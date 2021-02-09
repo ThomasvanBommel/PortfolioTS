@@ -1,0 +1,11 @@
+{
+    "include": ["src"],
+    "compilerOptions": {
+        "jsx": "react",
+        "target": "ES6",
+        "module": "none",
+        "lib": ["ES6", "DOM"],
+        "outFile": "build/main.js",
+        "moduleResolution": "node"
+    }
+}

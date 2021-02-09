@@ -6,7 +6,10 @@
   "scripts": {
     "build-client": "tsc -p client",
     "build-server": "tsc -p server",
-    "start": "npm run build-client && npm run build-server && node server/build/index.js"
+    "start": "npm run build-client && npm run build-server && node server/build/index.js",
+
+    "test": "npm run build-client && npm run build-server",
+    "posttest": "rm -rf client/build && rm -rf server/build"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,10 @@
  * 
  */
 
-
 /// <reference path="Navbar.tsx" />
 
-const App = () => Navbar();
+const App = () => {
+    return (
+        <Navbar brand="Thomas vanBommel" />
+    );
+};

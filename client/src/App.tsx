@@ -7,8 +7,17 @@
 
 /// <reference path="Navbar.tsx" />
 
-const App = () => {
-    return (
-        <Navbar brand="Thomas vanBommel" />
-    );
-};
+class App extends React.Component {
+
+    /** Create a new application */
+    constructor(props: {}) {
+        super(props);
+    }
+
+    /** Render application */
+    render() {
+        return (
+            <NavBar brand="Thomas vanBommel" />
+        );
+    }
+}

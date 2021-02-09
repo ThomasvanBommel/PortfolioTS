@@ -5,13 +5,26 @@
  * 
  */
 
-const Navbar = (props: { brand: string }) => {
-    return  <nav className="navbar navbar-expand navbar-light bg-light d-flex border-bottom shadow-sm">
+class NavBar extends React.Component<{ brand: string }, {}> {
+
+    /** Create a new navigation bar component */
+    constructor(props: { brand: string }) {
+        super(props);
+    }
+
+    /** Render to the canvas */
+    render() {
+        return (
+            <nav className="navbar navbar-expand navbar-light bg-light d-flex border-bottom shadow-sm">
                 <a href="/" className="navbar-brand ms-3">
-                    { props.brand }
+                    { this.props.brand }
                 </a>
                 <div className="flex-fill"></div>
                 <Clock />
-                <button type="button" className="btn btn-outline-success me-3">Contact</button>
+                <button type="button" className="btn btn-outline-success me-3">
+                    Contact
+                </button>
             </nav>
-};
+        );
+    }
+}

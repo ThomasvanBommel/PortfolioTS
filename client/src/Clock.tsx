@@ -5,14 +5,13 @@
  * 
  */
 
-class Clock extends React.Component {
-    state: { datetime: string }
+class Clock extends React.Component<{}, { datetime: string }> {
     clock_id = 0;
 
     /** Create a new clock component */
     constructor(props: {}){
         super(props);
-        this.state = { datetime: new Date().toLocaleTimeString() };
+        this.state = { datetime: this.getDateString() };
     }
 
     /** Successfully mounted component */
@@ -27,14 +26,21 @@ class Clock extends React.Component {
 
     /** Increment datetime value */
     tick() {
-        this.setState({ datetime: new Date().toLocaleTimeString() });
+        this.setState({ datetime: this.getDateString() });
+    }
+
+    /** Get the current datetime in string format */
+    getDateString() {
+        return new Date().toLocaleTimeString();
     }
 
     /** Draw to the canvas */
     render() {
         return (
             <div>
-                <p className="text-muted m-0 me-2">{ this.state.datetime }</p>
+                <p className="text-muted m-0 me-2">
+                    { this.state.datetime }
+                </p>
             </div>
         );
     }

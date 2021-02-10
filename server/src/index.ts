@@ -5,7 +5,7 @@
  * 
  */
 
-
+import * as request from "./request";
 import express from "express";
 import path from "path"
 
@@ -18,6 +18,20 @@ app.use(express.static(path.join(__dirname, "../../client/dependencies")));
 // home get request
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/views/index.html"));
+});
+
+// youtube get request
+app.get("/api/youtube/:service", (req, res) => {
+    request.default({ 
+        host: "youtube.googleapis.com",
+        path: `/youtube/v3/${ req.params.service }`,
+        parameters: {
+            key: "value",
+            key2: "value",
+        }
+    }, request.accumulator((err, res, data) => {
+        console.log(err, res, data);
+    }));
 });
 
 // listen on 8000

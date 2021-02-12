@@ -11,8 +11,6 @@ jobs:
     runs-on: node
 
     steps:
-      - uses: actions/action
-
       - name: Build
         run: echo Done!
 

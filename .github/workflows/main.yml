@@ -12,8 +12,9 @@ jobs:
 
     steps:
       - name: Test
+        uses: thomasvanbommel/action
         run: ls -a
 
       - name: Build
-        run: /root/run.sh
+        run: echo "building..."
 

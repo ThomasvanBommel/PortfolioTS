@@ -1,10 +1,6 @@
 FROM ubuntu
 
-COPY . /root
-
-RUN echo "dockerfile doing docker things"
-
-RUN ls -a
+COPY ../../ /root
 
 RUN ls /root
 

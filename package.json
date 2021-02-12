@@ -4,14 +4,18 @@
   "description": "Portfolio written with typescript",
   "main": "index.js",
   "scripts": {
+    "prebuild-client": "rm -rf client/build",
     "build-client": "tsc -p client",
+
+    "prebuild-server": "rm -rf server/build",
     "build-server": "tsc -p server",
 
-    "prestart": "npm run build-server",
+    "build": "npm run build-client && npm run build-server",
+
     "start": "node -r dotenv/config server/build/index.js dotenv_config_path=./config.env",
 
-    "test": "npm run build-client && npm run build-server",
-    "posttest": "rm -rf client/build && rm -rf server/build"
+    "test": "npm run build",
+    "posttest": "npm run prebuild-client && npm run prebuild-server"
   },
   "repository": {
     "type": "git",

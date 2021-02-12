@@ -21,4 +21,4 @@ You need the following in order to run this project
 # Run the project
  1. Fill in your youtube details (YT_KEY & YT_ID) in [config.env.example](config.env.example)
  2. SaveAs [config.env](config.env)
- 3. `npm i && npm start`
+ 3. `npm i && npm run build && npm start`

@@ -1,7 +1,5 @@
-FROM ubuntu
+FROM node
 
 COPY . /root
-
-RUN which npm
 
 ENTRYPOINT ["/root/test.sh"]

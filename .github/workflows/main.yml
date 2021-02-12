@@ -11,8 +11,9 @@ jobs:
     runs-on: dash
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@master
 
       - name: Build
-        uses: ./github/actions
+        uses: ./.github/actions
 

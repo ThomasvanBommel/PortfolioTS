@@ -6,14 +6,10 @@
   "scripts": {
     "prebuild-client": "rm -rf client/build",
     "build-client": "tsc -p client",
-
     "prebuild-server": "rm -rf server/build",
     "build-server": "tsc -p server",
-
     "build": "npm run build-client && npm run build-server",
-
     "start": "node -r dotenv/config server/build/index.js dotenv_config_path=./config.env",
-
     "test": "npm run build",
     "posttest": "npm run prebuild-client && npm run prebuild-server"
   },

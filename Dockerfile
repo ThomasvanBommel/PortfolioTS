@@ -2,6 +2,6 @@ FROM ubuntu
 
 COPY . /root
 
-RUN ls /root
+RUN which npm
 
 ENTRYPOINT ["/root/test.sh"]

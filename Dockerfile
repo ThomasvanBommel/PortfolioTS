@@ -4,4 +4,4 @@ COPY . /root
 
 RUN ls /root
 
-ENTRYPOINT ["/root/run.sh"]
+ENTRYPOINT ["cd /root && npm i && npm run test"]

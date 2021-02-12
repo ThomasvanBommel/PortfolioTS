@@ -1,6 +1,6 @@
 FROM ubuntu
 
-COPY ../../ /root
+COPY . /root
 
 RUN ls /root
 

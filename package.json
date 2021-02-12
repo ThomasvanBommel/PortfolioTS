@@ -6,7 +6,9 @@
   "scripts": {
     "build-client": "tsc -p client",
     "build-server": "tsc -p server",
-    "start": "npm run build-client && npm run build-server && node server/build/index.js",
+
+    "prestart": "npm run build-server",
+    "start": "node -r dotenv/config server/build/index.js dotenv_config_path=./config.env",
 
     "test": "npm run build-client && npm run build-server",
     "posttest": "rm -rf client/build && rm -rf server/build"
@@ -24,6 +26,7 @@
   "dependencies": {
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

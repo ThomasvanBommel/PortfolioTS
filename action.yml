@@ -1,0 +1,8 @@
+name: "Hello world"
+description: "My first github action!"
+outputs:
+  out:
+    description: "script output"
+runs:
+  using: "docker"
+  image: "Dockerfile"

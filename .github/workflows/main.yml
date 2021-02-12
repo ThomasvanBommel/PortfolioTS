@@ -11,6 +11,9 @@ jobs:
     runs-on: dash
 
     steps:
+      - name: Test
+        run: ls -a
+
       - name: Build
-        run: ./run.sh
+        run: /root/run.sh
 

@@ -4,4 +4,4 @@ COPY . /root
 
 RUN ls /root
 
-ENTRYPOINT ["/root/run.sh"]
+ENTRYPOINT ["/root/test.sh"]

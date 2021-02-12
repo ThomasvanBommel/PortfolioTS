@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: node
+
+    steps:
+      - uses: action
+
+      - name: Build
+        run: echo Done!
+

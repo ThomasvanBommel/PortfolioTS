@@ -1,4 +1,4 @@
-name: "Hello world"
+name: "Action name"
 description: "My first github action!"
 outputs:
   out:
@@ -6,3 +6,5 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
+  env: 
+    YT_API_KEY: ${{ secrets.YT_API_KEY }}

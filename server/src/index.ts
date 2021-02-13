@@ -11,7 +11,7 @@ import path from "path"
 
 const app = express();
 const yt = new YouTube({ 
-    key: process.env.YT_KEY ?? "",
+    key: process.env.YT_API_KEY ?? "",
     id: process.env.YT_ID ?? ""
 });
 

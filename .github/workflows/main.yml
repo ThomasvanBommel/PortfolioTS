@@ -10,7 +10,14 @@ jobs:
   build:
     runs-on: dash
 
+    env: 
+      YT_API_KEY: ${{ secrets.YT_API_KEY }}
+
     steps:
+      - name: OwnerCheck
+        run: |
+          echo ${{ github.actor }} && exit 1
+
       - name: Checkout
         uses: actions/checkout@master
 

@@ -1,6 +1,6 @@
 FROM node
 
-COPY ../../. /root
+COPY . /root
 
 ENV YT_API_KEY=$YT_API_KEY
 

@@ -5,6 +5,6 @@ outputs:
     description: "script output"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  image: "../../Dockerfile"
   env: 
     YT_API_KEY: $YT_API_KEY

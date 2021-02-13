@@ -1,8 +1,10 @@
-name: "Action name"
-description: "My first github action!"
+name: "Testing"
+description: "Action to test PortfolioTS"
+
 outputs:
   out:
     description: "script output"
+    
 runs:
   using: "docker"
   image: "../../Dockerfile"

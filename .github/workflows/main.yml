@@ -25,4 +25,4 @@ jobs:
         uses: actions/checkout@master
 
       - name: Build
-        uses: ./
+        uses: ./.github/actions/

@@ -18,6 +18,7 @@ jobs:
         run: |
           if [ ${{ github.actor }} != "ThomasvanBommel" ]
           then
+            echo "Error wrong actor: ${{ github.actor }}"
             exit 1
           fi
 

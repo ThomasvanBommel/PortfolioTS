@@ -9,10 +9,35 @@ import YouTube from "./youtube";
 import express from "express";
 import path from "path"
 
+// application configuration (default falsy)
+const config = {
+    host: process.env.HOST ?? "",
+    port: Number(process.env.PORT) ?? 0,
+    yt_channel_id: process.env.YT_CHANNEL_ID ?? "",
+    yt_api_key: process.env.YT_API_KEY ?? ""
+};
+
+let config_ok = true;
+
+// check each env var individually
+for(let [key, value] of Object.entries(config)){
+    if(!value){
+        console.error("Missing environment variable", key.toUpperCase());
+        config_ok = false;
+    }
+}
+
+// check configuration values
+if(!config_ok){
+    console.error("Missing one or more environment variables");
+    console.log("Did you forget to load the configuration?");
+    process.exit(1);
+}
+
 const app = express();
 const yt = new YouTube({ 
-    key: process.env.YT_API_KEY ?? "",
-    id: process.env.YT_ID ?? ""
+    key: config.yt_api_key,
+    id:  config.yt_channel_id
 });
 
 // expose client build and dependencies folders
@@ -38,5 +63,5 @@ app.get("/", (req, res) => {
 //     }));
 // });
 
-// listen on 8000
-app.listen(8000, () => console.log("http://localhost:8000"));
+// listen on $PORT
+app.listen(config.port, () => console.log(`http://${ config.host }:${ config.port }`));

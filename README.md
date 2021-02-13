@@ -24,6 +24,5 @@ You need the following in order to run this project
  - [NPM](https://www.npmjs.com/)
 
 ## Run the project
- 1. Fill in your youtube details (YT_KEY & YT_ID) in [config.env.example](config.env.example)
- 2. SaveAs [config.env](config.env)
- 3. `npm i && npm run build && npm start`
+ 1. Set environment variable $YT_API_KEY to a valid youtube api key
+ 2. Run `npm i && npm run build && npm start`

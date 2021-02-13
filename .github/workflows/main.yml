@@ -12,6 +12,7 @@ jobs:
 
     env: 
       YT_API_KEY: ${{ secrets.YT_API_KEY }}
+      SECRET_FRUIT: ${{ secrets.SECRET_FRUIT }}
 
     steps:
       - name: OwnerCheck

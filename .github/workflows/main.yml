@@ -16,7 +16,10 @@ jobs:
     steps:
       - name: OwnerCheck
         run: |
-          echo ${{ github.actor }} && exit 1
+          if [ ${{ github.actor }} != "ThomasvanBommel" ]
+          then
+            exit 1
+          fi
 
       - name: Checkout
         uses: actions/checkout@master

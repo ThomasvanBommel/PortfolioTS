@@ -4,4 +4,6 @@ COPY . /root
 
 ENV YT_API_KEY=$YT_API_KEY
 
-ENTRYPOINT ["/root/test.sh"]
+RUN cd /root
+RUN npm i
+RUN npm run test

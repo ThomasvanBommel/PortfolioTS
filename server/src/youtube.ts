@@ -38,18 +38,18 @@ export default class YouTube {
                 part: "snippet",
                 chart: "mostPopular"
             }
-        }, (err, res) => {
+        }, request.accumulator((err, res, data="{}") => {
 
             // check requests reponse status + errors
             if(!err && res?.statusCode === 200) 
                 return callback(true);
 
             console.log("Response code:", res?.statusCode);
-            console.log("Response headers:", res?.headers);
+            console.log("Response:", data);
 
             // response status is bad
             callback(false);
-        });
+        }));
     }
 
     requestVideos() {

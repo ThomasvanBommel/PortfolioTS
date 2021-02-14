@@ -11,6 +11,7 @@ import express from "express";
 import path from "path"
 
 console.log("KEY", process.env.YT_API_KEY);
+console.log("TEST", process.env.TEST);
 
 import config from "./config";
 

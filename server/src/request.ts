@@ -16,7 +16,7 @@ type RequestOptions = {
     method?: "GET" | "POST"
 };
 
-type RequestCallback = (err: Error | undefined, res?: http.IncomingMessage) => void;
+export type RequestCallback = (err: Error | undefined, res?: http.IncomingMessage) => void;
 type AccumulatorCallback = (err: Error | undefined, res?: http.IncomingMessage, data?: string) => void;
 
 /** Send request */

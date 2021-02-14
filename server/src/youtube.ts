@@ -24,7 +24,7 @@ export default class YouTube {
         this.options = options;
         this.videos = new Map();
 
-        this.requestVideos();
+        // this.requestVideos();
     }
 
     requestVideos() {

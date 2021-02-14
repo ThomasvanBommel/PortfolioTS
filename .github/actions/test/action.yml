@@ -1,13 +1,12 @@
 name: "Testing"
 description: "Action to test PortfolioTS"
-    
+
 outputs:
   out:
     description: "script output"
-
+    
 runs:
-  env: 
-    YT_API_KEY: ${YT_API_KEY}
-    TEST: 12345
   using: "docker"
   image: "../../../Dockerfile"
+  env: 
+    YT_API_KEY: $YT_API_KEY

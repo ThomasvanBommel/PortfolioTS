@@ -3,7 +3,7 @@ description: "Action to test PortfolioTS"
     
 runs:
   env: 
-    YT_API_KEY: $YT_API_KEY
+    YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
   using: "docker"
   image: "../../../Dockerfile"

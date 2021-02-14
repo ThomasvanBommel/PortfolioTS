@@ -10,8 +10,6 @@ import YouTube from "./youtube";
 import express from "express";
 import path from "path"
 
-console.log("ARGV", process.argv);
-
 const app = express();
 const yt = new YouTube({ 
     key: config.yt_api_key,

@@ -2,8 +2,8 @@ name: "Testing"
 description: "Action to test PortfolioTS"
     
 runs:
-  env: 
-    YT_API_KEY: $YT_API_KEY
-
   using: "docker"
   image: "../../../Dockerfile"
+
+  env: 
+   - YT_API_KEY: $YT_API_KEY

@@ -17,6 +17,8 @@ let config_ok = true;
 
 // check each env var individually
 for(let [key, value] of Object.entries(config)){
+    console.log(key.toUpperCase(), value);
+
     if(!value){
         console.error("Missing environment variable", key.toUpperCase());
         config_ok = false;

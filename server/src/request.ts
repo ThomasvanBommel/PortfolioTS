@@ -24,7 +24,8 @@ export default function request(options: RequestOptions, callback: RequestCallba
     let path = options.path + "?";
 
     for(let key in options.parameters)
-        path += `${ key }=${ options.parameters[key] }&`;
+        if(options.parameters[key])
+            path += `${ key }=${ options.parameters[key] }&`;
 
     const req = https.request({
         hostname: options.host,

@@ -44,6 +44,9 @@ export default class YouTube {
             if(!err && res?.statusCode === 200) 
                 return callback(true);
 
+            console.log("Response code:", res?.statusCode);
+            console.log("Response headers:", res?.headers);
+
             // response status is bad
             callback(false);
         });

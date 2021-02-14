@@ -2,6 +2,6 @@ FROM node
 
 COPY . /root
 
-ENV YT_API_KEY=$YT_API_KEY
+#ENV YT_API_KEY=$YT_API_KEY
 
-RUN cd /root && npm i && npm run test
+RUN ["/bin/bash", "-c", "export YT_API_KEY=$YT_API_KEY && cd /root && npm i && npm run test"]

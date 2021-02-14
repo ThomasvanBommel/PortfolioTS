@@ -13,3 +13,4 @@ runs:
     # - ${{ inputs.yt_api_key }}
   env: 
     YT_API_KEY: ${{ inputs.yt_api_key }}
+    TEST: 98765

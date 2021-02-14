@@ -1,14 +1,15 @@
 name: "Testing"
 description: "Action to test PortfolioTS"
 
-outputs:
-  out:
-    description: "script output"
+inputs:
+  yt_api_key:
+    description: "Youtube API key"
+    required: true
     
 runs:
   using: "docker"
   image: "../../../Dockerfile"
   args:
-    - ${{ env.INPUT_YT_API_KEY }}
+    - ${{ inputs.yt_api_key }}
 #  env: 
 #    YT_API_KEY: $YT_API_KEY

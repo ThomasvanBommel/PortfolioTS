@@ -5,8 +5,6 @@
  * 
  */
 
-console.log("test:", process.env.TEST);
-
 import YouTube from "./youtube";
 import Testing from "./Testing";
 import config from "./config";

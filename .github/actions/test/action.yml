@@ -9,5 +9,5 @@ runs:
   using: "docker"
   image: "../../../Dockerfile"
   env: 
-    YT_API_KEY: $YT_API_KEY
+    YT_API_KEY: ${YT_API_KEY}
     TEST: 12345

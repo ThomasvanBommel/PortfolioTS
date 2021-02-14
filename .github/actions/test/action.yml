@@ -8,5 +8,7 @@ outputs:
 runs:
   using: "docker"
   image: "../../../Dockerfile"
-  env: 
-    YT_API_KEY: $YT_API_KEY
+  args:
+    - ${{ secrets.YT_API_KEY }}
+#  env: 
+#    YT_API_KEY: $YT_API_KEY

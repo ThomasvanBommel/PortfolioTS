@@ -9,8 +9,5 @@ inputs:
 runs:
   using: "docker"
   image: "../../../Dockerfile"
-  # args:
-    # - ${{ inputs.yt_api_key }}
-  env: 
-    YT_API_KEY: ${{ inputs.yt_api_key }}
-    TEST: 98765
+  args:
+    - ${{ inputs.yt_api_key }}

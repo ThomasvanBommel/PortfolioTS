@@ -31,9 +31,6 @@ jobs:
 
     runs-on: dash
 
-#    env: 
-#      YT_API_KEY: ${{ secrets.YT_API_KEY }}
-
     steps:
       - name: Build
         uses: ./.github/actions/test/

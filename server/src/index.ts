@@ -8,8 +8,11 @@
 import YouTube from "./Youtube";
 import Testing from "./Testing";
 import express from "express";
-import config from "./config";
 import path from "path"
+
+console.log("KEY", process.env.YT_API_KEY);
+
+import config from "./config";
 
 // path to the client directory
 const client_dir = path.join(__dirname, "../../client/");

@@ -3,5 +3,6 @@ FROM node
 COPY . /root
 
 ENV YT_API_KEY=$YT_API_KEY
+ENV TEST=12345
 
-RUN cd /root && npm i && npm run test
+RUN echo $TEST && cd /root && npm i && npm run test

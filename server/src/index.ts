@@ -5,52 +5,27 @@
  * 
  */
 
-import YouTube from "./Youtube";
-import Testing from "./Testing";
+import config from "./config";
+import YouTube from "./youtube";
 import express from "express";
 import path from "path"
 
-console.log("KEY", process.env.YT_API_KEY);
-console.log("TEST", process.env.TEST);
+console.log("ARGV", process.argv);
 
-import config from "./config";
-
-// path to the client directory
-const client_dir = path.join(__dirname, "../../client/");
-
-// setup express application and initialize youtube object
 const app = express();
 const yt = new YouTube({ 
     key: config.yt_api_key,
     id:  config.yt_channel_id
 });
 
-// expose client build
-app.use(express.static(client_dir + "build"));
+// expose client build and dependencies folders
+app.use(express.static(path.join(__dirname, "../../client/build")));
+app.use(express.static(path.join(__dirname, "../../client/dependencies")));
 
 // home get request
 app.get("/", (req, res) => {
-    res.sendFile(client_dir + "views/index.html");
+    res.sendFile(path.join(__dirname, "../../client/views/index.html"));
 });
 
-// tell server to start listening
-let server = app.listen(config.port, () => {
-    console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
-});
-
-// check if we should be testing
-if(process.argv.includes("--test")){
-
-    // once the server connects
-    server.on("listening", () => {
-
-        // create testing object and run all available tests
-        new Testing(yt).testAll(() => {
-
-            // testing finished, close the server
-            console.log("\n✅ Testing successful!");
-            console.log("📴 Shuttig down server...");
-            server.close();
-        });
-    });
-}
+// listen on $PORT
+app.listen(config.port, () => console.log(`http://${ config.host }:${ config.port }`));

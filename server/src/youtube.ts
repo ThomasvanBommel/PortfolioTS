@@ -9,7 +9,6 @@ import * as request from "./request";
 
 type YouTubeOptions  = { key: string, id: string };
 type YouTubeResponse = { [key: string]: unknown };
-type SuccessCallback = (success: boolean) => void;
 
 type Video = {
     id: string,
@@ -24,27 +23,8 @@ export default class YouTube {
     constructor(options: YouTubeOptions) {
         this.options = options;
         this.videos = new Map();
-    }
 
-    // test script
-    test(callback: SuccessCallback) {
-        request.default({ 
-            host: "youtube.googleapis.com",
-            path: `/youtube/v3/videos`,
-            parameters: {
-                key: this.options.key,
-                part: "snippet",
-                chart: "mostPopular"
-            }
-        }, (err, res) => {
-
-            // check requests reponse status + errors
-            if(!err && res?.statusCode === 200) 
-                return callback(true);
-
-            // response status is bad
-            callback(false);
-        });
+        // this.requestVideos();
     }
 
     requestVideos() {

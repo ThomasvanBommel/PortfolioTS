@@ -1,6 +1,10 @@
 name: "Testing"
 description: "Action to test PortfolioTS"
     
+outputs:
+  out:
+    description: "script output"
+
 runs:
   using: "docker"
   image: "../../../Dockerfile"

@@ -25,8 +25,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-  # build application before testing
-  build:
+  # test server-side
+  server-test:
     needs: checkout
 
     runs-on: dash
@@ -35,5 +35,5 @@ jobs:
       YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
     steps:
-      - name: Build
+      - name: Test
         uses: ./.github/actions/test/

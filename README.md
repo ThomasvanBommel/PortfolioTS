@@ -11,7 +11,6 @@ Typescript portfolio with a ReactJS front-end
 
 ## Technology Stack
 Server
- - [NodeJS](https://nodejs.org/en/)
  - [Express](https://www.npmjs.com/package/express)
  - [dotenv](https://www.npmjs.com/package/dotenv)
 
@@ -19,6 +18,7 @@ Client
  - [React](https://reactjs.org/)
  - [Bootstrap](https://getbootstrap.com/)
  - [webpack](https://webpack.js.org/)
+ - [react-slick](https://www.npmjs.com/package/react-slick)
 
 ## Requirements
 You need the following in order to run this project

@@ -54,7 +54,7 @@ class Youtube extends React.Component<{}, State> {
             slidesToShow: 3,
             slidesToScroll: 1,
             autoplaySpeed: 5000,
-            autoplay: true,
+            // autoplay: true,
             responsive: [{
                 breakpoint: 992,
                 settings: {
@@ -81,7 +81,9 @@ class Youtube extends React.Component<{}, State> {
 
         return (
             <div>
-                <Slider { ...settings1 } ref={ slider => (this.slider1 = slider) } asNavFor={ this.state.carousel2 }>
+                <Slider { ...settings1 } 
+                    ref={ slider => (this.slider1 = slider) } 
+                    asNavFor={ this.state.carousel2 }>
                     <div>
                         <h3>1</h3>
                     </div>
@@ -101,7 +103,12 @@ class Youtube extends React.Component<{}, State> {
                         <h3>6</h3>
                     </div>
                 </Slider>
-                <Slider { ...settings2 } ref={ slider => (this.slider2 = slider) } asNavFor={ this.state.carousel1 } className="slider2">
+                <Slider { ...settings2 } 
+                    ref={ slider => {
+                        this.slider2 = slider;
+                    } } 
+                    asNavFor={ this.state.carousel1 } 
+                    className="slider2">
                     <div>
                         <h3>1</h3>
                     </div>
@@ -110,6 +117,7 @@ class Youtube extends React.Component<{}, State> {
                     </div>
                     <div>
                         <h3>3</h3>
+                        <p>123<br/>23<br/>234<br/>234<br/></p>
                     </div>
                     <div>
                         <h3>4</h3>

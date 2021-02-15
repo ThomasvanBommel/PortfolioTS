@@ -21,14 +21,27 @@ Author: Thomas vanBommel
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 
     <style>
+      .slider2{
+        margin-top:1em;
+      }
+
+      .slick-track{
+        display: flex !important;
+      }
+
+      .slick-slide{
+        height: inherit !important;
+      }
       .slick-slide div{
         background-color:cadetblue;
         color:whitesmoke;
         margin: 0 1em;
+        height:100%;
       }
 
-      .slider2{
-        margin-top:1em;
+      .slick-center div{
+        background: tomato;
+        transition: 2s background-color;
       }
     </style>
   </head>

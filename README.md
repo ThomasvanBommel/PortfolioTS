@@ -1,22 +1,24 @@
 # PortfolioTS
-Typescript portfolio with a react front-end
+Typescript portfolio with a ReactJS front-end
 
 ## Features
- - Continuous Integration (self-hosted runner)
- - Network Router
- - YouTube API
+ - Continuous integration testing
+ - Webpack + TSC transpiling
+ - Express network router
+ - Typescript type-checking
+ - Developer mode (watch files and auto-transpile)
+ - Production modes
 
 ## Technology Stack
 Server
  - [NodeJS](https://nodejs.org/en/)
  - [Express](https://www.npmjs.com/package/express)
+ - [dotenv](https://www.npmjs.com/package/dotenv)
 
 Client
  - [React](https://reactjs.org/)
  - [Bootstrap](https://getbootstrap.com/)
-
-Common
- - [dotenv](https://www.npmjs.com/package/dotenv)
+ - [webpack](https://webpack.js.org/)
 
 ## Requirements
 You need the following in order to run this project
@@ -24,5 +26,12 @@ You need the following in order to run this project
  - [NPM](https://www.npmjs.com/)
 
 ## Run the project
- 1. Set environment variable **YT_API_KEY** to a valid youtube api key
- 2. Run `npm i && npm run build && npm start`
+Prerequisite:
+ - Set environment variable **YT_API_KEY** to a valid youtube api key
+
+Run in production mode:
+ 1. Run `npm i && npm run build && npm start`
+
+Run in development mode:
+ 1. Run `npm i && npm run build-server && npm start` in one terminal
+ 2. Run `npm run watch` in another terminal

@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild-client": "rm -rf client/build",
     "build-client": "webpack --config ./config/webpack.config.js",
+    "watch": "npm run build-client -- -w --env --dev",
     "prebuild-server": "rm -rf server/build",
     "build-server": "tsc -p server",
     "build": "npm run build-client && npm run build-server",

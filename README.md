@@ -11,19 +11,19 @@ Typescript portfolio with a ReactJS front-end
 
 ## Technology Stack
 Server
- - [Express](https://www.npmjs.com/package/express)
- - [dotenv](https://www.npmjs.com/package/dotenv)
+ - [Express](https://www.npmjs.com/package/express) - Node framework
+ - [dotenv](https://www.npmjs.com/package/dotenv) - ENV loader
 
 Client
- - [React](https://reactjs.org/)
- - [Bootstrap](https://getbootstrap.com/)
- - [webpack](https://webpack.js.org/)
- - [react-slick](https://www.npmjs.com/package/react-slick)
+ - [React](https://reactjs.org/) - UI framework
+ - [Bootstrap](https://getbootstrap.com/) - HTML styling
+ - [webpack](https://webpack.js.org/) - Module bundling
+ - [react-slick](https://www.npmjs.com/package/react-slick) - Carousel
 
 ## Requirements
 You need the following in order to run this project
- - [NodeJS](https://nodejs.org/en/)
- - [NPM](https://www.npmjs.com/)
+ - [NodeJS](https://nodejs.org/en/) - Rounting engine
+ - [NPM](https://www.npmjs.com/) - Package manager
 
 ## Run the project
 Prerequisite:

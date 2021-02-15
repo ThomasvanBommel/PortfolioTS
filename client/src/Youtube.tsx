@@ -54,7 +54,7 @@ class Youtube extends React.Component<{}, State> {
             slidesToShow: 3,
             slidesToScroll: 1,
             autoplaySpeed: 5000,
-            // autoplay: true,
+            autoplay: true,
             responsive: [{
                 breakpoint: 992,
                 settings: {

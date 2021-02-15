@@ -31,6 +31,8 @@ export default class YouTube {
     options: YouTubeOptions;
     videos: Map<string, Video>;
 
+    cacheInterval: NodeJS.Timeout | undefined = undefined;
+
     /**
      * Create a new YouTube object
      * @param options - Youtube options object
@@ -70,6 +72,33 @@ export default class YouTube {
     }
 
     /**
+     * Request and cache video results in this.videos
+     * @param interval How often to refresh video results
+     */
+    cache(interval: number = 3600000) {
+        
+        // check if we already caching, if so stop it
+        if(this.cacheInterval)
+            clearInterval(this.cacheInterval);
+
+        // helper function to request videos and log errors
+        let getVideos = () => {
+            this.requestVideos((err, videos) => {
+                if(err) return console.error(err);
+            });
+        }
+
+        // log progress
+        console.log("Caching videos...");
+
+        // request immediately 
+        getVideos();
+
+        // request every interval
+        this.cacheInterval = setInterval(getVideos, interval);
+    }
+
+    /**
      * Recursively request videos and store them in this.videos
      * @param callback Data and error callback
      * @param nextPageToken Recursive parameter, no need to set it yourself
@@ -95,6 +124,9 @@ export default class YouTube {
 
             // check for errors
             if(err) return callback(err);
+
+            // log progress
+            console.log("Requesting videos...");
 
             // parse response data
             let response: YouTubeResponse = JSON.parse(data);
@@ -123,6 +155,12 @@ export default class YouTube {
         // ensure items in response and is of type Array
         if("items" in response && response.items instanceof Array) {
 
+            // log progress
+            console.log(`Extracting video details of ${ response.items.length } videos...`);
+
+            // tally for how many videos we will extract
+            let count = 0;
+
             // foreach item in the array
             response.items.forEach(item => {
 
@@ -148,6 +186,9 @@ export default class YouTube {
                                 thumbnails: item.snippet.thumbnails,
                                 published: item.snippet.publishedAt ?? item.snippet.publishTime
                             });
+
+                            // increment count
+                            count++;
                         }
                     }
                 } catch {
@@ -156,6 +197,9 @@ export default class YouTube {
                     console.error("Unable to cast video from youtube response:\n", item);
                 }
             });
+
+            // log video count
+            console.log(`Extracted ${ count }/${response.items.length} videos`);
         }
     }
 }

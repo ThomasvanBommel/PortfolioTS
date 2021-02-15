@@ -1,7 +1,7 @@
 {
     "include": ["src"],
     "compilerOptions": {                      
-        "lib": ["es6"],     
+        "lib": ["es2019"],     
         "strict": true,   
         "target": "es5",                            
         "rootDir": "src",                 

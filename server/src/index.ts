@@ -11,6 +11,7 @@ import config from "./config";
 import express from "express";
 import path from "path"
 
+// initialize express and youtube modules
 const app = express();
 const yt = new YouTube({ 
     key: config.yt_api_key,
@@ -26,14 +27,15 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/views/index.html"));
 });
 
+// youtube videos request
+app.get("/youtube", (req, res) => {
+    res.json(Object.fromEntries(yt.videos));
+});
+
 // tell server to start listening
 let server = app.listen(config.port, () => {
     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
 });
-
-// yt.requestVideos((err, videos) => {
-//     console.log(err, videos, videos?.size);
-// });
 
 // check if we should be testing
 if(process.argv.includes("--test")){
@@ -50,4 +52,8 @@ if(process.argv.includes("--test")){
             server.close();
         });
     });
+}else{
+    
+    // request and cache videos every hour
+    yt.cache();
 }

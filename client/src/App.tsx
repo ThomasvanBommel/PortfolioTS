@@ -5,7 +5,9 @@
  * 
  */
 
-/// <reference path="Navbar.tsx" />
+import React from 'react';
+import Navbar from './Navbar';
+import Youtube from './Youtube';
 
 class App extends React.Component {
 
@@ -17,7 +19,12 @@ class App extends React.Component {
     /** Render application */
     render() {
         return (
-            <NavBar brand="Thomas vanBommel" />
+            <div>
+                <Navbar brand="Thomas vanBommel" />
+                <Youtube />
+            </div>
         );
     }
 }
+
+export default App;

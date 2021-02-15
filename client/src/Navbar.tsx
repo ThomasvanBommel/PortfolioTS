@@ -5,6 +5,9 @@
  * 
  */
 
+import React from 'react';
+import Clock from "./Clock";
+
 class NavBar extends React.Component<{ brand: string }, {}> {
 
     /** Create a new navigation bar component */
@@ -28,3 +31,5 @@ class NavBar extends React.Component<{ brand: string }, {}> {
         );
     }
 }
+
+export default NavBar;

@@ -1,11 +1,11 @@
 {
-    "include": ["src"],
+    "include": ["src/**/*"],
     "compilerOptions": {
         "jsx": "react",
-        "target": "ES6",
-        "module": "none",
+        // "target": "ES6",
         "lib": ["ES6", "DOM"],
-        "outFile": "build/main.js",
-        "moduleResolution": "node"
+        // "outDir": "build",
+        // "moduleResolution": "node",
+        "esModuleInterop": true
     }
 }

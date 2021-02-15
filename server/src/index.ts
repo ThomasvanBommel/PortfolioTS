@@ -31,9 +31,9 @@ let server = app.listen(config.port, () => {
     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
 });
 
-yt.requestVideos((err, videos) => {
-    console.log(err, videos, videos?.size);
-});
+// yt.requestVideos((err, videos) => {
+//     console.log(err, videos, videos?.size);
+// });
 
 // check if we should be testing
 if(process.argv.includes("--test")){

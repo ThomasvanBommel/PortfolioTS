@@ -5,6 +5,8 @@
  * 
  */
 
+import React from 'react';
+
 class Clock extends React.Component<{}, { datetime: string }> {
     clock_id = 0;
 
@@ -45,3 +47,5 @@ class Clock extends React.Component<{}, { datetime: string }> {
         );
     }
 }
+
+export default Clock;

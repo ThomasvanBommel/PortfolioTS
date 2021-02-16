@@ -12,7 +12,7 @@ import React, { createRef } from 'react';
 type State = {
     error: Error,
     isLoaded: boolean,
-    videos: Video[],
+    videos: { [id: string]: Video },
 
     carousel1: React.RefObject<Slider> | undefined,
     carousel2: React.RefObject<Slider> | undefined
@@ -31,7 +31,7 @@ class Youtube extends React.Component<{}, State> {
         this.state = {
             error: null,
             isLoaded: false,
-            videos: [],
+            videos: {},
 
             carousel1: undefined,
             carousel2: undefined
@@ -40,6 +40,22 @@ class Youtube extends React.Component<{}, State> {
 
     /** Successfully mounted component */
     componentDidMount() {
+        fetch("http://localhost:8000/youtube")
+            .then(res => res.json())
+            .then(result => {
+                this.setState({
+                    isLoaded: true,
+                    videos: result
+                });
+
+                console.log(result);
+            }, error => {
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
+            });
+
         this.setState({
             carousel1: this.slider1,
             carousel2: this.slider2
@@ -79,58 +95,46 @@ class Youtube extends React.Component<{}, State> {
             responsive: []
         };
 
-        return (
-            <div>
-                <Slider { ...settings1 } 
-                    ref={ slider => (this.slider1 = slider) } 
-                    asNavFor={ this.state.carousel2 }>
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
-                <Slider { ...settings2 } 
-                    ref={ slider => {
-                        this.slider2 = slider;
-                    } } 
-                    asNavFor={ this.state.carousel1 } 
-                    className="slider2">
-                    <div>
-                        <h3>1</h3>
-                    </div>
-                    <div>
-                        <h3>2</h3>
-                    </div>
-                    <div>
-                        <h3>3</h3>
-                        <p>123<br/>23<br/>234<br/>234<br/></p>
-                    </div>
-                    <div>
-                        <h3>4</h3>
-                    </div>
-                    <div>
-                        <h3>5</h3>
-                    </div>
-                    <div>
-                        <h3>6</h3>
-                    </div>
-                </Slider>
-            </div>
-        );
+        // let videos = this.state.videos;
+
+        
+        // if(!this.state.isLoaded){
+        //     return ( <h1>Loading...</h1> );
+        // }else{
+            return (
+                <div>
+                    <Slider { ...settings1 } 
+                        ref={ slider => (this.slider1 = slider) } 
+                        asNavFor={ this.state.carousel2 }
+                        className="top-slider">
+                        {
+                            Object.values(this.state.videos).slice(0, 7).map(video => (
+                                <div key="top-{ i }" >
+                                    <img src={ video.thumbnails["medium"].url } 
+                                        className="d-block mx-auto" 
+                                        style={{ margin: "16px", maxWidth: "calc(100% - 32px)" }} />
+                                </div>
+                            ))
+                        }
+                    </Slider>
+                    <Slider { ...settings2 } 
+                        ref={ slider => {
+                            this.slider2 = slider;
+                        } } 
+                        asNavFor={ this.state.carousel1 } 
+                        className="slider2">
+                        {
+                            Object.values(this.state.videos).slice(0, 7).map((video, i) => (
+                                <div key="bot-{ i }">
+                                    <h3>{ video.title }</h3>
+                                    <p>{ video.description }</p>
+                                </div>
+                            ))
+                        }
+                    </Slider>
+                </div>
+            );
+        // }
     }
 }
 

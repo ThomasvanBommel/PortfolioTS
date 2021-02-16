@@ -21,7 +21,7 @@ Author: Thomas vanBommel
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 
     <style>
-      .slider2{
+      .slick-list{
         margin-top:1em;
       }
 
@@ -29,19 +29,30 @@ Author: Thomas vanBommel
         display: flex !important;
       }
 
+      .slider1 .slick-slide div {
+        margin:1em;
+      }
+
       .slick-slide{
         height: inherit !important;
       }
+
       .slick-slide div{
-        background-color:cadetblue;
-        color:whitesmoke;
-        margin: 0 1em;
+        /* background-color:cadetblue; */
+        /* color:whitesmoke; */
+        /* margin: 0 1em; */
         height:100%;
       }
 
-      .slick-center div{
-        background: tomato;
-        transition: 2s background-color;
+      .top-slider .slick-slide div div{
+        margin:0;
+      }
+
+      .top-slider .slick-center div{
+        background: rgba(255, 99, 71, 0.25);
+        border-radius: 1em;
+        border:1px solid tomato;
+        transition: 3s background-color;
       }
     </style>
   </head>

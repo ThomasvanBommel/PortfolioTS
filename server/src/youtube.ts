@@ -112,7 +112,7 @@ export default class YouTube {
             maxResults: "50",
             part: "snippet",
             type: "video",
-            order: "date"
+            order: "rating"
         }
 
         // send request

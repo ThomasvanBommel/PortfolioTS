@@ -11,7 +11,7 @@ Typescript portfolio with a ReactJS front-end
 
 ## Technology Stack
 Server
- - [Express](https://www.npmjs.com/package/express) - Node framework
+ - [Express](https://www.npmjs.com/package/express) - Rounting engine
  - [dotenv](https://www.npmjs.com/package/dotenv) - ENV loader
 
 Client
@@ -22,9 +22,9 @@ Client
 
 ## Requirements
 You need the following in order to run this project
- - [NodeJS](https://nodejs.org/en/) - Rounting engine
- - [NPM](https://www.npmjs.com/) - Package manager
-
+ - [NodeJS](https://nodejs.org/en/)
+ - [NPM](https://www.npmjs.com/)
+ 
 ## Run the project
 Prerequisite:
  - Set environment variable **YT_API_KEY** to a valid youtube api key

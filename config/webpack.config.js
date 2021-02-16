@@ -21,11 +21,12 @@ module.exports = {
     entry: { client: join(__dirname, "../client/src/index.tsx") },
     output: { path:  join(__dirname, "../client/build"), filename: "bundle.js" },
 
-    resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
+    resolve: { extensions: [".ts", ".tsx", ".js", ".jsx", ".css"] },
 
     module: {
         rules: [
-            { test: /\.tsx?$/, use: "ts-loader" }
+            { test: /\.tsx?$/, use: "ts-loader" },
+            { test: /\.css$/,  use: ["style-loader", "css-loader"] }
         ]
     }
 };

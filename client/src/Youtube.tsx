@@ -7,6 +7,7 @@
 
 import { Video } from "../../common/types";
 import React from 'react';
+import Carousel from "./Carousel";
 
 type State = {
     error: Error,
@@ -46,22 +47,29 @@ class Youtube extends React.Component<{}, State> {
             });
     }
 
+    /** Render this component */
     render() {
 
         // check if videos are loaded
         if(!this.state.isLoaded){
-            return ( <h1>Loading...</h1> );
+            return ( 
+                <div>
+                    <div className="spinner-border d-block mx-auto my-5 text-secondary"></div>
+                </div>
+            );
         }else{
             return (
                 <div>
-                    {
-                        Object.values(this.state.videos).map(video => (
-                            <div>
-                                <h3>{ video.title }</h3>
-                                <img src={ video.thumbnails["medium"].url } />
-                            </div>
-                        ))
-                    }
+                    <Carousel>
+                        {
+                            Object.values(this.state.videos).map((video, i) => (
+                                <div key={ i } className="col-lg-4 col-sm-6 col-xs-12 text-center">
+                                    <img src={ video.thumbnails["medium"].url } className="d-block mx-auto" />
+                                    <h3>{ video.title }</h3>
+                                </div>
+                            ))
+                        }
+                    </Carousel>
                 </div>
             );
         }

@@ -1,0 +1,31 @@
+.carousel{
+    position: relative;
+    outline: 1px solid tomato;
+}
+
+.carousel .children{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.carousel .button{
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: calc(50% - 1.5em);
+    transition: 1s background-color;
+    transition: 0.5s color;
+}
+
+.carousel .back{
+    left: 1em;
+}
+
+.carousel .forward{
+    right: 1em;
+}
+
+.carousel .button:hover{
+    color: white;
+    background-color: #343a40;
+}

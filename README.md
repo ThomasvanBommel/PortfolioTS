@@ -18,13 +18,12 @@ Client
  - [React](https://reactjs.org/) - UI framework
  - [Bootstrap](https://getbootstrap.com/) - HTML styling
  - [webpack](https://webpack.js.org/) - Module bundling
- - [react-slick](https://www.npmjs.com/package/react-slick) - Carousel
 
 ## Requirements
 You need the following in order to run this project
  - [NodeJS](https://nodejs.org/en/)
  - [NPM](https://www.npmjs.com/)
- 
+
 ## Run the project
 Prerequisite:
  - Set environment variable **YT_API_KEY** to a valid youtube api key

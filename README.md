@@ -1,5 +1,5 @@
 # PortfolioTS
-Typescript portfolio with a ReactJS front-end
+Typescript portfolio with a ReactJS front-end 
 
 ## Features
  - Continuous integration testing

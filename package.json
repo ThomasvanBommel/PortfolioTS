@@ -9,9 +9,9 @@
     "watch": "npm run build-client -- -w --env --dev",
     "prebuild-server": "rm -rf server/build",
     "build-server": "tsc -p server",
+    "prestart": "npm run build-server && npm run test && npm run build-client",
     "start": "node server/build/index.js",
-    "test": "npm run build-server && npm start -- --test && npm run build-client",
-    "posttest": "npm run prebuild-client && npm run prebuild-server"
+    "test": "npm run build-server && node server/build/index.js --test && npm run build-client"
   },
   "repository": {
     "type": "git",

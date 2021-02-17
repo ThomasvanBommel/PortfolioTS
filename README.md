@@ -28,7 +28,7 @@ Prerequisite:
  - Set environment variable **YT_API_KEY** to a valid youtube api key
 
 Run in production mode:
- 1. Run `npm i && npm run build-server && npm start && npm run build-client`
+ 1. Run `npm i && npm start`
 
 Run in development mode:
  1. Run `npm i && npm run build-server && npm start` in one terminal

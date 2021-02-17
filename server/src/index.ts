@@ -9,13 +9,13 @@ import YouTube from "./youtube";
 import Testing from "./Testing";
 import config from "./config";
 import express from "express";
-import path from "path"
+import path from "path";
 
 // initialize express and youtube modules
 const app = express();
 const yt = new YouTube({ 
-    key: config.yt_api_key,
-    id:  config.yt_channel_id
+    key: config.apiKey ?? "",
+    id:  config.channelId
 });
 
 // expose client build and dependencies folders
@@ -33,7 +33,7 @@ app.get("/youtube", (req, res) => {
 });
 
 // tell server to start listening
-let server = app.listen(config.port, process.argv.includes("--test") ? "localhost" : "192.168.1.181", () => {
+let server = app.listen(config.port, config.host ?? "", () => {
     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
 });
 

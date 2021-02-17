@@ -6,8 +6,10 @@
  */
 
 import { Video } from "../../common/types";
-import React from 'react';
 import Carousel from "./Carousel";
+import React from 'react';
+
+const config = require("../../config/.config.json");
 
 type State = {
     error: Error,
@@ -30,7 +32,7 @@ class Youtube extends React.Component<{}, State> {
 
     /** Successfully mounted component */
     componentDidMount() {
-        fetch("http://192.168.1.181:8000/youtube")
+        fetch(`http://${ config.host }:${ config.port }/youtube`)
             .then(res => res.json())
             .then(result => {
                 this.setState({

@@ -10,7 +10,7 @@
     "prebuild-server": "rm -rf server/build",
     "build-server": "tsc -p server",
     "build": "npm run build-client && npm run build-server",
-    "start": "node -r dotenv/config server/build/index.js dotenv_config_path=./config/config.env",
+    "start": "node server/build/index.js",
     "test": "npm run build && npm start -- --test",
     "posttest": "npm run prebuild-client && npm run prebuild-server"
   },
@@ -29,7 +29,6 @@
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
     "css-loader": "^5.0.2",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

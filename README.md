@@ -12,7 +12,6 @@ Typescript portfolio with a ReactJS front-end
 ## Technology Stack
 Server
  - [Express](https://www.npmjs.com/package/express) - Rounting engine
- - [dotenv](https://www.npmjs.com/package/dotenv) - ENV loader
 
 Client
  - [React](https://reactjs.org/) - UI framework

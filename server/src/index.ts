@@ -33,7 +33,7 @@ app.get("/youtube", (req, res) => {
 });
 
 // tell server to start listening
-let server = app.listen(config.port, () => {
+let server = app.listen(config.port, "192.168.1.181", () => {
     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
 });
 

@@ -1,31 +1,41 @@
 .carousel{
+    width: 100%;
     position: relative;
-    outline: 1px solid tomato;
+    overflow: hidden;
 }
 
 .carousel .children{
     display: flex;
     flex-wrap: nowrap;
+
+    transition: 0.5s transform;
+    will-change: transform;
+}
+
+.carousel .children div{
+    padding: 1em 0;
+    
 }
 
 .carousel .button{
     font-weight: bold;
-    color: black;
+    color: white;
     position: absolute;
     top: calc(50% - 1.5em);
     transition: 1s background-color;
     transition: 0.5s color;
 }
 
+.carousel .button:hover{
+    color: black;
+    background-color: white;
+}
+
 .carousel .back{
-    left: 1em;
+    left: 0.1em;
 }
 
 .carousel .forward{
-    right: 1em;
+    right: 0.1em;
 }
 
-.carousel .button:hover{
-    color: white;
-    background-color: #343a40;
-}

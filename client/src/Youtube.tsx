@@ -30,15 +30,13 @@ class Youtube extends React.Component<{}, State> {
 
     /** Successfully mounted component */
     componentDidMount() {
-        fetch("http://localhost:8000/youtube")
+        fetch("http://192.168.1.181:8000/youtube")
             .then(res => res.json())
             .then(result => {
                 this.setState({
                     isLoaded: true,
                     videos: result
                 });
-
-                console.log(result);
             }, error => {
                 this.setState({
                     isLoaded: true,
@@ -63,9 +61,19 @@ class Youtube extends React.Component<{}, State> {
                     <Carousel>
                         {
                             Object.values(this.state.videos).map((video, i) => (
-                                <div key={ i } className="col-lg-4 col-sm-6 col-xs-12 text-center">
+                                <div key={ i } className="slide col-lg-4 col-sm-6 col-xs-12 text-center">
                                     <img src={ video.thumbnails["medium"].url } className="d-block mx-auto" />
-                                    <h3>{ video.title }</h3>
+                                    <p style={{ 
+                                        width: "80%",
+                                        display: "block",
+                                        margin: "0 auto",
+                                        paddingTop: "0.25em",
+                                        maxHeight: "1.75em", 
+                                        overflow: "hidden", 
+                                        textOverflow: "ellipsis", 
+                                        whiteSpace: "nowrap" }}>
+                                        { video.title }
+                                    </p>
                                 </div>
                             ))
                         }

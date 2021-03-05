@@ -2,7 +2,8 @@ name: CI
 
 on:
   push:
-    branches: [ * ]
+    branches:
+      - "*"
 
   workflow_dispatch:
 
@@ -24,6 +25,8 @@ jobs:
         # checkout repo using github action
       - name: Checkout
         uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
 
   # build application before testing
   build:

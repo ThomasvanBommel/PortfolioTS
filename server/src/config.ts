@@ -5,9 +5,11 @@
  * 
  */
 
+import settings from "../../config/server.config.json";
 import { networkInterfaces } from "os";
 import { join } from "path";
 import fs from "fs";
+
 
 // import config from /config
 const config: { 
@@ -15,7 +17,7 @@ const config: {
     host?: string, 
     apiKey?: string,
     channelId: string
-} = require("../../config/server.config.json");
+} = settings;
 
 // get apiKey from env vars if not set in config file
 if(!config.apiKey)

@@ -4,14 +4,20 @@
   "description": "Portfolio written with typescript",
   "main": "index.js",
   "scripts": {
-    "prebuild-client": "rm -rf client/build",
+    "prebuild": "find . -path ./node_modules -prune -false -o -type d -name build -exec rm -rf {} \\; || :",
+    "build": "tsc --build ./server/ && npm run config-server && npm run build-client",
+
     "build-client": "webpack --config ./config/webpack.config.js",
     "watch": "npm run build-client -- -w --env --dev",
-    "prebuild-server": "rm -rf server/build",
-    "build-server": "tsc -p server",
-    "prestart": "npm run build-server && npm run test && npm run build-client",
-    "start": "node server/build/index.js",
-    "test": "npm run build-server && node server/build/index.js --test && npm run build-client"
+
+    "config-server": "npm run start-server -- --config",
+
+    "prestart": "npm run build",
+    "start": "npm run start-server",
+    "start-server": "node ./server/build/server/src/index.js",
+
+    "pretest": "npm run build && tsc --build ./test/",
+    "test": "mocha './test/**/src/*.js'"
   },
   "repository": {
     "type": "git",

@@ -6,10 +6,13 @@
  */
 
 import YouTube from "./youtube";
-import Testing from "./Testing";
 import config from "./config";
 import express from "express";
 import path from "path";
+
+// check if we should only configure
+if(process.argv.includes("--config"))
+    process.exit(0);
 
 // initialize express and youtube modules
 const app = express();
@@ -18,13 +21,16 @@ const yt = new YouTube({
     id:  config.channelId
 });
 
+// request and cache videos every hour
+yt.cache();
+
 // expose client build and dependencies folders
-app.use(express.static(path.join(__dirname, "../../client/build")));
-app.use(express.static(path.join(__dirname, "../../client/dependencies")));
+app.use(express.static(path.join(__dirname, "../../../../client/build")));
+app.use(express.static(path.join(__dirname, "../../../../client/dependencies")));
 
 // home get request
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../client/views/index.html"));
+    res.sendFile(path.join(__dirname, "../../../../client/views/index.html"));
 });
 
 // youtube videos request
@@ -36,24 +42,3 @@ app.get("/youtube", (req, res) => {
 let server = app.listen(config.port, config.host ?? "", () => {
     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
 });
-
-// check if we should be testing
-if(process.argv.includes("--test")){
-
-    // once the server connects
-    server.on("listening", () => {
-
-        // create testing object and run all available tests
-        new Testing(yt).testAll(() => {
-
-            // testing finished, close the server
-            console.log("\n✅ Testing successful!");
-            console.log("📴 Shuttig down server...");
-            server.close();
-        });
-    });
-}else{
-    
-    // request and cache videos every hour
-    yt.cache();
-}

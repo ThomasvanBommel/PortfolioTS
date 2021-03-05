@@ -9,7 +9,7 @@ import { Video } from "../../common/types";
 import Carousel from "./Carousel";
 import React from 'react';
 
-const config = require("../../config/.config.json");
+const config = require("../../server/build/config/.config.json");
 
 type State = {
     error: Error,

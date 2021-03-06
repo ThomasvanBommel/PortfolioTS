@@ -51,7 +51,7 @@ export default class YouTube {
     test(callback: SuccessCallback) {
         request.default({ 
             host: "youtube.googleapis.com",
-            path: `/youtube/v3/videos`,
+            path: "/youtube/v3/videos",
             parameters: {
                 key: this.options.key,
                 part: "snippet",

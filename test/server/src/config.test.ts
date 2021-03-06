@@ -18,24 +18,25 @@ describe("config", () => {
         // Check if the properties exist
         describe("exists", () => {
 
-            // Check that channelId exists
+            // Check that channelId exists and is not empty
             it(".channelId", () => {
-                assert.ok(config.channelId);
+                assert.ok(!!config.channelId);
             });
 
-            // Check that apiKey exists
+            // Check that apiKey exists and is not empty
             it(".apiKey", () => {
-                assert.ok(config.apiKey);
+                // console.log("API TRUTHY:", !!config.apiKey, config.apiKey);
+                assert.ok(!!config.apiKey);
             });
 
-            // Check that port exists
+            // Check that port exists and is not 0
             it(".port", () => {
-                assert.ok(config.port);
+                assert.ok(!!config.port);
             });
 
-            // Check that host exists
+            // Check that host exists and is not empty
             it(".host", () => {
-                assert.ok(config.host);
+                assert.ok(!!config.host);
             });
         });
 

@@ -27,8 +27,7 @@ if(!config.apiKey)
 
 try {
     // Create config from available pieces
-    config = { ...require(file_location) };
-    console.log("CONFIG", config);
+    config = { ...config, ...require(file_location) };
 } catch {
     
     // Inform user we needed to create a config file

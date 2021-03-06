@@ -21,8 +21,9 @@
     "test": "npm run mocha-test",
     "posttest": "npm run prebuild-server && npm run prebuild-client",
 
-    "premocha-test": "rm -rf ./test/build && tsc --build ./test/",
-    "mocha-test": "mocha './test/**/src/*.js'"
+    "premocha-test": "tsc --build ./test/",
+    "mocha-test": "mocha './test/**/src/*.js'",
+    "postmocha-test": "rm -rf ./test/build"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,7 @@
 import https from "https";
 import http from "http";
 
-type RequestOptions = {
+export type RequestOptions = {
     host: string,
     path: string,
     parameters?: { [key: string]: string },
@@ -16,8 +16,8 @@ type RequestOptions = {
     method?: "GET" | "POST"
 };
 
-type RequestCallback = (err: Error | undefined, res?: http.IncomingMessage) => void;
-type AccumulatorCallback = (err: Error | undefined, res?: http.IncomingMessage, data?: string) => void;
+export type RequestCallback = (err: Error | undefined, res?: http.IncomingMessage) => void;
+export type AccumulatorCallback = (err: Error | undefined, res?: http.IncomingMessage, data?: string) => void;
 
 /** Send request */
 export default function request(options: RequestOptions, callback: RequestCallback) {

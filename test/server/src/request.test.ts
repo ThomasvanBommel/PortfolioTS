@@ -15,73 +15,121 @@ import net from "net";
 describe("request", () => {
 
     // Test the default export, request()
-    describe(".request", () => {
+    describe(".default", () => {
 
-        // Test request with the youtube API
-        describe("youtube", () => {
+        // Check forbidden 
+        describe("403", () => {
+            let statusCode: number;
 
-            // Test request without an API key
-            it("try to access forbidden resource (no api key)", done => {
+            // Request
+            describe("test", () => {
 
-                // Setup
-                let loc: RequestOptions = {
-                    host: "youtube.googleapis.com",
-                    path: "/youtube/v3/videos"
-                };
+                // Test request without an API key
+                it("try to access forbidden resource (no api key)", done => {
 
-                // Exercise
-                request(loc, (err, res) => {
+                    // Setup
+                    let loc: RequestOptions = {
+                        host: "youtube.googleapis.com",
+                        path: "/youtube/v3/videos"
+                    };
 
-                    // Verify - no errors
-                    if(err) done(err);
-    
-                    let data = "";
-    
-                    res?.on("data", d => data += d);
-                    res?.on("end", () => {
+                    // Exercise
+                    request(loc, (err, res) => {
 
-                        // Verify - expected response code of 403
-                        if(res.statusCode === 403)
-                            return done();
+                        // Verify - no errors
+                        if(err) done(err);
 
-                        done("Unexpected statusCode, " + res.statusCode);
+                        let data = "";
+
+                        res?.on("data", d => data += d);
+                        res?.on("end", () => {
+
+                            // set status code to check later
+                            statusCode = res.statusCode ?? 0;
+
+                            done();
+                        });
                     });
                 });
             });
 
-            // Check that the API is working
-            it("get the 5 most popular videos", done => {
+            // Check response
+            describe("response", () => {
 
-                // Setup
-                let loc: RequestOptions = {
-                    host: "youtube.googleapis.com",
-                    path: "/youtube/v3/videos",
-                    parameters: {
-                        key: config.apiKey ?? "",
-                        chart: "mostPopular",
-                        part: "snippet"
-                    }
-                };
+                // Check response code
+                it("code 403", () => {
 
-                // Exercise
-                request(loc, (err, res) => {
+                    // Ensure restricted access code (forbidden)
+                    assert.strictEqual(statusCode, 403);
+                });
+            });
+        });
 
-                    // Verify - no errors
-                    if(err) done(err);
-    
-                    let data = "";
-    
-                    res?.on("data", d => data += d);
-                    res?.on("end", () => {
+        // Check proper request
+        describe("200", () => {
+            let videos: Video[];
+            let statusCode: number;
 
-                        // Verify - expected response code of 200
-                        if(res.statusCode !== 200)
-                            return done(data);
+            // Request
+            describe("test", () => {
+                // Check that the API is working
+                it("get the 5 most popular videos", done => {
 
-                        let videos: Video[] = JSON.parse(data).items;
+                    // Setup
+                    let loc: RequestOptions = {
+                        host: "youtube.googleapis.com",
+                        path: "/youtube/v3/videos",
+                        parameters: {
+                            key: config.apiKey ?? "",
+                            chart: "mostPopular",
+                            maxResults: "5",
+                            part: "snippet"
+                        }
+                    };
 
-                        done();
+                    // Exercise
+                    request(loc, (err, res) => {
+
+                        // Verify - no errors
+                        if(err) done(err);
+
+                        let data = "";
+
+                        res?.on("data", d => data += d);
+                        res?.on("end", () => {
+
+                            // set values to be checked in the next tests
+                            statusCode = res.statusCode ?? 0;
+                            videos = JSON.parse(data).items;
+
+                            done();
+                        });
                     });
+                });
+            });
+
+            // Check response
+            describe("response", () => {
+
+                // Check response code
+                it("code 200", () => {
+
+                    // Verify - expected response code of 200
+                    assert.strictEqual(statusCode, 200);
+                });
+
+                // Check response type
+                it("type isArray", () => {
+
+                    // Verify - check if response is an array
+                    assert.ok(Array.isArray(videos));
+                });
+
+                // Check response amount
+                it("count 5", () => {
+
+                    // Verify - number of videos returned
+                    assert.strictEqual(videos.length, 5);
                 });
             });
         });

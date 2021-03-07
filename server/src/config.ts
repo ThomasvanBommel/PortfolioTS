@@ -13,25 +13,30 @@ import fs from "fs";
 // import config from /config
 let config: { 
     port: number, 
-    host?: string, 
-    apiKey?: string,
+    host: string, 
+    apiKey: string,
     channelId: string
-} = settings;
+} = { ...settings, apiKey: "", host: "" };
+
+// Ensure config has apiKey and it exists
+let key = process.env.YT_API_KEY;
+
+if(key){
+    config.apiKey = key;
+}else{ throw new Error("Missing apiKey"); }
 
 // Target location for config file
-let file_location = join(__dirname, "../../config/.config.json");
+let config_file_location = join(__dirname, "../../config/.config.json");
 
-// Ensure config has apiKey
-if(!config.apiKey)
-    config.apiKey = process.env.YT_API_KEY;
-
+// Try to load existing config file
 try {
+    
     // Create config from available pieces
-    config = { ...config, ...require(file_location) };
+    config = { ...config, ...require(config_file_location) };
 } catch {
     
     // Inform user we needed to create a config file
-    console.log(`Creating config file: ${file_location}`);
+    console.log(`Creating config file: ${config_file_location}`);
 
     // Find this machines IP adress if host is missing
     if(!config.host){
@@ -74,14 +79,12 @@ try {
         process.exit(1);
     }
 
-    // tmp value to store in a tmp file
-    let tmp = { ...config };
-
-    // remove apikey from tmp
-    delete tmp.apiKey;
-
     // write hidden config file to /config folder
-    fs.writeFileSync(file_location, JSON.stringify(tmp));
+    fs.writeFileSync(config_file_location, JSON.stringify({
+        channelId: config.channelId,
+        host: config.host,
+        port: config.port
+    }));
 }
 
 export default config;

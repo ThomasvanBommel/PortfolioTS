@@ -5,7 +5,7 @@
  * 
  */
 
-import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo, isYouTubeSnippet, isYouTubeStatistics } from "../../common/types";
+import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "../../common/types";
 import request from "./request2";
 import config from "./config";
 
@@ -37,38 +37,64 @@ export default class YouTube {
         key: config.apiKey,
         order: "rating",
         maxResults: 50,
-        type: "video"
     };
-
-    // Map to hold unique videos
-    // videos: Map<string, Video> = new Map();
 
     // Cache interval identifier
     cacheInterval_: NodeJS.Timeout | undefined = undefined;
 
+    // Date / time the videos were last cached
+    lastCached: Date | undefined = undefined;
+
+    // List of cached videos
+    videos: YouTubeVideo[] = [];
 
     /**
-     * Set the parameters used for the getVideoSnippets method
-     * 
+     * Set the parameters used for the information request methods
      * Accepted parameters found here: https://developers.google.com/youtube/v3/docs/search/list
-     * Note: 'type' and 'part' should be left as their default values to avoid errors
      * @param { YouTubeParameters } parameters - Parameters to override the existing ones
      */
     setParameters(parameters: YouTubeParameters){
         this.parameters_ = { ...this.parameters_, ...parameters };
     }
 
-    startCache(checkNew: number = _1hour, refreshList: number = _1hour * 24){
+    /**
+     * Cache videos in this.videos every refreshInterval, optionally with statistics
+     * @param { boolean } [ withStatistics=true ] - Add videos statistics to the YouTubeVideo object
+     * @param { number } [ refreshInterval=3600000 ] - How often to refresh the cache in 
+     * milliseconds, (default 1h) 
+     */
+    startCache(withStatistics=true, refreshInterval: number = _1hour){
 
         // Clear previous interval, if any
         if(this.cacheInterval_)
             clearInterval(this.cacheInterval_);
 
-        // (async () => {
-        //     const videos = await(this.getVideoSnippets(1));
+        // Run immediately
+        this.cache(withStatistics);
 
+        // Run every refreshInterval
+        this.cacheInterval_ = setInterval(this.cache, refreshInterval, withStatistics);
+    }
 
-        // })();
+    /**
+     * Request videos from the YouTube API and store that 'cache' in this.videos after updating
+     * lastCache time and optionally adding video statistics 
+     * @param { boolean } withStatistics - Should the cached videos include statistics
+     */
+    async cache(withStatistics: boolean){
+
+        // Get video snippets
+        const videos = await this.getVideoSnippets();
+
+        // Optionally add statistics
+        if(withStatistics)
+            await this.addVideoStatistics(videos, true);
+
+        // Update cache time
+        this.lastCached = new Date();
+
+        // Update video cache
+        this.videos = videos;
     }
 
     /**
@@ -77,22 +103,22 @@ export default class YouTube {
      * 
      * Note: Each page has a 'quota cost' of 100 units, of the APIs maximum 10,000/day.
      * Quota information: https://developers.google.com/youtube/v3/getting-started#quota
-     * @param { number } [ limit=0 ] - How many pages to retrieve; 0 for all pages (default 0)
-     * @returns { Promise<Video[]> } - Array of requested videos
+     * @param { number } [ pageLimit=0 ] - How many pages to retrieve; 0 for all pages (default 0)
+     * @returns { Promise<YouTubeVideo[]> } - Array of requested videos
      */
-    async getVideoSnippets(limit: number=0): Promise<YouTubeVideo[]> {
+    async getVideoSnippets(pageLimit: number=0): Promise<YouTubeVideo[]> {
         try{
             // Attempt request
-            const response = await this.recurseResponse<YouTubeSnippet>({
+            const response = await this.recurseResponse_<YouTubeSnippet>({
                 hostname: "youtube.googleapis.com",
                 path: "/youtube/v3/search",
-                parameters: { ...this.parameters_, part: "snippet" }
-            }, limit);
+                parameters: { ...this.parameters_, type: "video", part: "snippet" }
+            }, pageLimit);
 
             // Return snippet after converting into videos
             return Promise.resolve(response.map(item => <YouTubeVideo> {
                 id: item.id.videoId,
-                snippet: item
+                snippet: item.snippet
             }));
         }catch(error){
 
@@ -102,13 +128,65 @@ export default class YouTube {
     }
 
     /**
+     * Request video statistics and add them to the list of videos provided
+     * This function loops through each 'page' of results returned by the YouTube API
      * 
-     * @param options 
-     * @param { number } [ limit=0 ] - How many pages to retrieve; 0 for all pages (default 0)
-     * @param { string } [ pageToken_ ] - YouTube's nextPageToken identifier (used for recursion)
-     * @returns 
+     * Note: Each page has a 'quota cost' of 1 unit, of the APIs maximum 10,000/day.
+     * Quota information: https://developers.google.com/youtube/v3/getting-started#quota
+     * @param { YouTubeVideo[] } videos - List of videos to add statistics to
+     * @param { boolean } [ modifyVideos=false ] - Should the function modify the list of videos, or 
+     * clone the list and return a new list (preventing changes to the provided one) default = false
+     * @returns { YouTubeVideo[] } List of videos with statistics added
      */
-    async recurseResponse<T extends YouTubeSnippet | YouTubeStatistics>(options: YouTubeOptions, limit: number=0, pageToken_?: string): Promise<T[]>{
+    async addVideoStatistics(videos: YouTubeVideo[], modifyVideos=false): Promise<YouTubeVideo[]> {
+        // Optionally modify incoming video list or clone (no modification to the parameter)
+        let videosCopy: YouTubeVideo[] = modifyVideos ? videos : JSON.parse(
+            JSON.stringify(videos)
+        );
+
+        try{
+            // Combine video ids into a comma-separated string
+            const ids = videosCopy.map(video => video.id).join(",");
+
+            // Attempt request
+            const response = await this.recurseResponse_<YouTubeStatistics>({
+                hostname: "youtube.googleapis.com",
+                path: "/youtube/v3/videos",
+                parameters: { 
+                    ...this.parameters_, 
+                    part: "statistics",
+                    id: ids
+                }
+            });
+
+            // Add statistics to the list of videos
+            videosCopy.forEach((video, i) => {
+
+                // Ensure both, videos and statistics lists are in the same order
+                if(video.id !== response[i].id)
+                    throw new Error("Order mismatch between videos and statistics");
+
+                video.statistics = response[i].statistics;
+            });
+
+            // Return videos with statistics added
+            return Promise.resolve(videosCopy);
+        }catch(error){
+
+            // Error has occured
+            return Promise.reject(error);
+        }
+    }
+
+    /**
+     * Request youtube snippets or statistics for videos on a specified endpoint
+     * @param { YouTubeOptions } options - API options 
+     * @param { number } [ pageLimit=0 ] - How many pages to retrieve; 0 for all pages (default 0)
+     * @param { string } [ pageToken_ ] - YouTube's nextPageToken identifier (used for recursion)
+     * @returns YouTubeSnippet or YouTubeStatistics based on the options hostname and path
+     */
+    async recurseResponse_<T extends YouTubeSnippet | YouTubeStatistics>(options: YouTubeOptions, 
+        pageLimit: number=0, pageToken_?: string): Promise<T[]>{
 
         // Specify page to retrieve
         if(pageToken_) options.parameters.pageToken = pageToken_;
@@ -121,12 +199,12 @@ export default class YouTube {
             const youtubeResponse = <YouTubeResponse> JSON.parse(requestResponse.data);
 
             // Check if we should/can recurse to the next page of results
-            if(--limit && youtubeResponse.nextPageToken)
+            if(--pageLimit && youtubeResponse.nextPageToken)
 
                 // Return this page and next page's items
                 return Promise.resolve([ 
                     ...<T[]> youtubeResponse.items,
-                    ...await this.recurseResponse<T>(options, limit, youtubeResponse.nextPageToken)
+                    ...await this.recurseResponse_<T>(options, pageLimit, youtubeResponse.nextPageToken)
                 ]);
             
             // Return result, we're finished!
@@ -137,8 +215,5 @@ export default class YouTube {
             return Promise.reject(error);
         }
     }
-
-
-    
 }
 

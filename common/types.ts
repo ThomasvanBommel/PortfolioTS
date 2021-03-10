@@ -25,34 +25,38 @@ export type UnknownObject = {
     [key: string]: unknown
 };
 
+export type YouTubeSnippetData = {
+    publishedAt: string,
+    channelId: string,
+    title: string,
+    description: string,
+    thumbnails: { [key: string]: Thumbnail },
+    channelTitle: string,
+    liveBroadcastContent: string
+};
+
 export type YouTubeSnippet = {
     id: { kind: string, videoId: string },
-    snippet: {
-        publishedAt: string,
-        channelId: string,
-        title: string,
-        description: string,
-        thumbnails: { [key: string]: Thumbnail },
-        channelTitle: string,
-        liveBroadcastContent: string
-    }
+    snippet: YouTubeSnippetData
+};
+
+export type YouTubeStatisticsData = {
+    viewCount: number,
+    likeCount: number,
+    dislikeCount: number,
+    favoriteCount: number,
+    commentCount: number
 };
 
 export type YouTubeStatistics = {
     id: string,
-    statistics: {
-        viewCount: number,
-        likeCount: number,
-        dislikeCount: number,
-        favoriteCount: number,
-        commentCount: number
-    }
+    statistics: YouTubeStatisticsData
 };
 
 export type YouTubeVideo = {
     id: string,
-    snippet: YouTubeSnippet,
-    statistics?: YouTubeStatistics,
+    snippet: YouTubeSnippetData,
+    statistics?: YouTubeStatisticsData,
 };
 
 /// Checks -------------------------------------------------------------------------------------- */

@@ -6,67 +6,32 @@
  */
 
 import YouTube from "../../../server/src/youtube2";
-import { YouTubeSnippet, isYouTubeSnippet } from "../../../common/types";
+import { YouTubeVideo } from "../../../common/types";
 import assert from "assert";
 
 describe("youtube2", () => {
 
-    describe("isYouTubeSnippet", () => {
+    // let videos: YouTubeVideo[];
 
-        it("should fail", () => {
-            assert.ok(!isYouTubeSnippet({
-                id: "hello!"
-            }));
-        });
+    // before(async () => {
+    //     const yt = new YouTube();
 
-        it("should fail", () => {
-            assert.ok(!isYouTubeSnippet({
-                id: { kind: "", videoId: "" }
-            }));
-        });
+    //     yt.setParameters({
+    //         maxResults: 5
+    //     });
 
-        it("should fail", () => {
-            assert.ok(!isYouTubeSnippet({
-                id: { kind: "", videoId: "" },
-                snippet: {
-                    publishedAt: "",
-                    channelId: "",
-                    title: ""
-                }
-            }));
-        });
+    //     videos = await yt.getVideoSnippets(1);
+    //     await yt.addVideoStatistics(videos);
 
-        it("should fail", () => {
-            assert.ok(!isYouTubeSnippet({
-                id: { kind: "", videoId: "" },
-                snippet: {
-                    publishedAt: "",
-                    channelId: "",
-                    title: "",
-                    description: "",
-                    thumbnails: [],
-                    channelTitle: ""
-                }
-            }));
-        });
+    //     console.log(videos);
 
-        it("should pass", () => {
-            assert.ok(isYouTubeSnippet({
-                id: { kind: "", videoId: "" },
-                snippet: {
-                    publishedAt: "",
-                    channelId: "",
-                    title: "",
-                    description: "",
-                    thumbnails: [],
-                    channelTitle: "",
-                    liveBroadcastContent: ""
-                }
-            }));
-        });
-    });
 
-    // console.log(keyof YouTubeSnippet)
+    // });
+
+    // it("true", () => {
+    //     assert.ok(true);
+    // });
+
 
     // new YouTube().startCache();
 

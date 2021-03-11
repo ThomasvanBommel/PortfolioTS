@@ -5,7 +5,7 @@
  * 
  */
 
-import { Video } from "../../common/types";
+import { YouTubeVideo } from "../../common/types";
 import Carousel from "./Carousel";
 import React from 'react';
 
@@ -14,7 +14,7 @@ const config = require("../../server/build/config/.config.json");
 type State = {
     error: Error,
     isLoaded: boolean,
-    videos: { [id: string]: Video },
+    videos: { [id: string]: YouTubeVideo },
 };
 
 class Youtube extends React.Component<{}, State> {
@@ -33,8 +33,9 @@ class Youtube extends React.Component<{}, State> {
     /** Successfully mounted component */
     componentDidMount() {
         fetch(`http://${ config.host }:${ config.port }/youtube`)
-            .then(res => res.json())
-            .then(result => {
+            .then(res => {
+                return res.json();
+            }).then(result => {
                 this.setState({
                     isLoaded: true,
                     videos: result
@@ -62,9 +63,11 @@ class Youtube extends React.Component<{}, State> {
                 <div>
                     <Carousel>
                         {
-                            Object.values(this.state.videos).map((video, i) => (
-                                <div key={ i } className="slide col-lg-4 col-sm-6 col-xs-12 text-center">
-                                    <img src={ video.thumbnails["medium"].url } className="d-block mx-auto" />
+                            Object.values(this.state.videos).map(video => (
+                                <div key={ video.id } className="slide col-lg-4 col-sm-6 col-xs-12 text-center">
+                                    <img src={ 
+                                        video.snippet.thumbnails["medium"].url 
+                                    } className="d-block mx-auto" />
                                     <p style={{ 
                                         width: "80%",
                                         display: "block",
@@ -74,7 +77,7 @@ class Youtube extends React.Component<{}, State> {
                                         overflow: "hidden", 
                                         textOverflow: "ellipsis", 
                                         whiteSpace: "nowrap" }}>
-                                        { video.title }
+                                        { video.snippet.title }
                                     </p>
                                 </div>
                             ))

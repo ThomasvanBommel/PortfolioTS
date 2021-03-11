@@ -5,8 +5,8 @@
  * 
  */
 
-import YouTube from "./youtube";
-import config from "./config";
+import YouTube from "./youtube2";
+import config from "./config"; // TODO : Remove
 import express from "express";
 import path from "path";
 
@@ -16,13 +16,10 @@ if(process.argv.includes("--config"))
 
 // initialize express and youtube modules
 const app = express();
-const yt = new YouTube({ 
-    key: config.apiKey ?? "",
-    id:  config.channelId
-});
+const yt = new YouTube();
 
 // request and cache videos every hour
-yt.cache();
+yt.startCache();
 
 // expose client build and dependencies folders
 app.use(express.static(path.join(__dirname, "../../../../client/build")));
@@ -35,7 +32,7 @@ app.get("/", (req, res) => {
 
 // youtube videos request
 app.get("/youtube", (req, res) => {
-    res.json(Object.fromEntries(yt.videos));
+    res.json(yt.videos);
 });
 
 // tell server to start listening

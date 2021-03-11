@@ -6,7 +6,7 @@
  */
 
 import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "../../common/types";
-import request from "./request2";
+import request from "./request";
 import config from "./config";
 
 // 1 hour in milliseconds

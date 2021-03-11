@@ -5,11 +5,11 @@
  * 
  */
 
-import request, { RequestResponse } from "../../../server/src/request2"
+import request, { RequestResponse } from "../../../server/src/request"
 import assert from "assert";
 
 // Testing the request module
-describe("request2", function() {
+describe("request", function() {
 
     // Verify response status code
     it("www.google.com", function() {

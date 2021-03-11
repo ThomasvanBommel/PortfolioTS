@@ -31,7 +31,7 @@ describe("request2", () => {
         });
 
         // Testing a request on googleapis.com
-        describe("googleapis.com", () => {
+        describe.skip("googleapis.com", () => {
 
             let response: RequestResponse;
 

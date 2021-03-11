@@ -21,9 +21,11 @@
     "test": "npm run mocha-test",
     "posttest": "npm run prebuild-server && npm run prebuild-client",
 
-    "premocha-test": "tsc --build ./test/",
+    "delete-mocha-test": "rm -rf ./test/build",
+
+    "premocha-test": "npm run delete-mocha-test && tsc --build ./test/",
     "mocha-test": "mocha './test/**/src/*.js'",
-    "postmocha-test": "rm -rf ./test/build"
+    "postmocha-test": "npm run delete-mocha-test"
   },
   "repository": {
     "type": "git",

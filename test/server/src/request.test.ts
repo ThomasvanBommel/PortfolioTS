@@ -12,7 +12,7 @@ import assert from "assert";
 import http from "http";
 import net from "net";
 
-describe("request", () => {
+describe.skip("request", () => {
 
     // Test the default export, request()
     describe(".default", () => {

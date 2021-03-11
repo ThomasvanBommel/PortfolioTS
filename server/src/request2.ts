@@ -45,28 +45,40 @@ async function request(options: string | RequestOptions): Promise<RequestRespons
 
     // Return a promise containing our request
     return new Promise((resolve, reject) => {
+        try{
+            // Create request
+            const request = https.request(options, response => {
+                let data = "";
 
-        // Create request
-        const request = https.request(options, response => {
-            let data = "";
+                // Accumulate data from each event until 'end'
+                response.on("data", info => data += info);
+                response.on("end", () => {
 
-            // Accumulate data from each event until 'end'
-            response.on("data", info => data += info);
-            response.on("end", () => {
+                    // Get response status code, if it doesn't exist set to 0 (unlikely)
+                    let code = response.statusCode ?? 0;
 
-                // Return the request response
-                resolve({
-                    message: response,
-                    data: data
-                })
+                    // Check status code, reject if no status code or isn't successful (200-299)
+                    if(code < 200 || code > 299)
+                        reject(new Error(data))
+
+                    // Return the request response
+                    resolve({
+                        message: response,
+                        data: data
+                    })
+                });
             });
-        });
 
-        // Error handling
-        request.on("error", reject);
+            // Error handling
+            request.on("error", reject);
 
-        // Send request
-        request.end();
+            // Send request
+            request.end();
+        }catch(error){
+
+            // An error has occured
+            reject(error);
+        }
     });
 }
 

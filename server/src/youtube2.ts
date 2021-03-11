@@ -36,7 +36,7 @@ export default class YouTube {
         channelId: config.channelId,
         key: config.apiKey,
         order: "rating",
-        maxResults: 50,
+        maxResults: 5,
     };
 
     // Cache interval identifier
@@ -104,20 +104,40 @@ export default class YouTube {
      * Note: Each page has a 'quota cost' of 100 units, of the APIs maximum 10,000/day.
      * Quota information: https://developers.google.com/youtube/v3/getting-started#quota
      * @param { number } [ pageLimit=0 ] - How many pages to retrieve; 0 for all pages (default 0)
+     * @param { "search" | "video" } [ location=search ] - What endpoint to use, (default search)
+     * - 'search' will retrieve the videos for the channelId in the config (cost of 100 per page)
+     * - 'video' will retrieve random video snippets (used for cheap testing, cost of 1 per page)
+     * This option should only be used for testing
      * @returns { Promise<YouTubeVideo[]> } - Array of requested videos
      */
-    async getVideoSnippets(pageLimit: number=0): Promise<YouTubeVideo[]> {
+    async getVideoSnippets(pageLimit: number=0, location: "search" | "videos" = "search")
+        : Promise<YouTubeVideo[]> {
+
         try{
+            // Set up a copy of the request parameters with a few defaults
+            let params: YouTubeParameters = { 
+                ...this.parameters_, type: "video", part: "snippet" 
+            };
+
+            // If location is videos we need to set 'chart' or API will error
+            // Since it should only be used in testing, we set it to mostPopular
+            if(location === "videos")
+                params["chart"] = "mostPopular";
+
             // Attempt request
             const response = await this.recurseResponse_<YouTubeSnippet>({
                 hostname: "youtube.googleapis.com",
-                path: "/youtube/v3/search",
-                parameters: { ...this.parameters_, type: "video", part: "snippet" }
+                path: `/youtube/v3/${location}`,
+                parameters: params
             }, pageLimit);
+
+            // Check for response
+            if(!response)
+                throw new Error("No response");
 
             // Return snippet after converting into videos
             return Promise.resolve(response.map(item => <YouTubeVideo> {
-                id: item.id.videoId,
+                id: item.id.videoId ?? item.id,
                 snippet: item.snippet
             }));
         }catch(error){
@@ -139,12 +159,12 @@ export default class YouTube {
      * @returns { YouTubeVideo[] } List of videos with statistics added
      */
     async addVideoStatistics(videos: YouTubeVideo[], modifyVideos=false): Promise<YouTubeVideo[]> {
-        // Optionally modify incoming video list or clone (no modification to the parameter)
-        let videosCopy: YouTubeVideo[] = modifyVideos ? videos : JSON.parse(
-            JSON.stringify(videos)
-        );
-
         try{
+            // Optionally modify incoming video list or clone (no modification to the parameter)
+            let videosCopy: YouTubeVideo[] = modifyVideos ? videos : JSON.parse(
+                JSON.stringify(videos)
+            );
+
             // Combine video ids into a comma-separated string
             const ids = videosCopy.map(video => video.id).join(",");
 
@@ -158,6 +178,10 @@ export default class YouTube {
                     id: ids
                 }
             });
+
+            // Check for response
+            if(!response)
+                throw new Error("No response");
 
             // Add statistics to the list of videos
             videosCopy.forEach((video, i) => {
@@ -199,14 +223,14 @@ export default class YouTube {
             const youtubeResponse = <YouTubeResponse> JSON.parse(requestResponse.data);
 
             // Check if we should/can recurse to the next page of results
-            if(--pageLimit && youtubeResponse.nextPageToken)
+            if(--pageLimit > 0 && youtubeResponse.nextPageToken)
 
                 // Return this page and next page's items
                 return Promise.resolve([ 
                     ...<T[]> youtubeResponse.items,
                     ...await this.recurseResponse_<T>(options, pageLimit, youtubeResponse.nextPageToken)
                 ]);
-            
+
             // Return result, we're finished!
             return Promise.resolve(<T[]> youtubeResponse.items);
         }catch(error){

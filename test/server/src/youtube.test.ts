@@ -5,11 +5,11 @@
  * 
  */
 
-import YouTube, { YouTubeParameters } from "../../../server/src/youtube2";
+import YouTube, { YouTubeParameters } from "../../../server/src/youtube";
 import { YouTubeVideo } from "../../../common/types";
 import assert from "assert";
 
-describe("youtube2", function() {
+describe("youtube", function() {
     let youtube = new YouTube();
 
     // unit-cost of 2*i units 

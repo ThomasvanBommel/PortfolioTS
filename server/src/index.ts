@@ -5,7 +5,7 @@
  * 
  */
 
-import YouTube from "./youtube2";
+import YouTube from "./youtube";
 import config from "./config"; // TODO : Remove
 import express from "express";
 import path from "path";

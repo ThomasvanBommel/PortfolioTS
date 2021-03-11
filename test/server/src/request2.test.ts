@@ -9,79 +9,32 @@ import request, { RequestResponse } from "../../../server/src/request2"
 import assert from "assert";
 
 // Testing the request module
-describe("request2", () => {
+describe("request2", function() {
 
-    // Testing the default export of the module
-    describe("default", () => {
-
-        // Testing a request on google.com
-        describe("google.com", () => {
-
-            let response: RequestResponse;
-
-            // Get response from google.com
-            before(async () => {
-                response = await request("https://www.google.com");
-            });
-
-            // Verify response status code
-            it("status code 200", () => {
-                assert.strictEqual(response.message.statusCode, 200);
-            });
+    // Verify response status code
+    it("www.google.com", function() {
+        assert.doesNotReject(async function() {
+            await request("https://www.google.com");
         });
+    });
 
-        // Testing a request on googleapis.com
-        describe.skip("googleapis.com", () => {
-
-            let response: RequestResponse;
-
-            // Get response
-            before(async () => {
-                response = await request({
-                    hostname: "youtube.googleapis.com",
-                    path: "/youtube/v3/videos"
-                });
-            });
-
-            // Verify response status code
-            it("status code 403", () => {
-                assert.strictEqual(response.message.statusCode, 403);
-            });
-
-            // Check response data
-            it("check error message says missing API key", () => {
-                let data = JSON.parse(response.data);
-                let expected = "The request is missing a valid API key."
-
-                // Ensure data includes parameter error.message
-                if("error" in data && "message" in data.error)
-
-                    // Check message
-                    return assert.strictEqual(data.error.message, expected);
-
-                // Throw error if parameter doesn't exist
-                throw new Error("Missing error or message parameter");
-            });
-        });
-
-        // Test an invalid url
-        describe("123abcLMNOP.987", () => {
-
-            // Expected failure test
-            it("expected error", async () => {
-                try{
-
-                    // Try invalid url
-                    await request("123abcLMNOP.987");
-                }catch{
-
-                    // Thrown error means a pass
-                    return assert.ok(true);
+    // No api key test
+    it("googleapis.com", function() {
+        assert.rejects(async function() {
+            await request({
+                hostname: "youtube.googleapis.com",
+                path: "/youtube/v3/videos",
+                parameters: {
+                    reason: "testing"
                 }
-
-                // Throw error if the test passed
-                throw new Error("This test should have failed");
             });
+        });
+    });
+
+    // Invalid url test
+    it("123abcLMNOP.987", function() {
+        assert.rejects(async function() {
+            await request("123abcLMNOP.987");
         });
     });
 });

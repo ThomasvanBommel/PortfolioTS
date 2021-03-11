@@ -12,7 +12,7 @@ import assert from "assert";
 describe("youtube2", function() {
     let youtube = new YouTube();
 
-    // unit-cost of 101*i units (303 units)
+    // unit-cost of 2*i units 
     for(let i = 1; i <= 2; i++){
         const maxResults = 5;
         const pageLimit = 1 * i;
@@ -83,41 +83,4 @@ describe("youtube2", function() {
             });
         });
     }
-
-
-    // let videos: YouTubeVideo[];
-
-    // before(async () => {
-    //     const yt = new YouTube();
-
-    //     yt.setParameters({
-    //         maxResults: 5
-    //     });
-
-    //     videos = await yt.getVideoSnippets(1);
-    //     await yt.addVideoStatistics(videos);
-
-    //     console.log(videos);
-
-
-    // });
-
-    // it("true", () => {
-    //     assert.ok(true);
-    // });
-
-
-    // new YouTube().startCache();
-
-    // let videos: Video[];
-
-    // before(async () => {
-    //     videos = await new YouTube().getVideoSnippets();
-    // });
-
-    // it("more than 1 video returned", () => {
-    //     assert.ok(videos.length > 0);
-
-    //     console.log("LENGTH", videos.length);
-    // });
 });

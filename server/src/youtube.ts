@@ -35,8 +35,8 @@ export default class YouTube {
     parameters_: YouTubeParameters = {
         channelId: config.channelId,
         key: config.apiKey,
-        order: "rating",
-        maxResults: 5,
+        order: "date",
+        maxResults: 50,
     };
 
     // Cache interval identifier

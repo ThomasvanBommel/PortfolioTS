@@ -3,6 +3,7 @@
     "compilerOptions": {
         "jsx": "react",
         "lib": ["ES6", "DOM"],
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "noImplicitAny": true
     }
 }

@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 6:21pm
+ * Last Modified: Saturday March 13th 2021 6:59pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,7 +16,7 @@ class ContactForm extends React.Component {
 
     render(){
         return (
-            <form action="#" method="POST" className={ style.container }>
+            <form action="#" className={ style.container }>
                 <Input label="name" />
                 <Input label="email" />
                 <Input label="subject" />
@@ -30,6 +30,7 @@ class ContactForm extends React.Component {
                 </div>
 
                 <input type="submit" value="Submit" />
+                <button>Cancel</button>
             </form>
         );
     }

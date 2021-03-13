@@ -8,11 +8,30 @@
 import React from 'react';
 import Clock from "./Clock";
 
-class NavBar extends React.Component<{ brand: string }, {}> {
+type properties = {
+    brand: string, 
+    contactClick: () => void
+};
+
+class NavBar extends React.Component<properties, { contactPageActive: boolean }> {
 
     /** Create a new navigation bar component */
-    constructor(props: { brand: string }) {
+    constructor(props: properties) {
         super(props);
+
+        this.state = {
+            contactPageActive: false
+        };
+
+        this.clickedContact = this.clickedContact.bind(this);
+    }
+
+    clickedContact() {
+        this.setState({
+            contactPageActive: !this.state.contactPageActive
+        });
+
+        this.props.contactClick();
     }
 
     /** Render to the canvas */
@@ -24,8 +43,10 @@ class NavBar extends React.Component<{ brand: string }, {}> {
                 </a>
                 <div className="flex-fill"></div>
                 <Clock />
-                <button type="button" className="btn btn-outline-success me-3">
-                    Contact
+                <button type="button" 
+                        onClick={ this.clickedContact }
+                        className="btn btn-outline-success me-3">
+                    { this.state.contactPageActive ? "Home" : "Contact" }
                 </button>
             </nav>
         );

@@ -3,7 +3,7 @@
  * Created: Monday February 15th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 5:26pm
+ * Last Modified: Saturday March 13th 2021 7:18pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -25,6 +25,8 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     resizeTimer: number = -1;
     itemWidth: number = 0;
 
+    lazyElements: HTMLImageElement[] = [];
+
     /** Create a new carousel */
     constructor(props: { children: React.ReactNode }) {
         super(props);
@@ -38,6 +40,8 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
         this.updateOffset = this.updateOffset.bind(this);
         this.resizeCheck = this.resizeCheck.bind(this);
         this.resize = this.resize.bind(this);
+
+        this.lazyLoad = this.lazyLoad.bind(this);
     }
 
     /** Successfully mounted component */
@@ -46,6 +50,11 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
         this.updateOffset();
 
         window.addEventListener('resize', this.resize);
+    }
+
+    /** Stop animation when unmounted */
+    componentWillUnmount() {
+        this.stopAnimation();
     }
 
     /** Start window resizing, time it (so we dont update every frame) */
@@ -73,9 +82,16 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     updateOffset() {
         this.itemWidth = document.querySelector(`.${style.carouselItem}`).clientWidth;
 
+        this.lazyLoad();
+
         this.setState({
             children_offset: this.selected * -this.itemWidth
         });
+    }
+
+    /** Load images when they are close to the viewport */
+    lazyLoad() {
+
     }
 
     /** Start auto scrolling */

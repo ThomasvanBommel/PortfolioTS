@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 6:22pm
+ * Last Modified: Saturday March 13th 2021 7:21pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,8 +16,10 @@
     margin: 1rem auto;
     padding: 1rem;
 
-    border: 2px solid var(--dark);
+    border: 2px solid lightgray;
     border-radius: 1rem;
+
+    box-shadow: 0.25rem 0.25rem rgba(128, 128, 128, 0.5);
 }
 
 .input{

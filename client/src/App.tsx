@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 2:56pm
+ * Last Modified: Saturday March 13th 2021 5:44pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,6 +13,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 import YoutubeCarousel from './youtube/YoutubeCarousel';
+import ContactForm from './contact/ContactForm';
 
 class App extends React.Component {
 
@@ -27,6 +28,7 @@ class App extends React.Component {
             <div>
                 <Navbar brand="Thomas vanBommel" />
                 <YoutubeCarousel />
+                <ContactForm />
             </div>
         );
     }

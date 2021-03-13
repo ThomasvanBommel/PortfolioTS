@@ -3,16 +3,11 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 5:30pm
+ * Last Modified: Saturday March 13th 2021 6:26pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
-
- :root{
-     --dark: rgb(33, 37, 41);
-     --light: rgb(248, 249, 250);
- }
 
  /** Carousel */
  .carousel{
@@ -41,7 +36,7 @@
 /** Loading div */
 .loading{
     text-align: center;
-    margin: 2rem;
+    margin: 4rem;
 }
 
 /** Carousel Items */

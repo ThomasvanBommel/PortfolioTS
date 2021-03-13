@@ -1,13 +1,18 @@
 /*
- * Filename: client/src/App.tsx
- * Created Date: Saturday, February 6th 2021, 11:49:28 pm
+ * File: App.tsx
+ * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday March 13th 2021 2:56pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-03-13 2:54pm	TvB	Updated header + Change import location
  */
 
 import React from 'react';
 import Navbar from './Navbar';
-import Youtube from './Youtube';
+import YoutubeCarousel from './youtube/YoutubeCarousel';
 
 class App extends React.Component {
 
@@ -21,7 +26,7 @@ class App extends React.Component {
         return (
             <div>
                 <Navbar brand="Thomas vanBommel" />
-                <Youtube />
+                <YoutubeCarousel />
             </div>
         );
     }

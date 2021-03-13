@@ -1,8 +1,13 @@
 /*
- * Filename: config/webpack.config.js
- * Created Date: Sunday, February 14th 2021, 11:45:00 pm
+ * File: webpack.config.js
+ * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday March 13th 2021 12:40pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-03-13 12:40pm	TvB	Updated header
  */
 
 const join = require("path").join;

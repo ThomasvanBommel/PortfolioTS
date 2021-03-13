@@ -59,13 +59,13 @@ async function request(options: string | RequestOptions): Promise<RequestRespons
 
                     // Check status code, reject if no status code or isn't successful (200-299)
                     if(code < 200 || code > 299)
-                        reject(new Error(data))
+                        reject(new Error(data));
 
                     // Return the request response
                     resolve({
                         message: response,
                         data: data
-                    })
+                    });
                 });
             });
 

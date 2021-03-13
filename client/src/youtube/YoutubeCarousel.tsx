@@ -3,10 +3,11 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 2:57pm
+ * Last Modified: Saturday March 13th 2021 5:33pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-13 5:31pm	TvB	Removed bootstrap tags
  * 2021-03-13 2:57pm	TvB	Changed file name
  * 2021-03-13 2:52pm	TvB	Moved over to using YouTubeCarouselItem
  * 2021-03-13 12:49pm	TvB	Updated header
@@ -14,6 +15,7 @@
 
 import YouTubeCarouselItem from "./YouTubeCarouselItem";
 import { YouTubeVideo } from "../../../common/types";
+import style from "./YouTubeCarousel.module.css";
 import Carousel from "./Carousel";
 import React from 'react';
 
@@ -59,26 +61,18 @@ class YoutubeCarousel extends React.Component<{}, State> {
     /** Render this component */
     render() {
 
-        // check if videos are loaded
-        if(!this.state.isLoaded){
-
-            // return spinner (waiting...)
-            return ( 
-                <div>
-                    <div className="spinner-border d-block mx-auto my-5 text-secondary"></div>
-                </div>
-            );
-        }else{
-
-            // return carousel items
-            return (
-                <Carousel>{
-                    Object.values(this.state.videos).map(video => (
-                        <YouTubeCarouselItem key={ video.id } video={ video } />
-                    ))
-                }</Carousel>
-            );
-        }
+        // Return "loading..." or carousel
+        return !this.state.isLoaded ? (
+            <div className={ style.loading }>
+                Loading...
+            </div>
+        ) : (
+            <Carousel>{
+                Object.values(this.state.videos).map(video => (
+                    <YouTubeCarouselItem key={ video.id } video={ video } />
+                ))
+            }</Carousel>
+        );
     }
 }
 

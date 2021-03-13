@@ -3,10 +3,12 @@
  * Created: Monday February 15th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 2:50pm
+ * Last Modified: Saturday March 13th 2021 5:26pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-13 5:26pm	TvB	Cleaned up back/forward code
+ * 2021-03-13 5:05pm	TvB	Made it calculate items width only 1 time
  * 2021-03-13 2:39pm	TvB	Added resize timer, 1s after resizing update offset
  * 2021-03-13 1:11pm	TvB	Added comments
  * 2021-03-13 12:11pm	TvB	Bound methods bind(this)
@@ -21,6 +23,7 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     selected: number = 0;
 
     resizeTimer: number = -1;
+    itemWidth: number = 0;
 
     /** Create a new carousel */
     constructor(props: { children: React.ReactNode }) {
@@ -40,6 +43,8 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     /** Successfully mounted component */
     componentDidMount() {
         this.startAnimation();
+        this.updateOffset();
+
         window.addEventListener('resize', this.resize);
     }
 
@@ -47,10 +52,7 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     resize() {
         if(this.resizeTimer < 0){
             this.resizeTimer = Date.now();
-            
             this.resizeCheck();
-
-            console.log("resizing...");
         }else{
             this.resizeTimer = Date.now();
         }
@@ -59,8 +61,6 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
     /** Check that the user has stopped resizing for at least a second */
     resizeCheck() {
         if(Date.now() - this.resizeTimer > 1000){
-            console.log("finished resizing!")
-
             this.updateOffset();
             this.resizeTimer = -1;
             return false;
@@ -71,18 +71,11 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
 
     /** Update carousels offset (after resizing) */
     updateOffset() {
-        let element_width = this.getItemWidth();
-        let offset = this.state.children_offset;
-
-        // this.setState({
-        //     children_offset: offset - (offset % element_width)
-        // });
+        this.itemWidth = document.querySelector(`.${style.carouselItem}`).clientWidth;
 
         this.setState({
-            children_offset: this.selected * -element_width
+            children_offset: this.selected * -this.itemWidth
         });
-
-        console.log("updated carousel offset!")
     }
 
     /** Start auto scrolling */
@@ -98,59 +91,23 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
 
     /** Scroll left (back) */
     back() {
-        let element_width = this.getItemWidth();
-        let children_count = React.Children.count(this.props.children) - 1;
-        let offset = this.state.children_offset;
-
-        if(this.state.children_offset > 0){
-            offset = -element_width * children_count;
-        }else{
-            offset = this.state.children_offset + element_width;
-        }
-
-        this.setState({
-            children_offset: offset
-        });
-
-        this.incrementSelected(-1);
+        this.moveSelected(-1);
+        this.updateOffset();
     }
 
     /** Scroll right (forward) */
     forward() {
-        let element_width = this.getItemWidth();
-        let children_count = React.Children.count(this.props.children) - 1;
-        let offset = this.state.children_offset;
-
-        if(this.state.children_offset <= -element_width * children_count){
-            offset = 0;
-        }else{
-            offset = this.state.children_offset - element_width;
-        }
-
-        this.setState({
-            children_offset: offset
-        });
-
-        this.incrementSelected(1);
-    }
-
-    getItemWidth(){
-        return document.querySelector(`.${style.carouselItem}`).clientWidth;
+        this.moveSelected(1);
+        this.updateOffset();
     }
 
     /** 
-     * Increment the counter (which element is selected) 
-     * @param { number } amount - Positive or negitive amount to move the counter / selector
+     * Change which item is selected
+     * @param { number } amount - Positive to move up or negitive to move down
      */
-    incrementSelected(amount: number) {
-        let tmp = this.selected + amount;
-
-        if(tmp < 0){
-            this.selected = React.Children.count(this.props.children) - 1;
-            return;
-        }
-            
-        this.selected = tmp % (React.Children.count(this.props.children) - 1);
+    moveSelected(amount: number) {
+        this.selected = 
+            Math.abs(this.selected + amount) % (React.Children.count(this.props.children) - 1);
     }
 
     /** Render this component */

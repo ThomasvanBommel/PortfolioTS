@@ -1,12 +1,18 @@
 /*
- * Filename: client/src/Navbar.tsx
- * Created Date: Sunday, February 7th 2021, 12:46:13 am
+ * File: Navbar.tsx
+ * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday March 13th 2021 9:54pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-03-13 7:27pm	TvB	Added click callback + contactPageActive state
  */
 
 import React from 'react';
 import Clock from "./Clock";
+import style from "./Navbar.module.css";
 
 type properties = {
     brand: string, 
@@ -37,17 +43,18 @@ class NavBar extends React.Component<properties, { contactPageActive: boolean }>
     /** Render to the canvas */
     render() {
         return (
-            <nav className="navbar navbar-expand navbar-light bg-light d-flex border-bottom shadow-sm">
-                <a href="/" className="navbar-brand ms-3">
-                    { this.props.brand }
-                </a>
-                <div className="flex-fill"></div>
-                <Clock />
-                <button type="button" 
-                        onClick={ this.clickedContact }
-                        className="btn btn-outline-success me-3">
-                    { this.state.contactPageActive ? "Home" : "Contact" }
-                </button>
+            <nav className={ style.nav }>
+                <div>
+                    <a href="/">
+                        Thomas v<span>an</span>B<span>ommel</span>
+                    </a>
+
+                    <div className={ style.spacer }></div>
+
+                    <button type="button" onClick={ this.clickedContact }>
+                        { this.state.contactPageActive ? "Home" : "Contact" }
+                    </button>
+                </div>
             </nav>
         );
     }

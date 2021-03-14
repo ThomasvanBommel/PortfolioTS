@@ -1,9 +1,15 @@
 <!--
-Filename: client/views/index.html
-Created Date: Saturday, February 6th 2021, 11:54:57 pm
+File: index.html
+Created: Saturday February 6th 2021
 Author: Thomas vanBommel
--->
 
+Last Modified: Saturday March 13th 2021 10:40pm
+Modified By: Thomas vanBommel
+
+CHANGELOG:
+2021-03-13 9:20pm	TvB	Added button styles
+2021-03-13 8:58pm	TvB	Added root styles
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,19 +22,45 @@ Author: Thomas vanBommel
     <meta name="author" content="Thomas vanBommel">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" 
           crossorigin="anonymous"
-          rel="stylesheet">
+          rel="stylesheet"> -->
 
     <style>
       :root{
         --dark: rgb(33, 37, 41);
         --light: rgb(248, 249, 250);
+        --border: 0.1rem solid rgba(0,0,0,0.5);
       }
 
       *{
-        font-family: 'Courier New', Courier, monospace;
+        margin: 0;
+        padding: 0;
+        border: none;
+        font-size: 16px;
+        text-decoration: none;
+        font-family: monospace;
+      }
+
+      button, input, textarea{
+        border: var(--border);
+        box-sizing: border-box;
+        border-radius: 0.25rem;
+        background-color: white;
+        padding: 0.25rem;
+      }
+
+      button:hover, input[type="submit"]:hover {
+        background-color: black;
+        cursor: pointer;
+        color: white;
+      }
+
+      body{
+        background-color: #eee;
+        max-width: 100%;
+        overflow: hidden;
       }
     </style>
 

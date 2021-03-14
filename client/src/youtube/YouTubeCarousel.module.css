@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 6:26pm
+ * Last Modified: Saturday March 13th 2021 11:29pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,8 +13,7 @@
  .carousel{
     width: 100%;
     position: relative;
-    overflow: hidden;
-
+    
     background-color: var(--dark);
     color: var(--light);
 }
@@ -32,7 +31,6 @@
     gap: 0;
 }
 
-/* spinner-border d-block mx-auto my-5 text-secondary */
 /** Loading div */
 .loading{
     text-align: center;
@@ -40,7 +38,6 @@
 }
 
 /** Carousel Items */
-/* col-lg-4 col-sm-6 col-xs-12 */
 .carouselItem{
     width: 100vw;
     text-align: center;
@@ -71,12 +68,13 @@
     background-color:rgba(128, 128, 128, 0.5);
     transition: 0.5s color;
 
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     border:none;
 }
 
 .backButton:hover, .forwardButton:hover{
     color: var(--dark);
+    background-color:rgba(128, 128, 128, 0.5);
 }
 
 .backButton{
@@ -85,6 +83,14 @@
 
 .forwardButton{
     right: 0.1em;
+}
+
+/** Page identifier */
+#pageCount{
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0.25rem;
+    color: var(--dark);
 }
 
 /** Screen width is bigger than 800px */
@@ -97,6 +103,6 @@
 /** Screen width is bigger than 1100px */
 @media only screen and (min-width: 1100px){
     .carouselItem{
-        width: 33vw;
+        width: 33.3333vw;
     }
 }

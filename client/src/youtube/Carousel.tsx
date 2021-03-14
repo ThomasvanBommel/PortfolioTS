@@ -3,10 +3,11 @@
  * Created: Monday February 15th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 7:18pm
+ * Last Modified: Saturday March 13th 2021 11:34pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-13 10:34pm	TvB	Removed bootstrap + added slide identifier + static values
  * 2021-03-13 5:26pm	TvB	Cleaned up back/forward code
  * 2021-03-13 5:05pm	TvB	Made it calculate items width only 1 time
  * 2021-03-13 2:39pm	TvB	Added resize timer, 1s after resizing update offset
@@ -18,14 +19,16 @@
 import React from 'react';
 import style from "./YouTubeCarousel.module.css";
 
+let staticSelected = 0;
+let staticOffset = 0;
+let staticItemWidth = 0;
+
 class Carousel extends React.Component<{}, { children_offset: number }> {
     interval_id = 0;
     selected: number = 0;
 
     resizeTimer: number = -1;
     itemWidth: number = 0;
-
-    lazyElements: HTMLImageElement[] = [];
 
     /** Create a new carousel */
     constructor(props: { children: React.ReactNode }) {
@@ -41,12 +44,13 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
         this.resizeCheck = this.resizeCheck.bind(this);
         this.resize = this.resize.bind(this);
 
-        this.lazyLoad = this.lazyLoad.bind(this);
+        this.getChildCount = this.getChildCount.bind(this);  
     }
 
     /** Successfully mounted component */
     componentDidMount() {
         this.startAnimation();
+        this.resizeCheck();
         this.updateOffset();
 
         window.addEventListener('resize', this.resize);
@@ -69,29 +73,25 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
 
     /** Check that the user has stopped resizing for at least a second */
     resizeCheck() {
-        if(Date.now() - this.resizeTimer > 1000){
+        if(Date.now() - this.resizeTimer > 500){
             this.updateOffset();
             this.resizeTimer = -1;
+
+            staticItemWidth = document.getElementsByClassName(style.carouselItem)[1].clientWidth;
+
             return false;
         }
 
-        setTimeout(this.resizeCheck, 200);
+        setTimeout(this.resizeCheck, 100);
     }
 
     /** Update carousels offset (after resizing) */
     updateOffset() {
-        this.itemWidth = document.querySelector(`.${style.carouselItem}`).clientWidth;
-
-        this.lazyLoad();
+        staticOffset = staticSelected * -staticItemWidth;
 
         this.setState({
-            children_offset: this.selected * -this.itemWidth
+            children_offset: staticOffset
         });
-    }
-
-    /** Load images when they are close to the viewport */
-    lazyLoad() {
-
     }
 
     /** Start auto scrolling */
@@ -122,20 +122,35 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
      * @param { number } amount - Positive to move up or negitive to move down
      */
     moveSelected(amount: number) {
-        this.selected = 
-            Math.abs(this.selected + amount) % (React.Children.count(this.props.children) - 1);
+        staticSelected = 
+            Math.abs(staticSelected + amount) % this.getChildCount();
+    }
+
+    getChildCount() {
+        return React.Children.count(this.props.children) - 1;
     }
 
     /** Render this component */
     render() {
+        let childCount = this.getChildCount();
+
         return (
             <div className={ style.carousel } 
                  onMouseEnter={ this.stopAnimation }
                  onMouseLeave={ this.startAnimation }>
 
-                <div className={ style.children } 
-                    style={{ transform: `translateX(${ this.state.children_offset }px)` }}>
-                    { this.props.children }
+                <style>{
+                    `.${ style.children } div:nth-child(${ staticSelected +1 }){
+                        border: 0.5rem solid #abb;
+                        box-sizing: border-box;
+                    }`
+                }</style>
+
+                <div style={{ overflow: "hidden" }}>
+                    <div className={ style.children } 
+                        style={{ transform: `translateX(${ staticOffset }px)` }}>
+                        { this.props.children }
+                    </div>
                 </div>
 
                 <button className={ style.backButton } onClick={ this.back }>
@@ -145,6 +160,10 @@ class Carousel extends React.Component<{}, { children_offset: number }> {
                 <button className={ style.forwardButton } onClick={ this.forward }>
                     &#12297; 
                 </button>
+
+                <p id={ style.pageCount }>
+                    { staticSelected + 1 } of { childCount + 1 }
+                </p>
             </div>
         );
     }

@@ -1,0 +1,44 @@
+/*
+ * File: Navbar.module.css
+ * Created: Saturday March 13th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Saturday March 13th 2021 9:56pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+ /* navbar navbar-expand navbar-light bg-light d-flex border-bottom shadow-sm */
+nav{
+    height: 2rem;
+    padding: 0.5rem 0;
+    background-color: white;
+}
+
+nav div{
+    display: flex;
+    margin: 0 0.5rem;
+}
+
+nav a{
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    color: var(--dark);
+}
+
+nav a span{
+    display: none;
+    font-size: inherit;
+}
+
+.spacer{
+    flex: 1;
+}
+
+@media only screen and (min-width: 500px){
+    nav a span{
+        display: inline;
+    }
+}

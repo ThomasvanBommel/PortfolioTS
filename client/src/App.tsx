@@ -3,15 +3,16 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 7:12pm
+ * Last Modified: Saturday March 13th 2021 8:51pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-13 7:27pm	TvB	Added contact click callback
  * 2021-03-13 2:54pm	TvB	Updated header + Change import location
  */
 
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from './navbar/Navbar';
 import YoutubeCarousel from './youtube/YoutubeCarousel';
 import ContactForm from './contact/ContactForm';
 

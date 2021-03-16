@@ -1,0 +1,35 @@
+/*
+ * File: Carousel.module.css
+ * Created: Tuesday March 16th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Tuesday March 16th 2021 3:00am
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+.carousel{
+    width: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+
+.itemContainer{
+    white-space: nowrap;
+    will-change: transform;
+    transition: 1s transform;
+}
+
+.item{
+    display:inline-block;
+    background-color:tomato;
+    border:2px solid black;
+    box-sizing: border-box;
+}
+
+.item img{
+    width:max-content;
+    display: block;
+    margin:0.25rem auto;
+}

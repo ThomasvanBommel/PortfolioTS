@@ -3,32 +3,32 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 9:56pm
+ * Last Modified: Tuesday March 16th 2021 12:14am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-16	TvB	Changed over to using classes
  */
 
- /* navbar navbar-expand navbar-light bg-light d-flex border-bottom shadow-sm */
-nav{
+.nav{
     height: 2rem;
     padding: 0.5rem 0;
     background-color: white;
 }
 
-nav div{
+.nav div{
     display: flex;
     margin: 0 0.5rem;
 }
 
-nav a{
+.nav a{
     font-size: 1.5rem;
     line-height: 2rem;
 
     color: var(--dark);
 }
 
-nav a span{
+.nav a span{
     display: none;
     font-size: inherit;
 }
@@ -38,7 +38,7 @@ nav a span{
 }
 
 @media only screen and (min-width: 500px){
-    nav a span{
+    .nav a span{
         display: inline;
     }
 }

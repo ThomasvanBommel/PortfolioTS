@@ -3,11 +3,11 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 15th 2021 10:04pm
+ * Last Modified: Tuesday March 16th 2021 12:17am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
- * 2021-03-15 7:41pm	TvB	Refactored to use react function components
+ * 2021-03-15   TvB	Refactored to use react function components
  */
 
 import style from "./ContactForm.module.css";

@@ -3,22 +3,24 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 15th 2021 10:12pm
+ * Last Modified: Tuesday March 16th 2021 2:52am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
- * 2021-03-15 7:39pm	TvB	Refactored to use a function component
- * 2021-03-13 7:27pm	TvB	Added contact click callback
- * 2021-03-13 2:54pm	TvB	Updated header + Change import location
+ * 2021-03-15   TvB	Refactored to use a function component
+ * 2021-03-13	TvB	Added contact click callback
+ * 2021-03-13	TvB	Updated header + Change import location
  */
 
 import React, { useState } from 'react';
 import Navbar from './navbar/Navbar';
 import YoutubeCarousel from './youtube/YoutubeCarousel';
 import ContactForm from './contact/ContactForm';
+import Carousel from "./youtube/Carousel2";
 
 export enum Page {
-    Home, Contact
+    Home = "Home", 
+    Contact = "Contact"
 };
 
 function App(){
@@ -31,10 +33,12 @@ function App(){
 
     return (
         <div>
-            <Navbar brand="Thomas vanBommel" contactClick={ handleContactClick } />
+            <Navbar activePage={ activePage } setActivePage={ setActivePage } />
             {
                 activePage === Page.Home ? (
-                    <YoutubeCarousel />
+                    <div>
+                        <Carousel />
+                    </div>
                 ) : (
                     <ContactForm />
                 )

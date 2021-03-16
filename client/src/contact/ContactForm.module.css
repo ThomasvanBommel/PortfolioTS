@@ -3,13 +3,13 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 10:41pm
+ * Last Modified: Monday March 15th 2021 10:07pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-15 10:07pm	TvB	Clean-up
  */
 
- 
 .container{
     width: max-content;
     max-width: calc(100% - 1rem);
@@ -25,19 +25,34 @@
     background-color: var(--light);
 }
 
+.container input, .container button{
+    margin: 0.25rem 0;
+}
+
+.container textarea{
+    max-width: 100%;
+    display:block;
+}
+
+.title{
+    margin-bottom:0.5rem;
+}
+
+.address{
+    text-align: center;
+    width: max-content;
+    margin: 0 auto;
+}
+
 .input{
+    line-height: 2rem;
     display: flex;
-    margin: 0.25rem;
 }
 
 .input input{
     flex: 1;
 }
 
-textarea{
-    max-width: 100%;
-}
-
-button{
-    margin-left: 0.25rem;
+.invalid{
+    outline: 0.1rem solid tomato;
 }

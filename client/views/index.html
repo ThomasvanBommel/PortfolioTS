@@ -3,7 +3,7 @@ File: index.html
 Created: Saturday February 6th 2021
 Author: Thomas vanBommel
 
-Last Modified: Saturday March 13th 2021 10:40pm
+Last Modified: Monday March 15th 2021 10:12pm
 Modified By: Thomas vanBommel
 
 CHANGELOG:
@@ -51,7 +51,7 @@ CHANGELOG:
         padding: 0.25rem;
       }
 
-      button:hover, input[type="submit"]:hover {
+      button:not([disabled]):hover, input[type="submit"]:not([disabled]):hover {
         background-color: black;
         cursor: pointer;
         color: white;
@@ -61,6 +61,10 @@ CHANGELOG:
         background-color: #eee;
         max-width: 100%;
         overflow: hidden;
+      }
+
+      h1{
+        font-size: 1.5rem;
       }
     </style>
 

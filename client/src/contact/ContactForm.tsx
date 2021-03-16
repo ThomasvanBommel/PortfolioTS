@@ -3,54 +3,89 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 13th 2021 11:07pm
+ * Last Modified: Monday March 15th 2021 10:04pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-15 7:41pm	TvB	Refactored to use react function components
  */
 
 import style from "./ContactForm.module.css";
-import React from 'react';
+import React, { useState } from 'react';
 
-class ContactForm extends React.Component {
+type InputTarget= { target: HTMLInputElement | HTMLTextAreaElement };
 
-    render(){
-        return (
-            <form action="#" className={ style.container }>
-                <Input label="name" />
-                <Input label="email" />
-                <Input label="subject" />
+/** Contact form */
+function ContactForm(){
+    const [ validated, setValidation ] = useState(false);
+    const [ name, setName ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ subject, setSubject ] = useState("");
+    const [ message, setMessage ] = useState("");
 
-                <div>
-                    <label htmlFor="message">Message: </label>
-                </div>
-                
-                <div>
-                    <textarea id="message" name="message" cols={30} rows={5}></textarea>
-                </div>
+    // Update an inputs value and check form validation
+    const update = (func: React.Dispatch<React.SetStateAction<string>>, val: string) => {
+        func(val);
+        setValidation(!!name && !!email && !!subject && !!message);
+    };
 
-                <input type="submit" value="Submit" />
-                <button>Cancel</button>
+    // Change handlers for each input
+    const handleNameChange    = ({ target }: InputTarget) => update(setName,    target.value);
+    const handleEmailChange   = ({ target }: InputTarget) => update(setEmail,   target.value);
+    const handleSubjectChange = ({ target }: InputTarget) => update(setSubject, target.value);
+    const handleMessageChange = ({ target }: InputTarget) => update(setMessage, target.value);
+
+    return (
+        <div>
+            <form action="/" className={ style.container }>
+                <h1 className={ style.title }>Message me</h1>
+                <Input label="name" value={ name } onChange={ handleNameChange } />
+                <Input label="email" value={ email } onChange={ handleEmailChange } />
+                <Input label="subject" value={ subject } onChange={ handleSubjectChange } />
+
+                <label htmlFor="message">Message</label>
+                <textarea 
+                    className={ !!message ? null : style.invalid }
+                    onChange={ handleMessageChange } 
+                    value={ message } 
+                    name="message" 
+                    id="message" 
+                    cols={ 30 } 
+                    rows={ 5 } 
+                    required
+                ></textarea>
+
+                <input type="submit" value="Submit" disabled={ !validated } />
             </form>
-        );
-    }
+            <address className={ style.address }>
+                <p>Alternatively send an email to:</p>
+                <a href="mailto:thomas@vanbommel.ca">thomas@vanbommel.ca</a>
+            </address>
+        </div>
+    );
 }
 
-class Input extends React.Component<{ label: string }, {}> {
+/** Form 'text' input elements */
+function Input({ label, value, onChange }
+    : { label: string, value: string, onChange: React.ChangeEventHandler<HTMLInputElement> } ){
 
-    render(){
-        let label = this.props.label;
-        let Label = label.charAt(0).toUpperCase() + label.slice(1);
+    // Copy label, capitalize the first letter, and pad with spaces
+    const paddedLabel = (label.charAt(0).toUpperCase() + label.slice(1)).padEnd(10, "\u00a0");
 
-        return (
-            <div className={ style.input }>
-                <label htmlFor={ label }>{
-                    Label.padEnd(10, "\u00a0")
-                }</label>
-                <input id={ label } name={ label } type="text" />
-            </div>
-        );
-    }
+    return (
+        <div className={ style.input }>
+            <label htmlFor={ label }>{ paddedLabel }</label>
+            <input 
+                className={ !!value ? null : style.invalid }
+                onChange={ onChange }
+                value={ value }
+                name={ label } 
+                id={ label } 
+                type="text" 
+                required 
+            />
+        </div>
+    );
 }
 
 export default ContactForm;

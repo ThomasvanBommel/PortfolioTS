@@ -2,20 +2,21 @@
 Typescript portfolio with a ReactJS front-end 
 
 ## Features
- - Continuous integration testing
+ - Continuous integration
+ - Continuous deployment
  - Webpack + TSC transpiling
  - Express network router
- - Typescript type-checking
+ - React front-end
  - Developer mode (watch files and auto-transpile)
- - Production modes
+ - Production mode
 
 ## Technology Stack
 Server
  - [Express](https://www.npmjs.com/package/express) - Rounting engine
+ - [Mocha](https://www.npmjs.com/package/mocha) - Test framework
 
 Client
  - [React](https://reactjs.org/) - UI framework
- - [Bootstrap](https://getbootstrap.com/) - HTML styling
  - [webpack](https://webpack.js.org/) - Module bundling
 
 ## Requirements
@@ -31,5 +32,5 @@ Run in production mode:
  1. Run `npm i && npm start`
 
 Run in development mode:
- 1. Run `npm i && npm run build-server && npm start` in one terminal
+ 1. Run `npm i && npm start` in one terminal
  2. Run `npm run watch` in another terminal

@@ -9,6 +9,7 @@ Typescript portfolio with a ReactJS front-end
  - React front-end
  - Developer mode (watch files and auto-transpile)
  - Production mode
+ - Complete test suite
 
 ## Technology Stack
 Server
@@ -27,10 +28,14 @@ You need the following in order to run this project
 ## Run the project
 Prerequisite:
  - Set environment variable **YT_API_KEY** to a valid youtube api key
+ - Install npm packages with `npm i`
 
 Run in production mode:
- 1. Run `npm i && npm start`
+ 1. Run `npm start`
 
 Run in development mode:
- 1. Run `npm i && npm start` in one terminal
+ 1. Run `npm start` in one terminal
  2. Run `npm run watch` in another terminal
+
+Run tests:
+ 1. Run `npm test`

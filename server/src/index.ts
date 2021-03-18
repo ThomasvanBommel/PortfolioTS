@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 
 // youtube videos request
 app.get("/youtube", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
     res.json(yt.videos);
 });
 

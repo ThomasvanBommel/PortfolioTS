@@ -3,33 +3,98 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 16th 2021 3:00am
+ * Last Modified: Thursday March 18th 2021 1:17am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-18	TvB	Clean up
  */
 
 .carousel{
     width: 100%;
     overflow: hidden;
-    background-color: black;
+    background-color:var(--dark);
+    position:relative;
 }
 
 .itemContainer{
     white-space: nowrap;
     will-change: transform;
     transition: 1s transform;
+    box-sizing: border-box;
 }
 
 .item{
     display:inline-block;
-    background-color:tomato;
-    border:2px solid black;
-    box-sizing: border-box;
+    padding:0.25rem 0;
+    text-align: center;
+}
+
+.videoThumbnail{
+    position:relative;
 }
 
 .item img{
-    width:max-content;
-    display: block;
-    margin:0.25rem auto;
+    padding-bottom: 0.25rem;
+}
+
+.videoDetails{
+    width:100%;
+    height:100%;
+
+    background-color: black;
+    color: white;
+    opacity: 0;
+    
+    text-align: center;
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+.videoDetails td{
+    width: 1rem;
+}
+
+.videoDetails td:first-child{
+    padding-left: 1rem;
+}
+
+.videoDetails td:last-child{
+    padding-right: 1rem;
+}
+
+.videoDetails:hover{
+    opacity: 0.8;
+}
+
+.itemTitle{
+    width: 80%;
+    margin:0 auto;
+    overflow:hidden;
+}
+
+.itemTitle a{
+    text-decoration: underline;
+    color: var(--light);
+}
+
+.backButton, .forwardButton{
+    height:100%;
+    opacity: 0.5;
+    position:absolute;
+    top:0;
+}
+
+.backButton{
+    left:0;
+}
+
+.forwardButton{
+    right:0;
+}
+
+.info{
+    padding: 1rem;
+    opacity: 0.5;
 }

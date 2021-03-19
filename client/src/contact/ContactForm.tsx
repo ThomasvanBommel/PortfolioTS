@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 16th 2021 12:17am
+ * Last Modified: Thursday March 18th 2021 9:02pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -21,12 +21,13 @@ function ContactForm(){
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ subject, setSubject ] = useState("");
-    const [ message, setMessage ] = useState("");
+    const [ message, setMessage ] = useState("This form is disabled");
 
     // Update an inputs value and check form validation
     const update = (func: React.Dispatch<React.SetStateAction<string>>, val: string) => {
         func(val);
-        setValidation(!!name && !!email && !!subject && !!message);
+        // Disabled validation
+        // setValidation(!!name && !!email && !!subject && !!message);
     };
 
     // Change handlers for each input
@@ -36,7 +37,7 @@ function ContactForm(){
     const handleMessageChange = ({ target }: InputTarget) => update(setMessage, target.value);
 
     return (
-        <div>
+        <div className={ style.disabled }>
             <form action="/" className={ style.container }>
                 <h1 className={ style.title }>Message me</h1>
                 <Input label="name" value={ name } onChange={ handleNameChange } />

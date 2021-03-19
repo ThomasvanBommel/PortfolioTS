@@ -1,0 +1,21 @@
+/*
+ * File: ProgressBanner.module.css
+ * Created: Thursday March 18th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Thursday March 18th 2021 8:55pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+.banner{
+    width:100%;
+    text-align: center;
+    
+    position:absolute;
+    bottom: 0;
+
+    background-color:yellow;
+    padding: 2rem 0;
+}

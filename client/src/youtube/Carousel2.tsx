@@ -3,14 +3,14 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 18th 2021 1:16am
+ * Last Modified: Thursday March 18th 2021 8:50pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  * 2021-03-18	TvB	Finished carousel2 ? (I hope so)
  */
 
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from "./Carousel.module.css";
 import { YouTubeVideo } from "../../../common/types";
 

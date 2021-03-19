@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 16th 2021 2:52am
+ * Last Modified: Thursday March 18th 2021 8:56pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,6 +17,7 @@ import Navbar from './navbar/Navbar';
 import YoutubeCarousel from './youtube/YoutubeCarousel';
 import ContactForm from './contact/ContactForm';
 import Carousel from "./youtube/Carousel2";
+import ProgressBanner from "./progress_banner/ProgressBanner";
 
 export enum Page {
     Home = "Home", 
@@ -34,6 +35,7 @@ function App(){
     return (
         <div>
             <Navbar activePage={ activePage } setActivePage={ setActivePage } />
+            <ProgressBanner />
             {
                 activePage === Page.Home ? (
                     <div>

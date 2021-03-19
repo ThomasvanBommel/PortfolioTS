@@ -18,6 +18,12 @@ if(process.argv.includes("--config"))
 const app = express();
 const yt = new YouTube();
 
+// Set headers using middleware
+app.use((req, res, next) => {
+    res.set("X-Powered-By", "Sagittarius A*");
+    next();
+});
+
 // request and cache videos every hour
 yt.startCache();
 

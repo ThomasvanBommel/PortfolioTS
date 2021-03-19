@@ -6,28 +6,26 @@
   "scripts": {
     "watch": "npm run build-client -- -w --env --dev",
     
-    "config-server": "npm run start-server -- --config",
     "prebuild-server": "rm -rf ./server/build",
-    "build-server": "tsc --build ./server/ && npm run config-server",
+    "build-server": "tsc --build ./server/",
     
     "prebuild-client": "rm -rf ./client/build",
     "build-client": "webpack --config ./config/webpack.config.js",
     
     "prestart": "npm run build-server && npm run build-client",
-    "start": "npm run start-server",
-    "start-server": "node ./server/build/server/src/index.js",
+    "start": "./start.sh",
     
     "pretest": "npm run prestart",
     "test": "npm run mocha-test",
     "posttest": "npm run prebuild-server && npm run prebuild-client",
-
+    
     "mocha-test": "npm run server-test && npm run client-test",
-
+    
     "delete-server-test": "rm -rf ./test-server/build",
     "preserver-test": "npm run delete-server-test && tsc --build ./test-server/",
     "server-test": "mocha './test-server/**/test-server/**/src/*.js'",
     "postserver-test": "npm run delete-server-test",
-
+    
     "delete-client-test": "rm -rf ./test-client/build",
     "preclient-test": "npm run delete-client-test && webpack --config ./test-client/webpack.config.js",
     "client-test": "mocha -r jsdom-global/register './test-client/**/build/*.js'",
@@ -49,6 +47,7 @@
     "@types/react-dom": "^17.0.0",
     "css-loader": "^5.0.2",
     "express": "^4.17.1",
+    "portfolio-config": "^1.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "style-loader": "^2.0.0",

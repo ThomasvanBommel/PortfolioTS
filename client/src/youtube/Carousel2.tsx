@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 19th 2021 3:41pm
+ * Last Modified: Friday March 19th 2021 6:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,7 +14,9 @@ import React, { useState, useEffect } from 'react';
 import style from "./Carousel.module.css";
 import { YouTubeVideo } from "../../../common/types";
 
-const config = require("../../../server/build/config/.config.json");
+// import config from "../../../common/config";
+const config = require("../../../config/.config.json");
+// const config = require("../../../server/build/config/.config.json");
 
 const SIZE = {
     small:  { width: 640,      ratio: 1   },

@@ -5,9 +5,10 @@
  * 
  */
 
-import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "../../common/types";
+import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "common/types";
 import request from "./request";
-import config from "./config";
+// import config from "common/config";
+import config from "portfolio-config";
 
 // 1 hour in milliseconds
 const _1hour = 1000 * 60 * 60;

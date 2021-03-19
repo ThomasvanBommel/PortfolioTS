@@ -1,22 +1,21 @@
 /*
- * Filename: server/src/config.ts
- * Created Date: Saturday, February 13th 2021, 9:36:17 pm
+ * File: config.js
+ * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Friday March 19th 2021 6:20pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
  */
 
-import settings from "../../config/server.config.json";
-import { networkInterfaces } from "os";
-import { join } from "path";
-import fs from "fs";
+const settings = require("../config/server.config.json");
+const { networkInterfaces } = require("os");
+const { join } = require("path");
+const fs = require("fs");
 
 // import config from /config
-let config: { 
-    port: number, 
-    host: string, 
-    apiKey: string,
-    channelId: string
-} = { ...settings, apiKey: "", host: "" };
+let config = { ...settings, apiKey: "", host: "" };
 
 // Ensure config has apiKey and it exists
 let key = process.env.YT_API_KEY;
@@ -26,7 +25,7 @@ if(key){
 }else{ throw new Error("Missing apiKey"); }
 
 // Target location for config file
-let config_file_location = join(__dirname, "../../config/.config.json");
+let config_file_location = join(__dirname, "../config/.config.json");
 
 // Try to load existing config file
 try {
@@ -87,4 +86,4 @@ try {
     }));
 }
 
-export default config;
+exports.default = config;

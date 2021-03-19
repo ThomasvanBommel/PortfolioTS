@@ -6,9 +6,13 @@
  */
 
 import YouTube from "./youtube";
-import config from "./config"; // TODO : Remove
+// import config from "./config"; // TODO : Remove
+// import config from "../../common/config";
+import config from "portfolio-config";
 import express from "express";
 import path from "path";
+
+console.log(config);
 
 // check if we should only configure
 if(process.argv.includes("--config"))

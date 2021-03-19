@@ -1,13 +1,12 @@
 /*
  * File: webpack.config.js
- * Created: Sunday February 14th 2021
+ * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 19th 2021 4:19pm
+ * Last Modified: Friday March 19th 2021 5:28pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
- * 2021-03-13 12:40pm	TvB	Updated header
  */
 
 const join = require("path").join;
@@ -23,7 +22,7 @@ module.exports = {
     module: {
         rules: [
             { test: /\.tsx?$/, use: "ts-loader" },
-            { test: /\.css$/,  use: ["style-loader", "css-loader"] }
+            { test: /\.css$/,  use: ["style-loader", "css-loader"] },
         ]
     }
 };

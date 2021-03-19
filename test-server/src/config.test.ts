@@ -5,7 +5,8 @@
  * 
  */
 
-import config from "../../server/src/config";
+// import config from "../../server/src/config";
+import config from "../../common/config";
 import assert from "assert";
 import path from "path";
 import fs from "fs";

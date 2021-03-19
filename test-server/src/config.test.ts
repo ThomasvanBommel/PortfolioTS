@@ -5,7 +5,7 @@
  * 
  */
 
-import config from "../../../server/src/config";
+import config from "../../server/src/config";
 import assert from "assert";
 import path from "path";
 import fs from "fs";
@@ -69,7 +69,7 @@ describe("config", () => {
     describe("file output", () => {
 
         // Location of the expected output file
-        let loc = path.join(__dirname, "../../../config/.config.json");
+        let loc = path.join(__dirname, "../../config/.config.json");
 
         // Ensure output file was created
         it(loc, () => {

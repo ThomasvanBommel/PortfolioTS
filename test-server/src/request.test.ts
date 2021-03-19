@@ -5,7 +5,7 @@
  * 
  */
 
-import request, { RequestResponse } from "../../../server/src/request"
+import request, { RequestResponse } from "../../server/src/request"
 import assert from "assert";
 
 // Testing the request module

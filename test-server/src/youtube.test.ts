@@ -5,8 +5,8 @@
  * 
  */
 
-import YouTube, { YouTubeParameters } from "../../../server/src/youtube";
-import { YouTubeVideo } from "../../../common/types";
+import YouTube, { YouTubeParameters } from "../../server/src/youtube";
+import { YouTubeVideo } from "../../common/types";
 import assert from "assert";
 
 describe("youtube", function() {

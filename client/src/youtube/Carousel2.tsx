@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 18th 2021 8:50pm
+ * Last Modified: Friday March 19th 2021 3:41pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -149,6 +149,8 @@ function getItemWidth(containerWidth: number){
     for(let [ key, { width, ratio } ] of Object.entries(SIZE))
         if(containerWidth < width)
             return containerWidth * ratio;
+    
+    return 0;
 }
 
 let videoCache: YouTubeVideo[] = [];

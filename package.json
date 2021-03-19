@@ -5,27 +5,33 @@
   "main": "index.js",
   "scripts": {
     "watch": "npm run build-client -- -w --env --dev",
-    "config-server": "npm run start-server -- --config",
     
+    "config-server": "npm run start-server -- --config",
     "prebuild-server": "rm -rf ./server/build",
     "build-server": "tsc --build ./server/ && npm run config-server",
-
+    
     "prebuild-client": "rm -rf ./client/build",
     "build-client": "webpack --config ./config/webpack.config.js",
-
+    
     "prestart": "npm run build-server && npm run build-client",
     "start": "npm run start-server",
     "start-server": "node ./server/build/server/src/index.js",
-
+    
     "pretest": "npm run prestart",
     "test": "npm run mocha-test",
     "posttest": "npm run prebuild-server && npm run prebuild-client",
 
-    "delete-mocha-test": "rm -rf ./test/build",
+    "mocha-test": "npm run server-test && npm run client-test",
 
-    "premocha-test": "npm run delete-mocha-test && tsc --build ./test/",
-    "mocha-test": "mocha './test/**/src/*.js'",
-    "postmocha-test": "npm run delete-mocha-test"
+    "delete-server-test": "rm -rf ./test-server/build",
+    "preserver-test": "npm run delete-server-test && tsc --build ./test-server/",
+    "server-test": "mocha './test-server/**/test-server/**/src/*.js'",
+    "postserver-test": "npm run delete-server-test",
+
+    "delete-client-test": "rm -rf ./test-client/build",
+    "preclient-test": "npm run delete-client-test && webpack --config ./test-client/webpack.config.js",
+    "client-test": "mocha -r jsdom-global/register './test-client/**/build/*.js'",
+    "postclient-test": "npm run delete-client-test"
   },
   "repository": {
     "type": "git",
@@ -53,6 +59,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^8.2.1",
+    "jsdom": "^16.5.1",
+    "jsdom-global": "^3.0.2",
     "mocha": "^8.3.0"
   }
 }

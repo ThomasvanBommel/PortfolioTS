@@ -30,12 +30,12 @@
     "delete-server-test": "rm -rf ./test-server/build && rm -rf ./server/build && rm -rf ./server/tsconfig.tsbuildinfo",
     "preserver-test": "npm run delete-server-test && npm run config",
     "server-test": "tsc --build ./test-server/ && mocha './test-server/build/**/*.js'",
-    "postserver-test": "npm run cleanup",
+    "postserver-test": "npm run delete-server-test",
     
     "delete-client-test": "rm -rf ./test-client/build",
     "preclient-test": "npm run delete-client-test && npm run config",
     "client-test": "webpack --config ./test-client/webpack.config.js && mocha -r jsdom-global/register './test-client/**/build/*.js'",
-    "postclient-test": "npm run cleanup"
+    "postclient-test": "npm run delete-client-test"
   },
   "repository": {
     "type": "git",

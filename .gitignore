@@ -4,3 +4,5 @@ node_modules/
 **/.config.json
 **/.server.config.json
 **/.client.config.json
+
+**/.vscode

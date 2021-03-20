@@ -7,8 +7,6 @@
 
 import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "./types";
 import request from "./request";
-// import config from "common/config";
-// import config from "portfolio-config";
 
 const config = require("../../common/.server.config.json");
 

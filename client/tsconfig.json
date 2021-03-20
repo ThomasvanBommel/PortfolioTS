@@ -4,6 +4,7 @@
         "jsx": "react",
         "lib": ["ES6", "DOM"],
         "esModuleInterop": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "typeRoots": ["../common"]
     }
 }

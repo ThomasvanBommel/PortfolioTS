@@ -28,14 +28,14 @@
     "mocha-test": "npm run server-test && npm run client-test",
     
     "delete-server-test": "rm -rf ./test-server/build && rm -rf ./server/build && rm -rf ./server/tsconfig.tsbuildinfo",
-    "preserver-test": "npm run delete-server-test && tsc --build ./test-server/",
-    "server-test": "mocha './test-server/build/**/*.js'",
-    "postserver-test": "npm run delete-server-test",
+    "preserver-test": "npm run delete-server-test && npm run config",
+    "server-test": "tsc --build ./test-server/ && mocha './test-server/build/**/*.js'",
+    "postserver-test": "npm run cleanup",
     
     "delete-client-test": "rm -rf ./test-client/build",
-    "preclient-test": "npm run delete-client-test && webpack --config ./test-client/webpack.config.js",
-    "client-test": "mocha -r jsdom-global/register './test-client/**/build/*.js'",
-    "postclient-test": "npm run delete-client-test"
+    "preclient-test": "npm run delete-client-test && npm run config",
+    "client-test": "webpack --config ./test-client/webpack.config.js && mocha -r jsdom-global/register './test-client/**/build/*.js'",
+    "postclient-test": "npm run cleanup"
   },
   "repository": {
     "type": "git",

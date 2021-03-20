@@ -6,10 +6,13 @@
  */
 
 // import config from "../../server/src/config";
-import config from "../../common/config";
+// import config from "../../common/config";
 import assert from "assert";
 import path from "path";
 import fs from "fs";
+
+// import config from "common/.server.config.json";
+const config = require("../../common/.server.config.json");
 
 describe("config", () => {
 
@@ -67,18 +70,18 @@ describe("config", () => {
     });
 
     // Check if a file was created
-    describe("file output", () => {
+    // describe("file output", () => {
 
-        // Location of the expected output file
-        let loc = path.join(__dirname, "../../config/.config.json");
+    //     // Location of the expected output file
+    //     let loc = path.join(__dirname, "../../config/.config.json");
 
-        // Ensure output file was created
-        it(loc, () => {
+    //     // Ensure output file was created
+    //     it(loc, () => {
 
-            // Check that the output config file exists
-            assert.doesNotThrow(() => {
-                fs.statSync(loc);
-            });
-        });
-    });
+    //         // Check that the output config file exists
+    //         assert.doesNotThrow(() => {
+    //             fs.statSync(loc);
+    //         });
+    //     });
+    // });
 });

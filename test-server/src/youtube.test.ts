@@ -5,8 +5,8 @@
  * 
  */
 
-import YouTube, { YouTubeParameters } from "../../server/src/youtube";
-import { YouTubeVideo } from "../../common/types";
+import YouTube, { YouTubeParameters } from "../../server/build/youtube";
+import { YouTubeVideo } from "../../server/build/types";
 import assert from "assert";
 
 describe("youtube", function() {
@@ -53,7 +53,7 @@ describe("youtube", function() {
 
             describe("http requests", function() {
                 it(`get [${count}] video snippets`, function() {
-                    return youtube.getVideoSnippets(pageLimit, "videos").then(vids => {
+                    return youtube.getVideoSnippets(pageLimit, "videos").then((vids: YouTubeVideo[]) => {
                         videos = vids;
                     });
                 });

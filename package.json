@@ -11,19 +11,25 @@
     
     "prebuild-client": "rm -rf ./client/build",
     "build-client": "webpack --config ./config/webpack.config.js",
+
+    "build": "npm run build-server && npm run build-client",
+    "config": "node ./common/create-config",
+
+    "prestart": "npm run config && npm run build",
+    "start": "node ./server/build/index.js",
     
-    "prestart": "npm run build-server && npm run build-client",
-    "start": "./start.sh",
-    
-    "pretest": "npm run prestart",
-    "test": "npm run mocha-test",
-    "posttest": "npm run prebuild-server && npm run prebuild-client",
+    "pretest": "npm run config",
+    "test": "npm run mocha-test && npm run build",
+    "posttest": "npm run cleanup",
+
+    "cleanup": "npm run delete-server-test && npm run delete-client-test && npm run prebuild-client",
+    "postcleanup": "rm -rf ./common/.client.config.json && rm -rf ./common/.server.config.json",
     
     "mocha-test": "npm run server-test && npm run client-test",
     
-    "delete-server-test": "rm -rf ./test-server/build",
+    "delete-server-test": "rm -rf ./test-server/build && rm -rf ./server/build && rm -rf ./server/tsconfig.tsbuildinfo",
     "preserver-test": "npm run delete-server-test && tsc --build ./test-server/",
-    "server-test": "mocha './test-server/**/test-server/**/src/*.js'",
+    "server-test": "mocha './test-server/build/**/*.js'",
     "postserver-test": "npm run delete-server-test",
     
     "delete-client-test": "rm -rf ./test-client/build",
@@ -47,7 +53,6 @@
     "@types/react-dom": "^17.0.0",
     "css-loader": "^5.0.2",
     "express": "^4.17.1",
-    "portfolio-config": "^1.0.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "style-loader": "^2.0.0",

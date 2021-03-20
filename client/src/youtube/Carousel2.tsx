@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 19th 2021 6:23pm
+ * Last Modified: Friday March 19th 2021 10:14pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,7 +15,7 @@ import style from "./Carousel.module.css";
 import { YouTubeVideo } from "../../../common/types";
 
 // import config from "../../../common/config";
-const config = require("../../../config/.config.json");
+const config = require("../../../common/.client.config.json");
 // const config = require("../../../server/build/config/.config.json");
 
 const SIZE = {

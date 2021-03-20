@@ -5,10 +5,12 @@
  * 
  */
 
-import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "common/types";
+import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "./types";
 import request from "./request";
 // import config from "common/config";
-import config from "portfolio-config";
+// import config from "portfolio-config";
+
+const config = require("../../common/.server.config.json");
 
 // 1 hour in milliseconds
 const _1hour = 1000 * 60 * 60;

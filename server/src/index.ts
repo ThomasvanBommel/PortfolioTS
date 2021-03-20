@@ -8,11 +8,11 @@
 import YouTube from "./youtube";
 // import config from "./config"; // TODO : Remove
 // import config from "../../common/config";
-import config from "portfolio-config";
+// import config from "portfolio-config";
 import express from "express";
 import path from "path";
 
-console.log(config);
+const config = require("../../common/.server.config.json");
 
 // check if we should only configure
 if(process.argv.includes("--config"))
@@ -32,12 +32,12 @@ app.use((req, res, next) => {
 yt.startCache();
 
 // expose client build and dependencies folders
-app.use(express.static(path.join(__dirname, "../../../../client/build")));
-app.use(express.static(path.join(__dirname, "../../../../client/dependencies")));
+app.use(express.static(path.join(__dirname, "../../client/build")));
+app.use(express.static(path.join(__dirname, "../../client/dependencies")));
 
 // home get request
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../../../client/views/index.html"));
+    res.sendFile(path.join(__dirname, "../../client/views/index.html"));
 });
 
 // youtube videos request

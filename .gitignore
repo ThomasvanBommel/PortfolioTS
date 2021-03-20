@@ -2,3 +2,5 @@ node_modules/
 **/build/
 
 **/.config.json
+**/.server.config.json
+**/.client.config.json

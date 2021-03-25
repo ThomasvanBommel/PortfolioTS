@@ -3,7 +3,7 @@
  * Created: Wednesday March 24th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 6:12pm
+ * Last Modified: Thursday March 25th 2021 8:30pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -33,7 +33,8 @@ export const pageSlice = createSlice({
     },
     reducers: {
         setPage: (state, action: PageAction) => {
-            state.page = action.payload;
+            if(action.payload)
+                state.page = action.payload;
         }
     }
 });

@@ -3,7 +3,7 @@
  * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 19th 2021 5:28pm
+ * Last Modified: Thursday March 25th 2021 8:29pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,7 +14,7 @@ const join = require("path").join;
 module.exports = {
     mode: "production",
 
-    entry: { client: join(__dirname, "src/index.ts") },
+    entry: { client: join(__dirname, "src/index.test") },
     output: { path:  join(__dirname, "build"), filename: "test.js" },
 
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx", ".css"] },

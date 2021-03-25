@@ -1,18 +1,20 @@
 /*
- * File: Carousel2.tsx
+ * File: Carousel.tsx
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 20th 2021 12:35am
+ * Last Modified: Thursday March 25th 2021 6:11pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-25	TvB	Changed file name
  * 2021-03-18	TvB	Finished carousel2 ? (I hope so)
  */
 
 import React, { useState, useEffect } from 'react';
-import style from "./Carousel.module.css";
 import { YouTubeVideo } from "../../../common/types";
+import CarouselItem from "./CarouselItem";
+import style from "./Carousel.module.css";
 
 const config = require("../../../common/.client.config.json");
 
@@ -82,7 +84,7 @@ function Carousel(){
 
                 <div className={ style.itemContainer } style={{ transform: `translateX(${ -offset }px)` }}>{
                     isLoaded ? (
-                        videos.map(video => <Item width={ itemWidth } video={ video } />)
+                        videos.map(video => <CarouselItem width={ itemWidth } video={ video } />)
                     ) : (
                         <p>Loading...</p>
                     )
@@ -100,46 +102,6 @@ function Carousel(){
                 <p>active={ activeItem + 1 } of { videos.length - perPage + 1 }</p>
                 <p>offset={ offset }</p>
             </div>
-        </div>
-    );
-}
-
-/** Carousel video item */
-function Item({ width, video }: { width: number, video: YouTubeVideo }){
-    return (
-        <div key={ video.id } className={ style.item } style={{ width: width }}>
-            <div className={ style.videoThumbnail }>
-                <img src={ video.snippet.thumbnails["medium"].url } alt="Video thumbnail"/>
-                <table className={ style.videoDetails }>
-                    <tr>
-                        <td>👀</td>
-                        <td>Views</td>
-                        <td>{ video.statistics?.viewCount ?? 0 }</td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <td>👍</td>
-                        <td>Likes</td>
-                        <td>{ video.statistics?.likeCount ?? 0 }</td>
-                    </tr>
-                    <tr>
-                        <td>👎</td>
-                        <td>Dislikes</td>
-                        <td>{ video.statistics?.dislikeCount ?? 0 }</td>
-                    </tr>
-                    <tr>
-                        <td>💬</td>
-                        <td>Comments</td>
-                        <td>{ video.statistics?.commentCount ?? 0 }</td>
-                    </tr>
-                </table>
-            </div>
-            <p className={ style.itemTitle }>
-                🔗&nbsp;
-                <a href={ `https://www.youtube.com/watch?v=${ video.id }` }>
-                    { video.snippet.title }
-                </a>
-            </p>
         </div>
     );
 }

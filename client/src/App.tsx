@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 1:31am
+ * Last Modified: Thursday March 25th 2021 6:12pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,12 +15,12 @@
 
 import React from 'react';
 import Navbar from './navbar/Navbar';
-import Carousel from "./youtube/Carousel2";
+import Carousel from "./youtube/Carousel";
 import ContactForm from './contact/ContactForm';
 import ProgressBanner from "./progress_banner/ProgressBanner";
 
 import { Provider, useSelector } from "react-redux";
-import { Page, getPage } from "./pageReducer";
+import { Page, getPage } from "./slices/pageSlice";
 import store from "./store";
 
 function App(){

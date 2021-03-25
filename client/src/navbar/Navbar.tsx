@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 5:56pm
+ * Last Modified: Thursday March 25th 2021 6:12pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,8 +17,8 @@
 import React from 'react';
 import style from "./Navbar.module.css";
 
-import { useDispatch, useSelector, useStore } from "react-redux";
-import { getPage, setPage, Page } from "../pageReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { getPage, setPage, Page } from "../slices/pageSlice";
 
 function NavBar(){
     const page = useSelector(getPage);

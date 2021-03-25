@@ -6,3 +6,4 @@ node_modules/
 **/.client.config.json
 
 **/.vscode
+**/tsconfig.tsbuildinfo

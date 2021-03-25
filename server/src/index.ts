@@ -1,22 +1,20 @@
 /*
- * Filename: server/src/index.ts
- * Created Date: Sunday, February 7th 2021, 12:18:27 am
+ * File: index.ts
+ * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Thursday March 25th 2021 3:00pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-03-25	TvB	Changed output formatting
  */
 
 import YouTube from "./youtube";
-// import config from "./config"; // TODO : Remove
-// import config from "../../common/config";
-// import config from "portfolio-config";
 import express from "express";
 import path from "path";
 
 const config = require("../../common/.server.config.json");
-
-// check if we should only configure
-if(process.argv.includes("--config"))
-    process.exit(0);
 
 // initialize express and youtube modules
 const app = express();

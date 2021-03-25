@@ -3,7 +3,7 @@
  * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 19th 2021 10:07pm
+ * Last Modified: Thursday March 25th 2021 1:58pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -49,5 +49,5 @@ writeFileSync(join(__dirname, ".client.config.json"), clientData);
 
 // log results
 console.log("Created config files:");
-console.log(serverPath);
-console.log(clientPath);
+console.log(" -", serverPath);
+console.log(" -", clientPath);

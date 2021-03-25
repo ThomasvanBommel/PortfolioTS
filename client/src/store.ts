@@ -3,20 +3,23 @@
  * Created: Wednesday March 24th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 6:13pm
+ * Last Modified: Thursday March 25th 2021 7:44pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
 import { configureStore } from "@reduxjs/toolkit";
-import pageReducer from "./slices/pageSlice";
+import pageSlice from "./slices/pageSlice";
+import videoSlice from "./slices/videoSlice";
+import thunkMiddleware from "redux-thunk";
 
 const store = configureStore({
     reducer: {
-        page: pageReducer,
-        
-    }
+        page: pageSlice,
+        videos: videoSlice
+    },
+    middleware: [ thunkMiddleware ]
 });
 
 export default store;

@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 6:12pm
+ * Last Modified: Thursday March 25th 2021 8:05pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -19,11 +19,14 @@ import Carousel from "./youtube/Carousel";
 import ContactForm from './contact/ContactForm';
 import ProgressBanner from "./progress_banner/ProgressBanner";
 
-import { Provider, useSelector } from "react-redux";
+import { Provider, useSelector, useDispatch } from "react-redux";
 import { Page, getPage } from "./slices/pageSlice";
+import { fetchVideos } from "./slices/videoSlice";
 import store from "./store";
 
 function App(){
+    // store.dispatch(fetchVideos);
+
     return (
         <Provider store={ store }>
             <Navbar />
@@ -34,6 +37,8 @@ function App(){
 }
 
 function Main(){
+    useDispatch()(fetchVideos);
+    
     let page = useSelector(getPage);
 
     if(page === Page.Home){

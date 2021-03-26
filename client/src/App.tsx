@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 26th 2021 1:32am
+ * Last Modified: Friday March 26th 2021 1:47am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -37,7 +37,7 @@ function App(){
 }
 
 function Main(){
-    useDispatch()(fetchVideos);
+    // useDispatch()(fetchVideos);
     
     let page = useSelector(getPage);
 

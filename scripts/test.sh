@@ -2,14 +2,14 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Friday March 26th 2021 1:26am
+ # Last Modified: Friday March 26th 2021 1:33am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
 
 #!/bin/bash
 
-set -e
+# set -e
 
 scripts/cleanup.sh
 

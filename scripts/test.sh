@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Thursday March 25th 2021 2:56pm
+ # Last Modified: Friday March 26th 2021 1:26am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -41,7 +41,10 @@ elif [ "$1" = "server" ] ; then
     test_server
 else
     test_client
+    echo "Finished client test suite"
+
     test_server
+    echo "Finished server test suite"
 fi
 
 scripts/cleanup.sh

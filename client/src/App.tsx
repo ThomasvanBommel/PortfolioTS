@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 8:05pm
+ * Last Modified: Friday March 26th 2021 1:30am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,6 +13,7 @@
  * 2021-03-13	TvB	Updated header + Change import location
  */
 
+import 'raf/polyfill';
 import React from 'react';
 import Navbar from './navbar/Navbar';
 import Carousel from "./youtube/Carousel";

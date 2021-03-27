@@ -3,14 +3,14 @@
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 1:21am
+ * Last Modified: Saturday March 27th 2021 4:43am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  * 2021-03-27	TvB	Added channelId and apiKey to constructor
  */
 
-import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "./types";
+import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "../../common/types";
 import request from "./request";
 
 // 1 hour in milliseconds

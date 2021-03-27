@@ -6,7 +6,7 @@
  */
 
 import YouTube, { YouTubeParameters } from "../src/youtube";
-import { YouTubeVideo } from "../src/types";
+import { YouTubeVideo } from "../../common/types";
 import assert from "assert";
 
 const ROOT = process.env.ROOT;

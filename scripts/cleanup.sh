@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Saturday March 27th 2021 1:52am
+ # Last Modified: Saturday March 27th 2021 5:16am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -26,20 +26,14 @@ rm_file () {
 echo "Clean-up:"
 
 ## Remove server build info
-# rm -rf server/tsconfig.tsbuildinfo
 rm_file . "*.tsbuildinfo" " - Removed *.tsbuildinfo"
+
+## Remove common/build + common/*.config.json
+rm_file common build " - Removing common/build"
+rm_file common "*.config.json" " - Removing common/*.config.json"
 
 ## Remove server/build
 rm_file server build " - Removing server/build"
 
 ## Remove client/build
 rm_file client build " - Removing client/build"
-
-## Remove server/test/build
-# rm_file test-server build " - Removing test-server/build"
-
-## Remove client/test/build
-rm_file test-client build " - Removing test-client/build"
-
-## Remove common/*.config.json
-rm_file common "*.config.json" " - Removing common/*.config.json"

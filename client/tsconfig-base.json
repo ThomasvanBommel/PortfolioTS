@@ -1,10 +1,13 @@
 {
-    "include": ["src/**/*.ts", "src/**/*.tsx", "../common/**/*.ts"],
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
     "compilerOptions": {
         "jsx": "react",
         "lib": ["ES6", "DOM"],
         "esModuleInterop": true,
         "noImplicitAny": true,
-        "rootDir": "../",
-    }
+        // "rootDir": "../",
+    },
+    "references": [
+      { "path": "../../common" }
+    ]
 }

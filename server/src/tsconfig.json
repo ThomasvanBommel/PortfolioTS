@@ -6,5 +6,8 @@
         "baseUrl": "./",                
         "outDir": "../build/src",   
         "composite": true,
-    }
+    },
+    "references": [
+      { "path": "../../common" }
+    ]
 }

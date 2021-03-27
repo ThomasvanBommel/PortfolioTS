@@ -1,0 +1,10 @@
+{
+    "include": ["./**/*.ts"],
+    "compilerOptions": {
+        "outDir": "build/",
+        "composite": true,
+        "declaration": true,
+        "declarationMap": true,
+    },
+    "references": []
+}

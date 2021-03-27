@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 4:19am
+ * Last Modified: Saturday March 27th 2021 5:06am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -24,7 +24,7 @@ module.exports = {
 
     module: {
         rules: [
-            { test: /\.tsx?$/, use: "ts-loader" },
+            { test: /\.tsx?$/, use: { loader: "ts-loader", options: { "projectReferences": true }} },
             { test: /\.css$/,  use: ["style-loader", "css-loader"] }
         ]
     }

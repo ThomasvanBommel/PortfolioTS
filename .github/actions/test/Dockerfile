@@ -1,10 +1,7 @@
 FROM node
 
-COPY . /root
+WORKDIR /github/workspace
 
-WORKDIR /root
+RUN ls -l /
 
-RUN ls -l
-RUN ls -l /github/workspace
-
-ENTRYPOINT ["/root/.github/actions/test/entrypoint.sh"]
+ENTRYPOINT ["/github/workspace/.github/actions/test/entrypoint.sh"]

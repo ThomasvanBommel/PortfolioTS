@@ -1,0 +1,63 @@
+/*
+ * File: Blog.module.css
+ * Created: Saturday March 27th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Saturday March 27th 2021 4:03pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+.content{
+    max-width: 1200px;
+    margin:0 auto;
+}
+
+.articleContainer{
+    max-width:1000px;
+    margin:0 auto;
+
+    border:1rem solid transparent;
+    box-sizing: border-box;
+}
+
+.title{
+    margin:2rem 0;
+}
+
+.article p{
+    padding-bottom:1rem;
+}
+
+.sidebar{
+    display: none;
+    position:fixed;
+    top: 3rem;
+    left: 0;
+
+    /* border: 1px solid #aaa;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem; */
+
+    padding:1rem;
+    padding-left:1rem;
+
+    /* background-color:#ccc; */
+    /*color:#aaa;
+    opacity: 0.7; */
+}
+
+.sidebar button{
+    box-shadow: 0.25rem 0.25rem 0.25rem #888;
+}
+
+.sidebar button:not(:last-child){
+    margin-bottom:0.25rem;
+}
+
+@media only screen and (min-width: 1200px){
+    .sidebar{
+        display:block;
+    }
+}

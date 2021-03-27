@@ -3,10 +3,11 @@
  * Created: Wednesday March 24th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 2:16pm
+ * Last Modified: Saturday March 27th 2021 3:05pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-27	TvB	Added lastPage 
  * 2021-03-25	TvB	Cleaned up, Added comments + renamed file
  */
 

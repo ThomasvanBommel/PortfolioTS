@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 2:36pm
+ * Last Modified: Saturday March 27th 2021 2:59pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -25,6 +25,9 @@ function NavBar(){
     const page = useSelector(getPage);
     const disbatch = useDispatch();
 
+    // console.log(new URL(document.location.href).searchParams.get("page"));
+    // history.pushState("", "vanBommel: Home", "?page=home");
+
     // Change page
     function handleChange(target: Page){
         disbatch({ ...setPage(), payload: target });
@@ -34,7 +37,7 @@ function NavBar(){
     function navButton(target: Page){
         return (
             <button type="button" 
-                    className={ page === target ? "active" : "" } 
+                    id={ page === target ? style.active : "" } 
                     onClick={ () => handleChange(target) }>
                 { String(target) }
             </button>

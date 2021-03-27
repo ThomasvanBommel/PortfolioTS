@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 2:14pm
+ * Last Modified: Saturday March 27th 2021 3:07pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,6 +14,7 @@
  */
 
 import React from 'react';
+import Blog from "./blog/Blog";
 import Navbar from './navbar/Navbar';
 import Carousel from "./youtube/Carousel";
 import ContactForm from './contact/ContactForm';
@@ -48,7 +49,7 @@ function Content(){
             return <ContactForm />
 
         case Page.Blog:
-            return (<div></div>);
+            return <Blog />;
 
         default:
             return <Carousel />

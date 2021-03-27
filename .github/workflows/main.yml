@@ -28,18 +28,25 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Build
+        # setup a node environment
+      - name: Setup
         uses: actions/setup-node@v2
         with:
           node-version: "14"
 
-      - run: npm i
+        # install and initialize required node modules
+      - name: Initialize
+        run: npm i
 
-      - run: npm start -- test
+        # start the application with the '-- test' argument
+      - name: Build test
+        run: npm start -- test
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
-      - run: npm test
+        # run 'npm test'
+      - name: CI test
+        run: npm test
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 

@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Saturday March 27th 2021 3:56am
+ # Last Modified: Saturday March 27th 2021 4:18am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -23,7 +23,7 @@ tsc --build server/src && echo " - Done" || echo " - Failed"
 
 ## Build client
 echo "Webpacking client:"
-webpack --config client/webpack.config.js
+webpack --config client/src/webpack.config.js
 
 ## If testing, clean up and return successful
 if [ "$1" = "test" ]; then

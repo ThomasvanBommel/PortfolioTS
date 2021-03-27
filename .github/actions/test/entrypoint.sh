@@ -2,4 +2,6 @@
 
 export YT_API_KEY=$1
 
-cd /root && npm i && npm test && npm start -- test
+echo "IS THIS WORKING?!"
+
+npm i && npm test && npm start -- test

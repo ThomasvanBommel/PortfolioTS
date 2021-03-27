@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 6:12pm
+ * Last Modified: Saturday March 27th 2021 2:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -21,34 +21,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPage, setPage, Page } from "../slices/pageSlice";
 
 function NavBar(){
+    // Get page and setup dispatch
     const page = useSelector(getPage);
     const disbatch = useDispatch();
 
-    // Handle page change button click
-    function handleClick(){
-        let nextPage: Page;
-
-        if(page === Page.Contact){
-            nextPage = Page.Home;
-        }else{
-            nextPage = Page.Contact;
-        }
-
-        // Set page
-        disbatch({ ...setPage(), payload: nextPage });
+    // Change page
+    function handleChange(target: Page){
+        disbatch({ ...setPage(), payload: target });
     }
 
-    // Render navbar
+    // Create button with className and handler
+    function navButton(target: Page){
+        return (
+            <button type="button" 
+                    className={ page === target ? "active" : "" } 
+                    onClick={ () => handleChange(target) }>
+                { String(target) }
+            </button>
+        );
+    }
+
+    // Render
     return (
         <nav className={ style.nav }>
             <div>
-                <a href="/">Thomas v<span>an</span>B<span>ommel</span></a>
+                <a href="#" onClick={ () => handleChange(Page.Home) }>
+                    Thomas v<span>an</span>B<span>ommel</span>
+                </a>
 
                 <div className={ style.spacer }></div>
 
-                <button type="button" onClick={ handleClick }>
-                    { page === Page.Contact ? "Home" : "Contact" }
-                </button>
+                { navButton(Page.Blog) }
+                { navButton(Page.Contact) }
+                
             </div>
         </nav>
     );

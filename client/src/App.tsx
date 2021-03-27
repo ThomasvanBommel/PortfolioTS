@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday March 26th 2021 1:49am
+ * Last Modified: Saturday March 27th 2021 2:14pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -25,8 +25,6 @@ import { fetchVideos } from "./slices/videoSlice";
 import store from "./store";
 
 function App(){
-    // store.dispatch(fetchVideos);
-
     return (
         <Provider store={ store }>
             <Navbar />
@@ -37,15 +35,24 @@ function App(){
 }
 
 function Main(){
+    // Load youtube videos
     useDispatch()(fetchVideos);
-    
-    let page = useSelector(getPage);
 
-    if(page === Page.Home){
-        return <Carousel />
+    return <Content />
+}
+
+function Content(){
+    // Display the correct page
+    switch(useSelector(getPage)){
+        case Page.Contact:
+            return <ContactForm />
+
+        case Page.Blog:
+            return (<div></div>);
+
+        default:
+            return <Carousel />
     }
-
-    return <ContactForm />
 }
 
 export default App;

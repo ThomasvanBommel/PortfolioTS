@@ -3,10 +3,11 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 1:57pm
+ * Last Modified: Saturday March 27th 2021 1:58pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-27	TvB	Fixed animation
  * 2021-03-25	TvB	Changed file name
  * 2021-03-18	TvB	Finished carousel2 ? (I hope so)
  */
@@ -57,10 +58,12 @@ function Carousel(){
         }
     }, [ animating ]);
 
+    // Handle clicking (move animation forward)
     function handleClickForward(){
         dispatch(increment());
     }
 
+    // Handle clicking (move animation backwards)
     function handleClickBack(){
         dispatch(decrement());
     }

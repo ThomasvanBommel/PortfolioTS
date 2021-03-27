@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 16th 2021 12:14am
+ * Last Modified: Saturday March 27th 2021 2:06pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -35,6 +35,10 @@
 
 .spacer{
     flex: 1;
+}
+
+.nav button:not(:last-child){
+    margin-right:1rem;
 }
 
 @media only screen and (min-width: 500px){

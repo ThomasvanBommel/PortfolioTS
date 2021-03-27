@@ -43,6 +43,8 @@ jobs:
       - run: npm i
 
       - run: npm start -- test
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
       - run: npm test
         env:

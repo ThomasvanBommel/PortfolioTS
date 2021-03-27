@@ -40,6 +40,12 @@ jobs:
         with:
           node-version: "14"
 
+  test:
+    needs: build
+
+    runs-on: dash
+
+    steps:
       - run: npm i
 
       - run: npm start -- test

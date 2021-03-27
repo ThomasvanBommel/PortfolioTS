@@ -1,6 +1,6 @@
 FROM node
 
-COPY / /root
+COPY . /root
 
 WORKDIR /root
 

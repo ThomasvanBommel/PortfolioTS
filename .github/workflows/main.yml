@@ -40,20 +40,25 @@ jobs:
         with:
           yt_api_key: ${{ secrets.YT_API_KEY }}
 
+      - name: Test
+        run: npm test
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+
     # steps:
     #   - name: Build
     #     uses: ./.github/actions/test/
     #     with:
     #       yt_api_key: ${{ secrets.YT_API_KEY }}
 
-  test:
-    needs: build
+  # test:
+  #   needs: build
 
-    runs-on: dash
+  #   runs-on: dash
 
-    steps:
-      - name: Test
-        run: npm test
-        # with:
-        #   yt_api_key: ${{ secrets.YT_API_KEY }}
+  #   steps:
+  #     - name: Test
+  #       run: npm test
+  #       env:
+  #         YT_API_KEY: ${{ secrets.YT_API_KEY }}
 

@@ -32,11 +32,11 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14
 
         # install and initialize required node modules
       - name: Initialize
-        run: npm i
+        run: npm ci
 
         # start the application with the '-- test' argument
       - name: Build test

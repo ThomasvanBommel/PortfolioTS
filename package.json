@@ -4,7 +4,7 @@
   "description": "Portfolio written with typescript",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --config ./config/webpack.config.js -w --env --dev",
+    "watch": "webpack --config ./client/src/webpack.config.js -w --env --dev",
     "cleanup": "scripts/cleanup.sh",
     "start": "scripts/start.sh",
     "test": "scripts/test.sh"

@@ -3,7 +3,7 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 8:15pm
+ * Last Modified: Saturday March 27th 2021 1:40pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,11 +15,17 @@ import style from "./Carousel.module.css";
 
 /** Carousel video item */
 export default function CarouselItem({ width, video }: { width: number, video: YouTubeVideo }){
+    const thumbnail = video.snippet.thumbnails["medium"];
+
     return (
         <div key={ video.id } className={ style.item } style={{ width: width }}>
             <div className={ style.videoThumbnail }>
-                <img src={ video.snippet.thumbnails["medium"].url } alt="Video thumbnail"/>
-                <table className={ style.videoDetails }>
+                <img src={ thumbnail.url } alt="Video thumbnail"/>
+                <table className={ style.videoDetails }
+                       style={{ 
+                           width: thumbnail.width,
+                           left: width / 2 - thumbnail.width / 2
+                        }}>
                     <tbody>
                         <tr>
                             <td>👀</td>

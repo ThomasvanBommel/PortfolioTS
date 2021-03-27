@@ -3,13 +3,13 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 8:18pm
+ * Last Modified: Saturday March 27th 2021 1:14pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
-import { YouTubeVideo } from "../../../common/types";
+import { YouTubeVideo } from "common/types";
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState, AppDispatch } from "../store";
 

@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 8:18pm
+ * Last Modified: Saturday March 27th 2021 1:15pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,7 +14,7 @@
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { getVideos, getCurrentVideoIndex, increment, decrement } from "../slices/videoSlice";
 import React, { useState, useEffect } from 'react';
-import { YouTubeVideo } from "../../../common/types";
+import { YouTubeVideo } from "common/types";
 import CarouselItem from "./CarouselItem";
 import style from "./Carousel.module.css";
 

@@ -1,12 +1,14 @@
 {
-    "extends": "../tsconfig-base.json",
-    "include": ["./**/*.ts", "./**/*.tsx"],
-    "compilerOptions": {
-        "composite": true,
-        "outDir": "../build/src/",
-        "rootDir": "./"
-    },
-    "references": [
-      { "path": "../../common" }
-    ]
+  "extends": "../tsconfig-base.json",
+  "include": ["./**/*.ts", "./**/*.tsx"],
+  "compilerOptions": {
+      "composite": true,
+      "outDir": "../build/src/",
+      "paths": {
+        "common/*": ["../../common/*"]
+      },
+  },
+  "references": [
+    { "path": "../../common" }
+  ]
 }

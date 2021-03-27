@@ -36,7 +36,24 @@ jobs:
 
     steps:
       - name: Build
-        uses: ./.github/actions/test/
+        uses: actions/setup-node@master
+        # with:
+        #   yt_api_key: ${{ secrets.YT_API_KEY }}
+
+    # steps:
+    #   - name: Build
+    #     uses: ./.github/actions/test/
+    #     with:
+    #       yt_api_key: ${{ secrets.YT_API_KEY }}
+
+  test:
+    needs: build
+
+    runs-on: dash
+
+    steps:
+      - name: Test
+        run: npm test
         with:
           yt_api_key: ${{ secrets.YT_API_KEY }}
 

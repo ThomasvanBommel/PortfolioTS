@@ -5,10 +5,7 @@
       "outDir": "../build/test/"
     },
     "references": [
-      { 
-        "path": "../src",
-      }, {
-        "path": "../../common",
-      }
+      { "path": "../src", }, 
+      { "path": "../../common", }
     ]
 }

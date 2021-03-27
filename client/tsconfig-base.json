@@ -5,7 +5,6 @@
         "lib": ["ES6", "DOM"],
         "esModuleInterop": true,
         "noImplicitAny": true,
-        // "rootDir": "../",
     },
     "references": [
       { "path": "../../common" }

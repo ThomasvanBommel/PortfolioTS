@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Saturday March 27th 2021 1:45am
+ # Last Modified: Saturday March 27th 2021 1:50am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -18,13 +18,13 @@ node common/create-config.js
 
  # Build and run mocha client tests
 test_client () {
-    echo "Building test-client:"
+    echo "Skipping test-client:"
     # webpack --config test-client/webpack.config.js
-    tsc --build test-client/
+    # tsc --build test-client/
 
-    echo "Start client testing:"
+    # echo "Start client testing:"
     # mocha "test-client/build/**/*.js"
-    node test-client/build/index.test.js
+    # node test-client/build/index.test.js
 }
 
  # Build and run mocha server tests

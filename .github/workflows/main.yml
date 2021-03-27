@@ -24,7 +24,7 @@ jobs:
 
         # checkout repo using github action
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
 
@@ -36,12 +36,11 @@ jobs:
 
     steps:
       - name: Build
-        uses: actions/setup-node@master
+        uses: actions/setup-node@v2
         with:
-          yt_api_key: ${{ secrets.YT_API_KEY }}
+          node-version: "14"
 
-      - name: Test
-        run: npm test
+      - run: npm test
         env:
           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 

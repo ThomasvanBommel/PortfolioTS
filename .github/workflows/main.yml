@@ -37,8 +37,8 @@ jobs:
     steps:
       - name: Build
         uses: actions/setup-node@master
-        # with:
-        #   yt_api_key: ${{ secrets.YT_API_KEY }}
+        with:
+          yt_api_key: ${{ secrets.YT_API_KEY }}
 
     # steps:
     #   - name: Build
@@ -54,6 +54,6 @@ jobs:
     steps:
       - name: Test
         run: npm test
-        with:
-          yt_api_key: ${{ secrets.YT_API_KEY }}
+        # with:
+        #   yt_api_key: ${{ secrets.YT_API_KEY }}
 

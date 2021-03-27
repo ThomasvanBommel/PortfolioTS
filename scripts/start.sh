@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Thursday March 25th 2021 3:01pm
+ # Last Modified: Saturday March 27th 2021 1:46am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -19,7 +19,7 @@ node common/create-config.js
 
 ## Build server
 echo "Building server:"
-tsc --build server/ && echo " - Done" || echo " - Failed"
+tsc --build server/src && echo " - Done" || echo " - Failed"
 
 ## Build client
 # TODO: move config file to client/
@@ -34,4 +34,5 @@ fi
 
 ## Start server
 echo "Starting server:"
-node server/build/index.js
+# node server/src/build/index.js
+ROOT=$(pwd) node server/build/src/index.js

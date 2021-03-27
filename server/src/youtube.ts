@@ -1,14 +1,17 @@
 /*
- * Filename: server/src/youtube2.ts
+ * File: youtube.ts
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday March 27th 2021 1:21am
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-03-27	TvB	Added channelId and apiKey to constructor
  */
 
 import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "./types";
 import request from "./request";
-
-const config = require("../../common/.server.config.json");
 
 // 1 hour in milliseconds
 const _1hour = 1000 * 60 * 60;
@@ -34,11 +37,17 @@ export default class YouTube {
 
     // Request parameters
     parameters_: YouTubeParameters = {
-        channelId: config.channelId,
-        key: config.apiKey,
         order: "date",
         maxResults: 50,
     };
+
+    constructor(channelId: string, apiKey: string){
+        if(!!!channelId || !!!apiKey)
+            throw new Error("You must pass a non-falsy channelId and apiKey");
+
+        this.parameters_.channelId = channelId;
+        this.parameters_.key = apiKey;
+    }
 
     // Cache interval identifier
     cacheInterval_: NodeJS.Timeout | undefined = undefined;

@@ -1,9 +1,12 @@
 {
-    "include": ["src/**/*"],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "../common/**/*.ts"],
     "compilerOptions": {
         "jsx": "react",
         "lib": ["ES6", "DOM"],
         "esModuleInterop": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "composite": true,
+        "rootDir": "../",
+        "outDir": "build/"
     }
 }

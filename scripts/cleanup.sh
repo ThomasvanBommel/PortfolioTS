@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Thursday March 25th 2021 2:51pm
+ # Last Modified: Saturday March 27th 2021 12:56am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -26,7 +26,8 @@ rm_file () {
 echo "Clean-up:"
 
 ## Remove server build info
-rm -rf server/tsconfig.tsbuildinfo
+# rm -rf server/tsconfig.tsbuildinfo
+rm_file . "*.tsbuildinfo" " - Removed *.tsbuildinfo"
 
 ## Remove server/build
 rm_file server build " - Removing server/build"

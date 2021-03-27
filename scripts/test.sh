@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Friday March 26th 2021 1:42am
+ # Last Modified: Saturday March 27th 2021 1:45am
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -19,19 +19,21 @@ node common/create-config.js
  # Build and run mocha client tests
 test_client () {
     echo "Building test-client:"
-    webpack --config test-client/webpack.config.js
+    # webpack --config test-client/webpack.config.js
+    tsc --build test-client/
 
     echo "Start client testing:"
-    mocha -r jsdom-global/register "test-client/build/**/*.js"
+    # mocha "test-client/build/**/*.js"
+    node test-client/build/index.test.js
 }
 
  # Build and run mocha server tests
 test_server () {
     echo "Building test-server:"
-    tsc --build test-server && echo " - Done" || echo " - Failed"
+    tsc --build server/test && echo " - Done" || echo " - Failed"
     
     echo "Start server testing:"
-    mocha "test-server/build/**/*.js"
+    ROOT=$(pwd) mocha "server/build/test/**/*.js"
 }
 
 ## Pick what to test (default both)

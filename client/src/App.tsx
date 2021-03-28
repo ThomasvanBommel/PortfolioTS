@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 3:07pm
+ * Last Modified: Sunday March 28th 2021 1:41am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,15 +14,17 @@
  */
 
 import React from 'react';
+import Home from "./home/Home";
 import Blog from "./blog/Blog";
 import Navbar from './navbar/Navbar';
-import Carousel from "./youtube/Carousel";
 import ContactForm from './contact/ContactForm';
 import ProgressBanner from "./progress_banner/ProgressBanner";
 
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { Page, getPage } from "./slices/pageSlice";
 import { fetchVideos } from "./slices/videoSlice";
+import { fetchEvents } from './slices/eventSlice';
+
 import store from "./store";
 
 function App(){
@@ -38,6 +40,7 @@ function App(){
 function Main(){
     // Load youtube videos
     useDispatch()(fetchVideos);
+    useDispatch()(fetchEvents);
 
     return <Content />
 }
@@ -52,7 +55,7 @@ function Content(){
             return <Blog />;
 
         default:
-            return <Carousel />
+            return <Home />
     }
 }
 

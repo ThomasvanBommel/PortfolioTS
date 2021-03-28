@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 4:18am
+ * Last Modified: Sunday March 28th 2021 12:51am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,6 +14,11 @@
 import YouTube from "./youtube";
 import express from "express";
 import path from "path";
+
+// import { test } from "./github";
+// (async () => {
+//     await test();
+// })();
 
 const ROOT = process.env.ROOT;
 
@@ -30,12 +35,13 @@ const yt = new YouTube(config.channelId, config.apiKey);
 
 // Set headers using middleware
 app.use((req, res, next) => {
+    res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
     res.set("X-Powered-By", "Sagittarius A*");
     next();
 });
 
 // request and cache videos every hour
-yt.startCache();
+// yt.startCache();
 
 // expose client build and dependencies folders
 app.use("/bundle.js", express.static(path.join(ROOT, "client/build/src/bundle.js")));
@@ -48,9 +54,12 @@ app.get("/", (req, res) => {
 
 // youtube videos request
 app.get("/youtube", (req, res) => {
-    res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
     res.json(yt.videos);
 });
+
+// app.get("/github", (req, res) => {
+    
+// });
 
 // tell server to start listening
 let server = app.listen(config.port, config.host ?? "", () => {

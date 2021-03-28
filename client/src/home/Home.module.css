@@ -1,0 +1,28 @@
+/*
+ * File: Home.module.css
+ * Created: Sunday March 28th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Sunday March 28th 2021 2:12am
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+ .scrollable{
+     height:calc(100vh - 3rem);
+     overflow-y: scroll;
+ }
+
+ .container{
+    width:max-content;
+    margin:0 auto;
+ }
+
+ .event{
+     margin: 1rem 0;
+ }
+
+ .commit:not(:last-child){
+    margin-bottom: 0.2rem;
+ }

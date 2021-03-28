@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 2:01am
+ * Last Modified: Sunday March 28th 2021 11:21am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -84,17 +84,22 @@ export async function fetchEvents(dispatch: AppDispatch, getState: () => RootSta
     const response = await fetch(`https://api.github.com/users/thomasvanbommel/events`);
     const events = await response.json();
     
-    if(Array.isArray(events)){
-        dispatch({ ...setEvents(), payload: events });
-    }else{
+    try{
         const remaining = Number(response.headers.get("x-ratelimit-remaining"));
-        const reset = Math.round(((Number(response.headers.get("x-ratelimit-reset")) - Date.now() / 1000) / 60) * 10) / 10;
-
-        if(remaining === 0 && reset > 0)
-            alert(`You have 0 reloads remaining.\nPlease wait ${reset} minutes for it to reset.`);
-
-        // console.log(response);
         console.log("Reloads remaining: ", remaining);
-        console.log("Reset time (minutes): ", reset);
+
+        if(Array.isArray(events)){
+            dispatch({ ...setEvents(), payload: events });
+        }else{
+            const reset = Math.round(((Number(response.headers.get("x-ratelimit-reset")) - Date.now() / 1000) / 60) * 10) / 10;
+
+            if(remaining === 0 && reset > 0)
+                alert(`You have 0 reloads remaining.\nPlease wait ${reset} minutes for it to reset.`);
+
+            // console.log(response);
+            console.log("Reset time (minutes): ", reset);
+        }
+    }catch{
+        console.log("Could not parse github response");
     }
 }

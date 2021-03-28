@@ -3,26 +3,47 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 2:12am
+ * Last Modified: Sunday March 28th 2021 11:36am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
- .scrollable{
-     height:calc(100vh - 3rem);
-     overflow-y: scroll;
- }
+.scrollable{
+    height:calc(100vh - 3rem);
+    overflow-y: scroll;
+}
 
- .container{
+.container{
     width:max-content;
     margin:0 auto;
- }
+}
 
- .event{
-     margin: 1rem 0;
- }
+.event{
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
 
- .commit:not(:last-child){
-    margin-bottom: 0.2rem;
- }
+.header{
+    display:flex;
+}
+
+.spacer{
+    flex: 1;
+}
+
+.commitContainer{
+    margin-top: 1rem;
+}
+
+ /* .commit{
+
+ } */
+
+.commit:not(:last-child){
+    /* margin-bottom: 0.2rem; */
+    padding-bottom:0.5rem;
+}

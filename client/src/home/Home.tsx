@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 11:57am
+ * Last Modified: Sunday March 28th 2021 12:04pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -29,16 +29,22 @@ function Home(){
                         if(event.type === "PushEvent"){
                             let push = event as PushEvent;
                             let time = Date.now() - Date.parse(push.created_at);
-                            let timeUnit = "h";
+                            let timeUnit = "m";
 
                             time /= 1000; // milliseconds to seconds
                             time /= 60; // seconds to minutes
-                            time /= 60; // minutes to hours
-                            time = Math.round(time); // round to nearest hour
+                            time = Math.round(time); // round to nearest minute
 
-                            if(time >= 48){
-                                time /= 24;
-                                timeUnit = "d";
+                            if(time >= 60){
+                                time /= 60; // minutes to hours
+                                time = Math.round(time); // round to nearest hour
+                                timeUnit = "h";
+
+                                if(time >= 48){
+                                    time /= 24; // hours to days
+                                    time = Math.round(time); // round to nearest day
+                                    timeUnit = "d";
+                                }
                             }
 
                             return (

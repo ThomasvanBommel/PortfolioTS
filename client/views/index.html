@@ -3,7 +3,7 @@ File: index.html
 Created: Saturday February 6th 2021
 Author: Thomas vanBommel
 
-Last Modified: Saturday March 27th 2021 3:36pm
+Last Modified: Sunday March 28th 2021 12:06am
 Modified By: Thomas vanBommel
 
 CHANGELOG:
@@ -39,7 +39,7 @@ CHANGELOG:
         font-family: monospace;
       }
 
-      button, input, textarea{
+      input, textarea{
         border: var(--border);
         box-sizing: border-box;
         border-radius: 0.25rem;
@@ -47,11 +47,7 @@ CHANGELOG:
         padding: 0.25rem;
       }
 
-      button {
-        border:none;
-      }
-
-      button:not([disabled]):hover, button:not([disabled]).active, input[type="submit"]:not([disabled]):hover {
+      input[type="submit"]:not([disabled]):hover {
         background-color: black;
         cursor: pointer;
         color: white;
@@ -60,7 +56,7 @@ CHANGELOG:
       body{
         background-color: #eee;
         max-width: 100%;
-        overflow-x: hidden;
+        overflow: hidden;
       }
 
       h1{

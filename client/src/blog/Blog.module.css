@@ -3,13 +3,15 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 4:03pm
+ * Last Modified: Sunday March 28th 2021 12:05am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
 .content{
+    height:calc(100vh - 3rem);
+    overflow-y: scroll;
     max-width: 1200px;
     margin:0 auto;
 }
@@ -31,33 +33,42 @@
 }
 
 .sidebar{
-    display: none;
-    position:fixed;
-    top: 3rem;
-    left: 0;
-
-    /* border: 1px solid #aaa;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem; */
+    width:max-content;
+    margin:0 auto;
 
     padding:1rem;
-    padding-left:1rem;
+    display:flex;
 
-    /* background-color:#ccc; */
-    /*color:#aaa;
-    opacity: 0.7; */
+    margin-bottom:6vw;
 }
 
 .sidebar button{
     box-shadow: 0.25rem 0.25rem 0.25rem #888;
+    padding:0.25rem;
+    border-radius: 0.25rem;
+}
+
+.sidebar button:hover{
+    background-color: var(--dark);
+    color: var(--light);
+    cursor: pointer;
 }
 
 .sidebar button:not(:last-child){
     margin-bottom:0.25rem;
+    margin-right:0.25rem;
 }
 
 @media only screen and (min-width: 1200px){
     .sidebar{
+        width:auto;
+        margin:none;
+
         display:block;
+        position:fixed;
+        top: 3rem;
+        left: 0;
+    
+        padding:1rem;
     }
 }

@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 3:00pm
+ * Last Modified: Sunday March 28th 2021 12:10am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,7 +17,7 @@
 
 .nav div{
     display: flex;
-    margin: 0 0.5rem;
+    margin-left:0.5rem;
 }
 
 .nav a{
@@ -40,16 +40,21 @@
     flex: 1;
 }
 
-#active{
+.nav button{
     height:3rem;
-    background-color:var(--dark);
-    color:var(--light);
+    transition:color 1s, background-color 1s;
+    padding:0 1rem;
     margin-top:0;
     margin-bottom:0;
 }
 
-.nav button:not(:last-child){
-    margin-right:1rem;
+.nav button:hover{
+    cursor: pointer;
+}
+
+#active{
+    background-color:var(--dark);
+    color:var(--light);
 }
 
 @media only screen and (min-width: 500px){

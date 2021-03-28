@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 3:58pm
+ * Last Modified: Saturday March 27th 2021 11:43pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,8 +17,8 @@ function Blog(){
     
     return (
         <div className={ style.content }>
-            <SideBar />
             <Article />
+            <SideBar />
         </div>
     );
 }

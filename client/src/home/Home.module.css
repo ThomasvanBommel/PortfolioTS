@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:50pm
+ * Last Modified: Sunday March 28th 2021 2:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,12 +16,14 @@
 
 .container{
     width:max-content;
+    max-width: 100%;
     margin:0 auto;
     margin-top:2rem;
 }
 
 .event{
-    margin: 1rem 0;
+    max-width: 100%;
+    margin: 1rem;
     padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid black;
@@ -29,7 +31,13 @@
 }
 
 .header{
-    display:flex;
+    display:block;
+}
+
+@media only screen and (min-width: 500px){
+    .header{
+        display:flex;
+    }
 }
 
 .spacer{
@@ -37,7 +45,10 @@
 }
 
 .commitContainer{
-    margin-top: 1rem;
+    margin-top:1rem;
+    /* margin
+    border: 1rem solid transparent;
+    box-sizing: border-box; */
 }
 
  /* .commit{

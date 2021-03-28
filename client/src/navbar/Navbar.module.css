@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 12:10am
+ * Last Modified: Sunday March 28th 2021 2:03pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -46,6 +46,7 @@
     padding:0 1rem;
     margin-top:0;
     margin-bottom:0;
+    background-color: inherit;
 }
 
 .nav button:hover{

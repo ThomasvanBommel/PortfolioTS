@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:13pm
+ * Last Modified: Sunday March 28th 2021 1:43pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -31,6 +31,7 @@ export default class Database{
         try{
             if(! await this.db.schema.hasTable("blogs")){
                 await this.db.schema.createTable("blogs", table => {
+                    table.increments("id");
                     table.text("title");
                     table.text("article");
                     table.integer("coffee");
@@ -58,6 +59,9 @@ export default class Database{
     }
 
     async blogs(){
-        return this.db("blogs").select("*");
+        if(this.isSetup)
+            return this.db("blogs").select("*");
+
+        return [];
     }
 }

@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:30pm
+ * Last Modified: Sunday March 28th 2021 1:35pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -29,11 +29,11 @@ function Blog(){
 function SideBar({ blog }: { blog: Blog}){
     return (
         <div className={ style.sidebar }>
-            <button className="reverse">☕ { blog.coffee }</button>
+            <button>☕ { blog.coffee }</button>
             <br/>
-            <button className="reverse">👍 { blog.thumbsup }</button>
+            <button>👍 { blog.thumbsup }</button>
             <br/>
-            <button className="reverse">👏 { blog.clap }</button>
+            <button>👏 { blog.clap }</button>
         </div>
     );
 }

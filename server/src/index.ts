@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 12:51am
+ * Last Modified: Sunday March 28th 2021 1:14pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,6 +14,10 @@
 import YouTube from "./youtube";
 import express from "express";
 import path from "path";
+
+import Database from "./blog/database";
+
+let db = new Database();
 
 // import { test } from "./github";
 // (async () => {
@@ -57,9 +61,9 @@ app.get("/youtube", (req, res) => {
     res.json(yt.videos);
 });
 
-// app.get("/github", (req, res) => {
-    
-// });
+app.get("/blogs", async (req, res) => {
+    res.json(await db.blogs());
+});
 
 // tell server to start listening
 let server = app.listen(config.port, config.host ?? "", () => {

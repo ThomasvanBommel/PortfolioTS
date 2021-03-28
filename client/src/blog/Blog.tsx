@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 11:43pm
+ * Last Modified: Sunday March 28th 2021 1:30pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,55 +12,41 @@
 import React from "react";
 import style from "./Blog.module.css";
 
-function Blog(){
+import { useSelector } from "react-redux";
+import { getBlogs, Blog } from "../slices/blogSlice";
 
+function Blog(){
+    const blogs = useSelector(getBlogs);
     
     return (
         <div className={ style.content }>
-            <Article />
-            <SideBar />
+            <Article blog={ blogs[0] } />
+            <SideBar blog={ blogs[0] } />
         </div>
     );
 }
 
-function SideBar(){
+function SideBar({ blog }: { blog: Blog}){
     return (
         <div className={ style.sidebar }>
-            <button className="reverse">☕ 11</button>
+            <button className="reverse">☕ { blog.coffee }</button>
             <br/>
-            <button className="reverse">👍 21</button>
+            <button className="reverse">👍 { blog.thumbsup }</button>
             <br/>
-            <button className="reverse">👏 2</button>
+            <button className="reverse">👏 { blog.clap }</button>
         </div>
     );
 }
 
-function Article(){
+function Article({ blog }: { blog: Blog}){
     return (
         <div className={ style.articleContainer }>
             <h1 className={ style.title }>
-                Wow! Look what I did. So amazing!
+                { blog.title }
             </h1>
 
             <article className={ style.article }>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
-                <p>Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. Hello this is my article. </p>
+                <p>{ blog.article }</p>
             </article>
         </div>
     );

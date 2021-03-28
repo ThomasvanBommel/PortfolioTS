@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 12:07pm
+ * Last Modified: Sunday March 28th 2021 1:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -24,6 +24,7 @@ import { Provider, useSelector, useDispatch } from "react-redux";
 import { Page, getPage } from "./slices/pageSlice";
 import { fetchVideos } from "./slices/videoSlice";
 import { fetchEvents } from './slices/eventSlice';
+import { fetchBlogs } from './slices/blogSlice';
 
 import store from "./store";
 
@@ -41,6 +42,7 @@ function Main(){
     // Load youtube videos
     useDispatch()(fetchVideos);
     useDispatch()(fetchEvents);
+    useDispatch()(fetchBlogs);
 
     return <Content />
 }

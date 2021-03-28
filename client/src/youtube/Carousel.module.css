@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 1:41pm
+ * Last Modified: Sunday March 28th 2021 1:52pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -83,6 +83,14 @@
     border-radius: 0;
     position:absolute;
     top:0;
+    padding:0 0.5rem;
+}
+
+.backButton:hover, .forwardButton:hover{
+    opacity: 0.8;
+    color: var(--dark);
+    background-color: var(--light);
+    cursor: pointer;
 }
 
 .backButton{
@@ -96,4 +104,5 @@
 .info{
     padding: 1rem;
     opacity: 0.5;
+    display:none;
 }

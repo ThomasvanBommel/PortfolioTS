@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:06pm
+ * Last Modified: Monday March 29th 2021 6:28pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,14 +13,15 @@ import React from "react";
 import style from "./Blog.module.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getBlogs, Blog } from "../slices/blogSlice";
+import { getBlogs, Blog, isLoaded } from "../slices/blogSlice";
 import { fetchBlogs } from '../slices/blogSlice';
 
 import SideBar from "./SideBar";
 import Article from "./Article";
 
 function Blog(){
-    useDispatch()(fetchBlogs);
+    if(!isLoaded)
+        useDispatch()(fetchBlogs);
     
     return (
         <div className={ style.content }>

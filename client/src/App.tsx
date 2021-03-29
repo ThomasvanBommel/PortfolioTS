@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:23pm
+ * Last Modified: Monday March 29th 2021 6:26pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -41,7 +41,6 @@ function Content(){
     return (
         <Switch>
             <Route path="/blog">
-                { console.log("blog page") }
                 <Blog />
             </Route>
 

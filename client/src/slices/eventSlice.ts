@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 11:21am
+ * Last Modified: Monday March 29th 2021 6:34pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,6 +11,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState, AppDispatch } from "../store";
+import { LoadedAction } from "./blogSlice";
 
 export type Event = {
     id: number,
@@ -63,20 +64,26 @@ export type EventAction = {
 export const eventSlice = createSlice({
     name: "event",
     initialState: {
-        events: [] as Event[]
+        events: [] as Event[],
+        isLoaded: false
     },
     reducers: {
         setEvents: (state, action: EventAction) => {
             if(action)
                 state.events = action.payload;
+        },
+        setLoaded: (state, action: LoadedAction) => {
+            if(action)
+                state.isLoaded = action.payload;
         }
     }
 });
 
 export default eventSlice.reducer;
 
-export const { setEvents } = eventSlice.actions;
+export const { setEvents, setLoaded } = eventSlice.actions;
 export const getEvents = (store: RootState) => store.events.events;
+export const isLoaded = (store: RootState) => store.events.isLoaded;
 
 export async function fetchEvents(dispatch: AppDispatch, getState: () => RootState){
     console.log("Loading events...");
@@ -90,6 +97,7 @@ export async function fetchEvents(dispatch: AppDispatch, getState: () => RootSta
 
         if(Array.isArray(events)){
             dispatch({ ...setEvents(), payload: events });
+            dispatch({ ...setLoaded(), payload: true });
         }else{
             const reset = Math.round(((Number(response.headers.get("x-ratelimit-reset")) - Date.now() / 1000) / 60) * 10) / 10;
 

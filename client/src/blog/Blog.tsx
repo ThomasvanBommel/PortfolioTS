@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:28pm
+ * Last Modified: Monday March 29th 2021 6:38pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,7 +20,7 @@ import SideBar from "./SideBar";
 import Article from "./Article";
 
 function Blog(){
-    if(!isLoaded)
+    if(!useSelector(isLoaded))
         useDispatch()(fetchBlogs);
     
     return (

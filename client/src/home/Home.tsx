@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:22pm
+ * Last Modified: Monday March 29th 2021 6:38pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,8 +11,8 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchEvents, getEvents, Event, PushEvent } from '../slices/eventSlice';
-import { fetchVideos } from "../slices/videoSlice";
+import { fetchEvents, getEvents, Event, PushEvent, isLoaded as eventsLoaded } from '../slices/eventSlice';
+import { fetchVideos, isLoaded as videosLoaded } from "../slices/videoSlice";
 
 import Carousel from "../youtube/Carousel";
 import style from "./Home.module.css";
@@ -20,8 +20,11 @@ import style from "./Home.module.css";
 function Home(){
     let dispatch = useDispatch();
 
-    dispatch(fetchVideos);
-    dispatch(fetchEvents);
+    if(!useSelector(videosLoaded))
+        dispatch(fetchVideos);
+
+    if(!useSelector(eventsLoaded))
+        dispatch(fetchEvents);
 
     return <Content />;
 }

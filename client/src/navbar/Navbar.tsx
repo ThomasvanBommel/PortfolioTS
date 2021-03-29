@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 2:59pm
+ * Last Modified: Monday March 29th 2021 5:28pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,6 +20,8 @@ import style from "./Navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getPage, setPage, Page } from "../slices/pageSlice";
 
+import { Link, NavLink } from "react-router-dom";
+
 function NavBar(){
     // Get page and setup dispatch
     const page = useSelector(getPage);
@@ -34,13 +36,15 @@ function NavBar(){
     }
 
     // Create button with className and handler
-    function navButton(target: Page){
+    function navButton(target: string){
         return (
-            <button type="button" 
-                    id={ page === target ? style.active : "" } 
-                    onClick={ () => handleChange(target) }>
-                { String(target) }
-            </button>
+            <NavLink to={ target }>
+                {/* <button type="button"> */}
+                        {/* id={ page === target ? style.active : "" }>*/}
+                        {/* onClick={ () => handleChange(target) }> */}
+                    { String(target) }
+                {/* </button> */}
+            </NavLink>
         );
     }
 
@@ -48,14 +52,16 @@ function NavBar(){
     return (
         <nav className={ style.nav }>
             <div>
-                <a href="#" onClick={ () => handleChange(Page.Home) }>
+                {/* <a href="#" onClick={ () => handleChange(Page.Home) }> */}
+                <Link to="/">
                     Thomas v<span>an</span>B<span>ommel</span>
-                </a>
+                </Link>
+                {/* </a> */}
 
                 <div className={ style.spacer }></div>
 
-                { navButton(Page.Blog) }
-                { navButton(Page.Contact) }
+                { navButton("/blog") }
+                { navButton("/contact") }
                 
             </div>
         </nav>

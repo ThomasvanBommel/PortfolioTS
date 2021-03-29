@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:23pm
+ * Last Modified: Monday March 29th 2021 6:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,45 +20,40 @@ import Navbar from './navbar/Navbar';
 import ContactForm from './contact/ContactForm';
 import ProgressBanner from "./progress_banner/ProgressBanner";
 
-import { Provider, useSelector, useDispatch } from "react-redux";
-import { Page, getPage } from "./slices/pageSlice";
-import { fetchVideos } from "./slices/videoSlice";
-import { fetchEvents } from './slices/eventSlice';
-import { fetchBlogs } from './slices/blogSlice';
-
+import { Provider } from "react-redux";
 import store from "./store";
+
+import { HashRouter, Switch, Route } from "react-router-dom";
 
 function App(){
     return (
-        <Provider store={ store }>
-            <Navbar />
-            <Main />
-            <ProgressBanner />
-        </Provider>
+        <HashRouter>
+            <Provider store={ store }>
+                <Navbar />
+                <Content />
+                <ProgressBanner />
+            </Provider>
+        </HashRouter>
     );
 }
 
-function Main(){
-    // Load youtube videos
-    useDispatch()(fetchVideos);
-    useDispatch()(fetchEvents);
-    useDispatch()(fetchBlogs);
-
-    return <Content />
-}
-
 function Content(){
-    // Display the correct page
-    switch(useSelector(getPage)){
-        case Page.Contact:
-            return <ContactForm />
+    return (
+        <Switch>
+            <Route path="/blog">
+                { console.log("blog page") }
+                <Blog />
+            </Route>
 
-        case Page.Blog:
-            return <Blog />;
+            <Route path="/contact">
+                <ContactForm />
+            </Route>
 
-        default:
-            return <Home />
-    }
+            <Route path="/">
+                <Home />
+            </Route>
+        </Switch>
+    );
 }
 
 export default App;

@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 5:06am
+ * Last Modified: Monday March 29th 2021 5:39pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,7 +15,7 @@ const join = require("path").join;
 
 // export webpack config
 module.exports = {
-    mode: "production",
+    mode: process.env.NODE_ENV === "development" ? "development" : "production",
 
     entry: { client: join(__dirname, "./index.tsx") },
     output: { path:  join(__dirname, "../build/src"), filename: "bundle.js" },

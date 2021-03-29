@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:23pm
+ * Last Modified: Monday March 29th 2021 6:08pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -30,7 +30,7 @@ export type BlogAction = {
 export const blogSlice = createSlice({
     name: "blog",
     initialState: {
-        blogs: [] as Blog[]
+        blogs: [] as Blog[],
     },
     reducers: {
         setBlogs: (state, action: BlogAction) => {
@@ -46,7 +46,7 @@ export const { setBlogs } = blogSlice.actions;
 export const getBlogs = (store: RootState) => store.blogs.blogs;
 
 export async function fetchBlogs(dispatch: AppDispatch, getState: () => RootState){
-    console.log("Loading blogs");
+    console.log("Loading blogs...");
 
     const response = await fetch(`http://${config.host}:${config.port}/blogs`);
     const blogs = await response.json();

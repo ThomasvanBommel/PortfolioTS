@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:35pm
+ * Last Modified: Monday March 29th 2021 6:06pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,42 +12,46 @@
 import React from "react";
 import style from "./Blog.module.css";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getBlogs, Blog } from "../slices/blogSlice";
+import { fetchBlogs } from '../slices/blogSlice';
+
+import SideBar from "./SideBar";
+import Article from "./Article";
 
 function Blog(){
-    const blogs = useSelector(getBlogs);
+    useDispatch()(fetchBlogs);
     
     return (
         <div className={ style.content }>
-            <Article blog={ blogs[0] } />
-            <SideBar blog={ blogs[0] } />
+            <Master />
         </div>
     );
 }
 
-function SideBar({ blog }: { blog: Blog}){
+function Master(){
+    const blogs = useSelector(getBlogs);
+
     return (
-        <div className={ style.sidebar }>
-            <button>☕ { blog.coffee }</button>
-            <br/>
-            <button>👍 { blog.thumbsup }</button>
-            <br/>
-            <button>👏 { blog.clap }</button>
+        <div>
+            {
+                blogs.length < 1 ? (
+                    <div>No blogs...</div>
+                ) : (
+                    blogs.map(blog => (
+                        <div>{ blog.title }</div>
+                    ))
+                )
+            }
         </div>
     );
 }
 
-function Article({ blog }: { blog: Blog}){
+function Detail({ blog }: { blog: Blog}){
     return (
-        <div className={ style.articleContainer }>
-            <h1 className={ style.title }>
-                { blog.title }
-            </h1>
-
-            <article className={ style.article }>
-                <p>{ blog.article }</p>
-            </article>
+        <div>
+            <Article blog={ blog } />
+            <SideBar blog={ blog } />
         </div>
     );
 }

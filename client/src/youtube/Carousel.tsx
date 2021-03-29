@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 1:58pm
+ * Last Modified: Monday March 29th 2021 6:41pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -76,7 +76,7 @@ function Carousel(){
                  onMouseLeave={ () => setAnimating(true) }>
 
                 <div className={ style.itemContainer } style={{ transform: `translateX(${ -offset }px)` }}>{
-                    videos.map(video => <CarouselItem width={ itemWidth } video={ video } />)
+                    videos.map(video => <CarouselItem width={ itemWidth } video={ video } key={ video.id } />)
                 }</div>
 
                 <button className={ style.backButton } onClick={ handleClickBack }>&lt;</button>

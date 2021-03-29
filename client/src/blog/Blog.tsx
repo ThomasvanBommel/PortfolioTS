@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:38pm
+ * Last Modified: Monday March 29th 2021 6:40pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -33,6 +33,7 @@ function Blog(){
 function Master(){
     const blogs = useSelector(getBlogs);
 
+
     return (
         <div>
             {
@@ -40,7 +41,7 @@ function Master(){
                     <div>No blogs...</div>
                 ) : (
                     blogs.map(blog => (
-                        <div>{ blog.title }</div>
+                        <div key={ blog.title }>{ blog.title }</div>
                     ))
                 )
             }

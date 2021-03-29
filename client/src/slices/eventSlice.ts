@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:34pm
+ * Last Modified: Monday March 29th 2021 8:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,7 +15,22 @@ import { LoadedAction } from "./blogSlice";
 
 export type Event = {
     id: number,
-    type: string
+    type: string,
+    actor: {
+        id: number,
+        login: string,
+        display_login: string,
+        gravatar_id: string,
+        url: string,
+        avatar_url: string
+    },
+    repo: {
+        id: number,
+        name: string,
+        url: string
+    },
+    public: boolean,
+    created_at: string
 };
 
 export type Commit = {
@@ -30,19 +45,6 @@ export type Commit = {
 };
 
 export type PushEvent = Event & {
-    actor: {
-        id: number,
-        login: string,
-        display_login: string,
-        gravatar_id: string,
-        url: string,
-        avatar_url: string
-    },
-    repo: {
-        id: number,
-        name: string,
-        url: string
-    },
     payload: {
         push_id: number,
         size: number,
@@ -51,9 +53,25 @@ export type PushEvent = Event & {
         head: string,
         before: string,
         commits: Commit[]
-    },
-    public: boolean,
-    created_at: string
+    }
+};
+
+export type CreateEvent = Event & {
+    payload: {
+        ref: string,
+        ref_type: string,
+        master_branch: string,
+        description: string,
+        pusher_type: string
+    }
+};
+
+export type DeleteEvent = Event & {
+    payload: {
+        ref: string,
+        ref_type: string,
+        pusher_type: string
+    }
 };
 
 export type EventAction = {

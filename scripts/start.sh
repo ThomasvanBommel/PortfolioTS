@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Tuesday March 30th 2021 4:34pm
+ # Last Modified: Tuesday March 30th 2021 6:17pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -10,6 +10,9 @@
 #!/bin/bash
 
 set -e
+
+## Check / create config file (common/config.json)
+scripts/config.sh
 
 ## Build server
 buildServer () {

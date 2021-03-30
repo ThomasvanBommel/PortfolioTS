@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Sunday March 28th 2021 12:45am
+ # Last Modified: Tuesday March 30th 2021 4:34pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -11,43 +11,40 @@
 
 set -e
 
-## Clean up the project first
-scripts/cleanup.sh
-
-## Create config files
-node common/create-config.js
-
+## Build server
 buildServer () {
-    ## Build server
     echo "Building server:"
     tsc --build server/src && echo " - Done" || echo " - Failed"
 }
 
+## Build client
 buildClient () {
-    ## Build client
     echo "Webpacking client:"
     webpack --config client/src/webpack.config.js
 }
 
 ## If testing, clean up and return successful
 if [ "$1" = "test" ]; then
-    buildServer
-    buildClient
     scripts/cleanup.sh
+    buildServer && \
+    buildClient
     exit 0
 
+## Only build the server
 elif [ "$1" = "server" ]; then
     buildServer
 
+## Only build the client
 elif [ "$1" = "client" ]; then
     buildClient
     exit 0
 
+## Default, build everything
 else
-    buildServer
+    buildServer && \
     buildClient
 fi
 
 ## Start server
 echo "Starting server:"
-ROOT=$(pwd) node server/build/src/index.js
+node build/server/src/index.js

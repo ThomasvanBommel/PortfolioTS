@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:41pm
+ * Last Modified: Tuesday March 30th 2021 4:59pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -18,8 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getVideos, getCurrentVideoIndex, increment, decrement } from "../slices/videoSlice";
 import CarouselItem from "./CarouselItem";
 import style from "./Carousel.module.css";
-
-const config = require("../../../common/.client.config.json");
 
 const SIZE = {
     small:  { width: 640,      ratio: 1   },

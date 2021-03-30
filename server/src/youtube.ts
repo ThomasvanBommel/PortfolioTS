@@ -3,14 +3,14 @@
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 4:43am
+ * Last Modified: Tuesday March 30th 2021 4:54pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  * 2021-03-27	TvB	Added channelId and apiKey to constructor
  */
 
-import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "../../common/types";
+import { YouTubeSnippet, YouTubeStatistics, YouTubeVideo } from "common/types";
 import request from "./request";
 
 // 1 hour in milliseconds
@@ -41,12 +41,15 @@ export default class YouTube {
         maxResults: 50,
     };
 
-    constructor(channelId: string, apiKey: string){
-        if(!!!channelId || !!!apiKey)
-            throw new Error("You must pass a non-falsy channelId and apiKey");
-
+    constructor(channelId: string){
         this.parameters_.channelId = channelId;
-        this.parameters_.key = apiKey;
+        this.parameters_.key = process.env.YT_API_KEY ?? "";
+
+        if(!!!this.parameters_.key)
+            throw new Error("YT_API_KEY environment variable not set");
+
+        if(!!!channelId)
+            throw new Error("You must pass a non-falsy channelId");
     }
 
     // Cache interval identifier

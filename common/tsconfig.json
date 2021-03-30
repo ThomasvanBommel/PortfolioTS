@@ -1,10 +1,11 @@
 {
     "include": ["./**/*.ts"],
     "compilerOptions": {
-        "outDir": "build/",
+        "outDir": "../build/common/",
         "composite": true,
         "declaration": true,
         "declarationMap": true,
+        "resolveJsonModule": true
     },
     "references": []
 }

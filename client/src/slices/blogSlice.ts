@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:28pm
+ * Last Modified: Tuesday March 30th 2021 5:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,10 +11,10 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState, AppDispatch } from "../store";
-
-const config = require("../../../common/.client.config.json");
+import config from "../../../common/config.json";
 
 export type Blog = {
+    id: number,
     title: string,
     article: string,
     coffee: number,

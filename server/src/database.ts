@@ -3,13 +3,16 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:43pm
+ * Last Modified: Monday March 29th 2021 11:02pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
 import knex from "knex";
+// import { makeSlug } from "common/slug";
+// const { makeSlug } = require("../../common/slug");
+
 
 export default class Database{
 
@@ -32,11 +35,14 @@ export default class Database{
             if(! await this.db.schema.hasTable("blogs")){
                 await this.db.schema.createTable("blogs", table => {
                     table.increments("id");
-                    table.text("title");
-                    table.text("article");
-                    table.integer("coffee");
-                    table.integer("thumbsup");
-                    table.integer("clap");
+                    table.text("slug").notNullable();
+                    table.text("title").notNullable();
+                    table.text("article").notNullable();
+                    table.integer("coffee").defaultTo(0);
+                    table.integer("thumbsup").defaultTo(0);
+                    table.integer("clap").defaultTo(0);
+
+                    table.unique(["slug"]);
                 });
 
                 console.log("Created blogs table");
@@ -44,9 +50,7 @@ export default class Database{
                 await this.db("blogs").insert({
                     title: "Testing...",
                     article: "Welcome to my new blog!",
-                    coffee: 0,
-                    thumbsup: 0,
-                    clap: 0
+                    slug: "test"
                 });
 
                 console.log("Inserted test article");

@@ -3,39 +3,28 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:38pm
+ * Last Modified: Tuesday March 30th 2021 5:57pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-30	TvB	Reverted back to relative file paths (new build dir)
  * 2021-03-27	TvB	Added requirement for process.env.ROOT 
  * 2021-03-25	TvB	Changed output formatting
  */
 
+import config from "../../common/config.json";
+import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
 import path from "path";
 
-import Database from "./blog/database";
+// const config = require("../../common/.server.config.json");
 
 let db = new Database();
 
-// import { test } from "./github";
-// (async () => {
-//     await test();
-// })();
-
-const ROOT = process.env.ROOT;
-
-if(!ROOT){
-    console.error("No ROOT environment variable set");
-    process.exit(1);
-}
-
-const config = require(ROOT + "/common/.server.config.json");
-
 // initialize express and youtube modules
 const app = express();
-const yt = new YouTube(config.channelId, config.apiKey);
+const yt = new YouTube(config.channelId);
 
 // Set headers using middleware
 app.use((req, res, next) => {
@@ -48,12 +37,11 @@ app.use((req, res, next) => {
 yt.startCache();
 
 // expose client build and dependencies folders
-app.use("/bundle.js", express.static(path.join(ROOT, "client/build/src/bundle.js")));
-app.use(express.static(path.join(ROOT, "client/dependencies")));
+app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bundle.js")));
 
 // home get request
 app.get("/", (req, res) => {
-    res.sendFile(path.join(ROOT, "client/views/index.html"));
+    res.sendFile(path.join(__dirname, "../../../public/index.html"));
 });
 
 // youtube videos request

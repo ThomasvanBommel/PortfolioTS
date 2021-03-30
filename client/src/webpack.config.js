@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 5:39pm
+ * Last Modified: Tuesday March 30th 2021 4:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -18,7 +18,7 @@ module.exports = {
     mode: process.env.NODE_ENV === "development" ? "development" : "production",
 
     entry: { client: join(__dirname, "./index.tsx") },
-    output: { path:  join(__dirname, "../build/src"), filename: "bundle.js" },
+    output: { path:  join(__dirname, "../../build/client/src"), filename: "bundle.js" },
 
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx", ".css"] },
 

@@ -1,12 +1,10 @@
 {
   "extends": "../tsconfig-base.json",
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "include": ["./**/*.ts", "./**/*.tsx", "../../common/*.json"],
   "compilerOptions": {
       "composite": true,
-      "outDir": "../build/src/",
-      "paths": {
-        "common/*": ["../../common/*"]
-      },
+      "outDir": "../../build/",
+      "rootDir": "../../"
   },
   "references": [
     { "path": "../../common" }

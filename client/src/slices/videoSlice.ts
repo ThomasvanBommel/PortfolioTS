@@ -3,18 +3,17 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:36pm
+ * Last Modified: Tuesday March 30th 2021 5:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
-import { YouTubeVideo } from "common/types";
-import { createSlice } from '@reduxjs/toolkit'
+import { YouTubeVideo } from "../../../common/types";
 import { RootState, AppDispatch } from "../store";
+import { createSlice } from '@reduxjs/toolkit'
 import { LoadedAction } from "./blogSlice";
-
-const config = require("../../../common/.client.config.json");
+import config from "../../../common/config.json";
 
 export type VideoAction = {
     type: string,
@@ -58,7 +57,7 @@ export const getCurrentVideoIndex = (store: RootState) => store.videos.currentIn
 export async function fetchVideos(dispatch: AppDispatch, getState: () => RootState) {
     console.log("Loading videos...");
     
-    const videos = await (await fetch(`http://${config.host}:${config.port}/youtube`)).json();
+    const videos = await (await fetch(`http://${ config.host }:${config.port}/youtube`)).json();
     dispatch({ ...setVideos(), payload: videos });
     dispatch({ ...setLoaded(), payload: true });
 }

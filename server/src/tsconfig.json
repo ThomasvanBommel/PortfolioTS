@@ -1,11 +1,14 @@
 {
     "extends": "../tsconfig-base.json",
-    "include": ["./**/*.ts"],
+    "include": ["./**/*.ts", "../../common/*.json"],
     "compilerOptions": {                      
-        "rootDir": "./", 
+        "rootDir": "../../", 
         "baseUrl": "./",                
-        "outDir": "../build/src",   
+        "outDir": "../../build",   
         "composite": true,
+        "paths": {
+          "common/*": ["../../common/*"],
+        },
     },
     "references": [
       { "path": "../../common" }

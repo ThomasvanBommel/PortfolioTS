@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Saturday March 27th 2021 1:50am
+ # Last Modified: Tuesday March 30th 2021 6:52pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -13,12 +13,12 @@ set -e
 
 scripts/cleanup.sh
 
-# Create config files
-node common/create-config.js
+# Check / create config file (common/config.json)
+scripts/config.sh
 
  # Build and run mocha client tests
 test_client () {
-    echo "Skipping test-client:"
+    echo "Skipping client tests:"
     # webpack --config test-client/webpack.config.js
     # tsc --build test-client/
 
@@ -29,11 +29,11 @@ test_client () {
 
  # Build and run mocha server tests
 test_server () {
-    echo "Building test-server:"
-    tsc --build server/test && echo " - Done" || echo " - Failed"
+    echo "Building server test:"
+    tsc --build server/test && echo " - Done"
     
     echo "Start server testing:"
-    ROOT=$(pwd) mocha "server/build/test/**/*.js"
+    mocha "build/server/test/**/*.js"
 }
 
 ## Pick what to test (default both)

@@ -8,18 +8,10 @@
 import YouTube, { YouTubeParameters } from "../src/youtube";
 import { YouTubeVideo } from "../../common/types";
 import assert from "assert";
-
-const ROOT = process.env.ROOT;
-
-if(!ROOT){
-    console.error("No ROOT environment variable set");
-    process.exit(1);
-}
-
-const config = require(ROOT + "/common/.server.config.json");
+import config from "../../common/config.json";
 
 describe("youtube", function() {
-    let youtube = new YouTube(config.channelId, config.apiKey);
+    let youtube = new YouTube(config.channelId);
 
     // unit-cost of 2*i units 
     for(let i = 1; i <= 2; i++){
@@ -33,7 +25,7 @@ describe("youtube", function() {
         describe(`test ${i}`, function() {
 
             before("create YouTube object", function() {
-                youtube = new YouTube(config.channelId, config.apiKey);
+                youtube = new YouTube(config.channelId);
 
                 youtube.setParameters({
                     "maxResults": maxResults,

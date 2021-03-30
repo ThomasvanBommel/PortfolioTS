@@ -6,15 +6,7 @@
  */
 
 import assert from "assert";
-
-const ROOT = process.env.ROOT;
-
-if(!ROOT){
-    console.error("No ROOT environment variable set");
-    process.exit(1);
-}
-
-const config = require(ROOT + "/common/.server.config.json");
+import config from "../../common/config.json";
 
 describe("config", () => {
 
@@ -27,12 +19,6 @@ describe("config", () => {
             // Check that channelId exists and is not empty
             it(".channelId", () => {
                 assert.ok(!!config.channelId);
-            });
-
-            // Check that apiKey exists and is not empty
-            it(".apiKey", () => {
-                // console.log("API TRUTHY:", !!config.apiKey, config.apiKey);
-                assert.ok(!!config.apiKey);
             });
 
             // Check that port exists and is not 0
@@ -52,11 +38,6 @@ describe("config", () => {
             // Check that channelId is a string type
             it(".channelId", () => {
                 assert.strictEqual(typeof config.channelId, "string");
-            });
-
-            // Check that apiKey is a string type
-            it(".apiKey", () => {
-                assert.strictEqual(typeof config.apiKey, "string")
             });
 
             // Check that port is a number type

@@ -3,7 +3,7 @@
  * Created: Sunday February 14th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:31pm
+ * Last Modified: Monday March 29th 2021 9:07pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -23,7 +23,7 @@ function NavBar(){
     // Create button with className and handler
     function navButton(target: string){
         return (
-            <NavLink to={ target }>
+            <NavLink to={ target } className={ style.navlink }>
                 { String(target) }
             </NavLink>
         );
@@ -33,7 +33,7 @@ function NavBar(){
     return (
         <nav className={ style.nav }>
             <div>
-                <Link to="/">
+                <Link to="/" className={ style.logo }>
                     Thomas v<span>an</span>B<span>ommel</span>
                 </Link>
 
@@ -41,7 +41,6 @@ function NavBar(){
 
                 { navButton("/blog") }
                 { navButton("/contact") }
-                
             </div>
         </nav>
     );

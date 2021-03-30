@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 2:03pm
+ * Last Modified: Monday March 29th 2021 9:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,46 +20,43 @@
     margin-left:0.5rem;
 }
 
-.nav a{
+.logo{
     font-size: 1.5rem;
-    line-height: 2rem;
-
-    color: var(--dark);
 }
 
-.nav a, .nav button{
-    margin: 0.5rem 0;
-}
-
-.nav a span{
+.logo span{
     display: none;
     font-size: inherit;
 }
 
-.spacer{
-    flex: 1;
+@media only screen and (min-width: 500px){
+    .logo span{
+        display: inline;
+    }
 }
 
-.nav button{
-    height:3rem;
-    transition:color 1s, background-color 1s;
-    padding:0 1rem;
-    margin-top:0;
-    margin-bottom:0;
-    background-color: inherit;
+.nav a{
+    line-height: 2rem;
+    color: var(--dark);
+    margin: 0.5rem 0;
 }
 
-.nav button:hover{
+.nav a:hover{
     cursor: pointer;
 }
 
-#active{
+.navlink{
+    padding: 0 1rem;
+}
+
+.navlink:global(.active){
+    margin: 0;
+    height:3rem;
+    line-height: 3rem;
     background-color:var(--dark);
     color:var(--light);
 }
 
-@media only screen and (min-width: 500px){
-    .nav a span{
-        display: inline;
-    }
+.spacer{
+    flex: 1;
 }

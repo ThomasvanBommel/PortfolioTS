@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 11:36pm
+ * Last Modified: Wednesday March 31st 2021 4:15pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,8 +11,6 @@
 
 import knex from "knex";
 import { makeSlug } from "../../common/slug";
-// const { makeSlug } = require("../../common/slug");
-
 
 export default class Database{
 
@@ -65,6 +63,21 @@ export default class Database{
     async blogs(){
         if(this.isSetup)
             return this.db.select("*").from("blogs");
+
+        return [];
+    }
+
+    /** Return all blog info except the article */
+    async blogList(){
+        if(this.isSetup)
+            return this.db.select(
+                "id",
+                "slug",
+                "title",
+                "coffee",
+                "thumbsup",
+                "clap"
+            ).from("blogs");
 
         return [];
     }

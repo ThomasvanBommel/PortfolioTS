@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 10:38pm
+ * Last Modified: Wednesday March 31st 2021 4:17pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -49,6 +49,11 @@ app.get("/youtube", (req, res) => {
 
 app.get("/blogs", async (req, res) => {
     res.json(await db.blogs());
+});
+
+// endpoint for a list of available blogs (no article)
+app.get("/blogList", async (req, res) => {
+    res.json(await db.blogList());
 });
 
 // tell server to start listening

@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 12:15am
+ * Last Modified: Wednesday March 31st 2021 4:20pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -94,14 +94,3 @@ export function getBlogBySlug(slug: string){
         return result;
     };
 }
-
-// export const getBlogBySlug = 
-
-
-// export function fetchContent(id: number){
-//     console.log("id: ", id);
-
-//     return async function (dispatch: AppDispatch, getState: () => RootState){
-//         console.log("Loading content for blog #", id);
-//     }
-// }

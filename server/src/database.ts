@@ -3,14 +3,14 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 11:02pm
+ * Last Modified: Tuesday March 30th 2021 11:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
 import knex from "knex";
-// import { makeSlug } from "common/slug";
+import { makeSlug } from "../../common/slug";
 // const { makeSlug } = require("../../common/slug");
 
 
@@ -50,7 +50,7 @@ export default class Database{
                 await this.db("blogs").insert({
                     title: "Testing...",
                     article: "Welcome to my new blog!",
-                    slug: "test"
+                    slug: makeSlug("Testing...")
                 });
 
                 console.log("Inserted test article");
@@ -64,7 +64,7 @@ export default class Database{
 
     async blogs(){
         if(this.isSetup)
-            return this.db("blogs").select("*");
+            return this.db.select("*").from("blogs");
 
         return [];
     }

@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 5:36pm
+ * Last Modified: Tuesday March 30th 2021 11:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,6 +16,7 @@ import config from "../../../common/config.json";
 export type Blog = {
     id: number,
     title: string,
+    slug: string,
     article: string,
     coffee: number,
     thumbsup: number,
@@ -66,3 +67,27 @@ export async function fetchBlogs(dispatch: AppDispatch, getState: () => RootStat
         dispatch({ ...setLoaded(), payload: true });
     }
 }
+
+export function getBlogBySlug(slug: string){
+    return (store: RootState) => {
+        let result: Blog | undefined = undefined;
+    
+        store.blogs.blogs.forEach(blog => {
+            if(blog.slug === slug)
+                result = blog;
+        });
+    
+        return result;
+    };
+}
+
+// export const getBlogBySlug = 
+
+
+// export function fetchContent(id: number){
+//     console.log("id: ", id);
+
+//     return async function (dispatch: AppDispatch, getState: () => RootState){
+//         console.log("Loading content for blog #", id);
+//     }
+// }

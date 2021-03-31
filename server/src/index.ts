@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 5:57pm
+ * Last Modified: Tuesday March 30th 2021 10:38pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,8 +17,6 @@ import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
 import path from "path";
-
-// const config = require("../../common/.server.config.json");
 
 let db = new Database();
 
@@ -34,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 // request and cache videos every hour
-yt.startCache();
+// yt.startCache();
 
 // expose client build and dependencies folders
 app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bundle.js")));

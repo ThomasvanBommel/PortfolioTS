@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 9:38pm
+ * Last Modified: Tuesday March 30th 2021 11:53pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,9 +14,9 @@ import style from "./Blog.module.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getBlogs, Blog, isLoaded } from "../slices/blogSlice";
-import { fetchBlogs } from '../slices/blogSlice';
+import { fetchBlogs, getBlogBySlug } from '../slices/blogSlice';
 
-import { useRouteMatch, Link, Switch, Route } from "react-router-dom";
+import { useRouteMatch, useParams, Link, Switch, Route } from "react-router-dom";
 
 import SideBar from "./SideBar";
 import Article from "./Article";
@@ -25,13 +25,17 @@ function Blog(){
     if(!useSelector(isLoaded))
         useDispatch()(fetchBlogs);
 
+    return <Router />;
+}
+
+function Router(){
     const { path } = useRouteMatch();
     
     return (
         <div className={ style.content }>
             <Switch>
                 <Route path={ `${ path }/:slug` }>
-
+                    <Detail />
                 </Route>
 
                 <Route path={ path }>
@@ -44,8 +48,9 @@ function Blog(){
 
 function Master(){
     const blogs = useSelector(getBlogs);
-    const loaded = useSelector(isLoaded);
     const { url } = useRouteMatch();
+
+    // console.log("master", blogs);
 
     return (
         <div className={ style.articleContainer }>
@@ -55,7 +60,7 @@ function Master(){
                     blogs.length < 1 ? (
                         <div>
                             {
-                                loaded ? "No blogs..." : "Loading"
+                                blogs.length < 1 ? "No blogs..." : "Loading..."
                             }
                         </div>
                     ) : (
@@ -63,7 +68,7 @@ function Master(){
                             {
                                 blogs.map((blog, i) => (
                                     <li key={ blog.title }>
-                                        <Link to={ `${ url }/${ i }` }>
+                                        <Link to={ `${ url }/${ blog.slug }` }>
                                             { blog.title }
                                         </Link>
                                     </li>
@@ -77,7 +82,15 @@ function Master(){
     );
 }
 
-function Detail({ blog }: { blog: Blog}){
+function Detail(){
+    const { slug } = useParams() as { slug: string };
+    const blog = useSelector(getBlogBySlug(slug));
+
+    // console.log("blog", blog);
+
+    if(!blog)
+        return <div>Searching for article "{ slug }"...</div>
+
     return (
         <div>
             <Article blog={ blog } />

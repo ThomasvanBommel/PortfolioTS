@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 8:38pm
+ * Last Modified: Tuesday March 30th 2021 11:59pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -38,7 +38,11 @@ function Content(){
             
             <div className={ style.container }>
                 <h2>Latest GitHub Activity:</h2>
-                { events.map(event => <EventElement event={ event } key={ event.id.toString() } />) }
+                { 
+                    events.map(event => 
+                        <EventElement event={ event } key={ event.id.toString() } />
+                    ) 
+                }
             </div>
         </div>
     );

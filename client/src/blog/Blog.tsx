@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 11:53pm
+ * Last Modified: Tuesday March 30th 2021 11:58pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -89,7 +89,9 @@ function Detail(){
     // console.log("blog", blog);
 
     if(!blog)
-        return <div>Searching for article "{ slug }"...</div>
+        return (<div className={ style.articleContainer }>
+            <h1>Searching for article "{ slug }"...</h1>
+        </div>);
 
     return (
         <div>

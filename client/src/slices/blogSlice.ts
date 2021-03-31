@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 11:36pm
+ * Last Modified: Wednesday March 31st 2021 12:15am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -32,6 +32,13 @@ export type LoadedAction = BlogAction & {
     payload?: boolean
 };
 
+export type IncrementAction = BlogAction & {
+    payload?: {
+        id: number,
+        option: "coffee" | "thumbsup" | "clap"
+    }
+};
+
 export const blogSlice = createSlice({
     name: "blog",
     initialState: {
@@ -46,13 +53,20 @@ export const blogSlice = createSlice({
         setLoaded: (state, action: LoadedAction) => {
             if(action)
                 state.isLoaded = action.payload;
+        },
+        increment: (state, action: IncrementAction) => {
+            if(action)
+                state.blogs.forEach(blog => {
+                    if(blog.id === action.payload.id)
+                        blog[action.payload.option]++;
+                });
         }
     }
 });
 
 export default blogSlice.reducer;
 
-export const { setBlogs, setLoaded } = blogSlice.actions;
+export const { setBlogs, setLoaded, increment } = blogSlice.actions;
 export const getBlogs = (store: RootState) => store.blogs.blogs;
 export const isLoaded = (store: RootState) => store.blogs.isLoaded;
 

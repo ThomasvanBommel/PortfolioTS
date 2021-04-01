@@ -16,6 +16,13 @@ export type Blog = {
     clap: number
 };
 
+export const isBlog = (obj: Blog) => {
+    if(obj.id && obj.title && obj.slug && obj.article && 
+       obj.coffee != undefined && obj.thumbsup != undefined && obj.clap != undefined)
+       return true;
+    return false;
+}
+
 /** YouTube ------------------------------------------------------------------------------------- */
 export type Thumbnail = {
     url: string,

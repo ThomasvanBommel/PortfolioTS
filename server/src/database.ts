@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 12:34pm
+ * Last Modified: Thursday April 1st 2021 12:52pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -81,7 +81,7 @@ export default class Database{
             // return blog object
             return await this.db("blogs").select("*").where({ slug: slug });
         }catch(error){
-            return error;
+            return new Error(error);
         }
     }
 }

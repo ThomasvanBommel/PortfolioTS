@@ -3,14 +3,14 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 12:16pm
+ * Last Modified: Thursday April 1st 2021 12:55pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
 import config from "../../common/config.json";
-import { Blog } from "../../common/types";
+import { Blog, isBlog } from "../../common/types";
 
 // Fetch all blogs from the server database
 export const fetchAllBlogs = async (): Promise<Blog[]> => {
@@ -29,8 +29,10 @@ export const incrementEmojiCount = async (slug: string, emoji: string) => {
         })
             .then(res => res.json())
             .then(json => {
-                console.log("response:", json);
-                resolve(json);
+                if(Array.isArray(json) && isBlog(json[0]))
+                    resolve(json[0]);
+
+                reject(json);
             })
             .catch(err => reject(err));
     });

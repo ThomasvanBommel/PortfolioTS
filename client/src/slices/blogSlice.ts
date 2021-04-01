@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 11:57am
+ * Last Modified: Thursday April 1st 2021 12:58pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -25,12 +25,12 @@ import { Blog } from "../../../common/types";
 export const fetchAllBlogs = createAsyncThunk(
     "blogs/fetchAll",
     async () => {
-        console.log("fetching blogs...");
+        console.log("Fetching blogs...");
         return await API.fetchAllBlogs();
     }
 );
 
-// Increment blogs coffee count thunk
+// Increment blogs emoji count thunk
 export const incrementCoffeeCount= createAsyncThunk(
     "blogs/incrementCoffee",
     async (slug: string, thinkAPI) => await API.incrementEmojiCount(slug, "coffee")
@@ -64,8 +64,12 @@ const blogSlice = createSlice({
                 state.fetchedAll = true;
                 blogsAdapter.upsertMany(state, action);
             })
-            .addCase(incrementCoffeeCount.fulfilled, (state, action) => {
-                console.log(action);
+            .addCase(incrementCoffeeCount.fulfilled, (state, { payload }) => {
+                console.log("incrementCoffeeCount Fulfilled:");
+                blogsAdapter.upsertOne(state, payload as Blog);
+            })
+            .addCase(incrementCoffeeCount.rejected, (state, action) => {
+                console.log("incrementCoffeeCount Rejected:", action);
             })
     }
 });

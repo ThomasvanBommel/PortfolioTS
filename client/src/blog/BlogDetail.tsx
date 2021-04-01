@@ -3,18 +3,23 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:48pm
+ * Last Modified: Thursday April 1st 2021 11:59am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  * 2021-03-31	TvB	Updated to work with blogSlice 2.0
  */
 
+import { 
+    getBlog, 
+    fetchedAll, 
+    fetchAllBlogs, 
+    incrementCoffeeCount 
+} from "../slices/blogSlice";
 import React from "react";
 import style from "./Blog.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getBlog, fetchedAll, fetchAllBlogs } from "../slices/blogSlice";
 import { Blog } from "../../../common/types";
 
 /** Blog detail view */
@@ -59,9 +64,15 @@ function Article({ blog }: { blog: Blog}){
 
 /** Sidebar component (user interaction) */
 function SideBar({ blog }: { blog: Blog}){
+    const dispatch = useDispatch();
+
+    const handleCoffeeClick = () => {
+        dispatch(incrementCoffeeCount(blog.slug));
+    }
+
     return (
         <div className={ style.sidebar }>
-            <button>
+            <button onClick={ handleCoffeeClick }>
                 ☕ { blog.coffee }
             </button>
             <br/>

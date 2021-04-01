@@ -3,10 +3,11 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:25pm
+ * Last Modified: Thursday April 1st 2021 11:57am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-01	TvB	Added incrementCoffeeCount thunk
  */
 
 import { 
@@ -18,6 +19,8 @@ import * as API from "../serverApi";
 import { RootState } from "../store";
 import { Blog } from "../../../common/types";
 
+/** Thunks -------------------------------------------------------------------------------------- */
+
 // Fetch blogs thunk 
 export const fetchAllBlogs = createAsyncThunk(
     "blogs/fetchAll",
@@ -27,11 +30,21 @@ export const fetchAllBlogs = createAsyncThunk(
     }
 );
 
+// Increment blogs coffee count thunk
+export const incrementCoffeeCount= createAsyncThunk(
+    "blogs/incrementCoffee",
+    async (slug: string, thinkAPI) => await API.incrementEmojiCount(slug, "coffee")
+);
+
+/** Adapters ------------------------------------------------------------------------------------ */
+
 // Normalization adapter
 const blogsAdapter = createEntityAdapter<Blog>({
     selectId: blog => blog.slug,
     sortComparer: (a, b) => a.slug.localeCompare(b.slug)
 });
+
+/** Slices -------------------------------------------------------------------------------------- */
 
 // Blog slice
 const blogSlice = createSlice({
@@ -46,14 +59,18 @@ const blogSlice = createSlice({
         deleteBlog(state, action) {}
     },
     extraReducers: builder => {
-        builder.addCase(fetchAllBlogs.fulfilled, (state, action) => {
-            state.fetchedAll = true;
-            blogsAdapter.upsertMany(state, action);
-        })
+        builder
+            .addCase(fetchAllBlogs.fulfilled, (state, action) => {
+                state.fetchedAll = true;
+                blogsAdapter.upsertMany(state, action);
+            })
+            .addCase(incrementCoffeeCount.fulfilled, (state, action) => {
+                console.log(action);
+            })
     }
 });
 
-/** Exports */
+/** Exports ------------------------------------------------------------------------------------- */
 
 // Selectors
 export const blogSelector = blogsAdapter.getSelectors<RootState>(state => state.blogs);

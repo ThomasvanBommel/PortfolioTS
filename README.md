@@ -1,5 +1,5 @@
 # PortfolioTS
-Typescript portfolio with a ReactJS front-end 
+Typescript portfolio with a ReactJS front-end
 
 This project gets auto-deployed to [vanbommel.ca](http://vanbommel.ca)
 

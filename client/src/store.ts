@@ -3,7 +3,7 @@
  * Created: Wednesday March 24th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 7:45pm
+ * Last Modified: Wednesday March 31st 2021 11:41pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,15 +12,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import videoSlice from "./slices/videoSlice";
 import eventSlice from "./slices/eventSlice";
-import blogSlice from "./slices/blogSlice";
-import articleSlice from "./slices/articleSlice";
+import blogSlice from "./slices/blogSlice2";
 
 const store = configureStore({
     reducer: {
         videos: videoSlice,
         events: eventSlice,
         blogs: blogSlice,
-        articles: articleSlice
     }
 });
 

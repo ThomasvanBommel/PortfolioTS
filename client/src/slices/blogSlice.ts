@@ -3,10 +3,11 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 5:45pm
+ * Last Modified: Wednesday March 31st 2021 11:31pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-31	TvB	DEPRECATED
  */
 
 import { createSlice } from '@reduxjs/toolkit'
@@ -73,8 +74,8 @@ export const blogSlice = createSlice({
 export default blogSlice.reducer;
 
 export const { loadBlogs } = blogSlice.actions;
-export const getBlogs = (store: RootState) => store.blogs.blogs;
-export const isLoading = (store: RootState) => store.blogs.loading;
+// export const getBlogs = (store: RootState) => store.blogs.blogs;
+// export const isLoading = (store: RootState) => store.blogs.loading;
 
 export async function fetchBlogList(dispatch: AppDispatch, getState: () => RootState){
     console.log("Loading blogs...");
@@ -97,15 +98,15 @@ export async function fetchBlogList(dispatch: AppDispatch, getState: () => RootS
 //     }
 // }
 
-export function getBlogBySlug(slug: string){
-    return (store: RootState) => {
-        let result: Blog | undefined = undefined;
+// export function getBlogBySlug(slug: string){
+//     return (store: RootState) => {
+//         let result: Blog | undefined = undefined;
     
-        store.blogs.blogs.forEach(blog => {
-            if(blog.slug === slug)
-                result = blog;
-        });
+//         store.blogs.blogs.forEach(blog => {
+//             if(blog.slug === slug)
+//                 result = blog;
+//         });
     
-        return result;
-    };
-}
+//         return result;
+//     };
+// }

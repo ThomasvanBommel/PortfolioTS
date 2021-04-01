@@ -3,58 +3,67 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 4:50pm
+ * Last Modified: Wednesday March 31st 2021 11:21pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-31	TvB	Updated for use with the new blogSlice
  */
 
 import React from "react";
 import style from "./Blog.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { getBlogs, Blog, isLoading, fetchBlogList } from "../slices/blogSlice";
 import { useRouteMatch, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { allBlogs, fetchAllBlogs, fetchedAll } from "../slices/blogSlice2";
 
+/** Blog 'Master' view (all blog links) */
 function Master(){
-    const blogs = useSelector(getBlogs);
-    const loading = useSelector(isLoading);
-    const dispatch = useDispatch();
+    const hasBeenFetched = useSelector(fetchedAll);
 
-    if(blogs.length < 1 && !loading)
-        dispatch(fetchBlogList);
-
-    return <Design blogs={ blogs } />;
+    // Check if all blogs have been fetched from the server, if not fetch them
+    if(!hasBeenFetched)
+        useDispatch()(fetchAllBlogs());
+        
+    // Render the rest of this component
+    return <Design fetched={ hasBeenFetched } />;
 }
 
-function Design({ blogs }: { blogs: Blog[] }){
-    // const blogs = useSelector(getBlogs);
+/** Master views design */
+function Design({ fetched }: { fetched: boolean }){
+    const blogs = useSelector(allBlogs);
     const { url } = useRouteMatch();
 
+    // Calculate content
+    const content = () => {
+
+        // Check if we've fetched all the blogs
+        if(!fetched)
+            return <div>Loading...</div>;
+
+        // Check that there are some blogs to display
+        if(blogs.length < 1)
+            return <div>No blogs...</div>
+
+        // Return a list of links to the various blogs
+        return (
+            <ul>{
+                blogs.map((blog) => (
+                    <li key={ blog.slug }>
+                        <Link to={ `${ url }/${ blog.slug }` }>
+                            { blog.title }
+                        </Link>
+                    </li>
+                ))
+            }</ul>
+        );
+    };
+
+    // Return this element
     return (
         <div className={ style.articleContainer }>
             <h1>Blogs:</h1>
             <div className={ style.blogListContainer }>
-                {
-                    blogs.length < 1 ? (
-                        <div>
-                            {
-                                blogs.length < 1 ? "No blogs..." : "Loading..."
-                            }
-                        </div>
-                    ) : (
-                        <ul>
-                            {
-                                blogs.map((blog, i) => (
-                                    <li key={ blog.title }>
-                                        <Link to={ `${ url }/${ blog.slug }` }>
-                                            { blog.title }
-                                        </Link>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    )
-                }
+                { content() }
             </div>
         </div>
     );

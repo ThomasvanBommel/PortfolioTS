@@ -3,41 +3,75 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 5:32pm
+ * Last Modified: Wednesday March 31st 2021 11:40pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-03-31	TvB	Updated to work with blogSlice 2.0
  */
 
 import React from "react";
 import style from "./Blog.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-// import { getBlogBySlug } from "../slices/blogSlice";
-import { loadArticle } from "../slices/articleSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { getBlog, fetchedAll, fetchAllBlogs } from "../slices/blogSlice2";
+import { Blog } from "../../../common/types";
 
-import SideBar from "./SideBar";
-import Article from "./Article";
-
+/** Blog detail view */
 function Detail(){
-    const dispatch = useDispatch();
-
     const { slug } = useParams() as { slug: string };
-    // const blog = useSelector(getBlogBySlug(slug));
-    const article = dispatch(loadArticle(slug));
+    const fetched = useSelector(fetchedAll);
+    const blog = useSelector(getBlog(slug));
 
-    // console.log("blog", blog);
+    // Check if we've fetched blogs from the server, if not fetch them
+    if(!fetched)
+        useDispatch()(fetchAllBlogs());
 
-    if(!article)
+    // If a the blog doesn't exist...
+    if(!blog)
         return (<div className={ style.articleContainer }>
-            <h1>Searching for article "{ slug }"...</h1>
+            <p>Unknown blog '{ slug }'</p>
         </div>);
 
+    // Render component
     return (
         <div>
-            { JSON.stringify(article) }
-            {/* <Article blog={ blog } />
-            <SideBar blog={ blog } /> */}
+            <Article blog={ blog } />
+            <SideBar blog={ blog } />
+        </div>
+    );
+}
+
+/** Article component */
+function Article({ blog }: { blog: Blog}){
+    return (
+        <div className={ style.articleContainer }>
+            <h1 className={ style.title }>
+                { blog.title }
+            </h1>
+
+            <article className={ style.article }>
+                <p>{ blog.article }</p>
+            </article>
+        </div>
+    );
+}
+
+/** Sidebar component (user interaction) */
+function SideBar({ blog }: { blog: Blog}){
+    return (
+        <div className={ style.sidebar }>
+            <button>
+                ☕ { blog.coffee }
+            </button>
+            <br/>
+            <button>
+                👍 { blog.thumbsup }
+            </button>
+            <br/>
+            <button>
+                👏 { blog.clap }
+            </button>
         </div>
     );
 }

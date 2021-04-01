@@ -5,6 +5,18 @@
  * 
  */
 
+/** Blogs --------------------------------------------------------------------------------------- */
+export type Blog = {
+    id: number,
+    title: string,
+    slug: string,
+    article: string,
+    coffee: number,
+    thumbsup: number,
+    clap: number
+};
+
+/** YouTube ------------------------------------------------------------------------------------- */
 export type Thumbnail = {
     url: string,
     width: number,

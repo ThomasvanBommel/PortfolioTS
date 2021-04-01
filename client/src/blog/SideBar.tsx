@@ -3,7 +3,7 @@
  * Created: Monday March 29th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 1:12am
+ * Last Modified: Wednesday March 31st 2021 4:52pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,7 +12,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./Blog.module.css";
 import { useDispatch } from "react-redux";
-import { Blog, increment } from "../slices/blogSlice";
+import { Blog } from "../slices/blogSlice";
 
 /** SideBar for reader interactions */
 function SideBar({ blog }: { blog: Blog}){
@@ -46,7 +46,7 @@ function SideBar({ blog }: { blog: Blog}){
     }, [ holding ]);
 
     function handleIncrement(key: typeof selected){
-        dispatch({ ...increment(), payload: { id: blog.id, option: key }});
+        // dispatch({ ...increment(), payload: { id: blog.id, option: key }});
     }
 
     function handleMouseDown(key: typeof selected){
@@ -59,21 +59,28 @@ function SideBar({ blog }: { blog: Blog}){
         setMouseDown(false);
     }
 
+    if(!blog.article)
+        return (
+            <div className={ style.sidebar }>
+                :(
+            </div>
+        );
+
     return (
         <div className={ style.sidebar }>
             <button onMouseDown={ () => handleMouseDown("coffee") } 
                     onMouseUp={ handleMouseUp }>
-                ☕ { blog.coffee }
+                ☕ { blog.article.coffee }
             </button>
             <br/>
             <button onMouseDown={ () => handleMouseDown("thumbsup") } 
                     onMouseUp={ handleMouseUp }>
-                👍 { blog.thumbsup }
+                👍 { blog.article.thumbsup }
             </button>
             <br/>
             <button onMouseDown={ () => handleMouseDown("clap") } 
                     onMouseUp={ handleMouseUp }>
-                👏 { blog.clap }
+                👏 { blog.article.clap }
             </button>
         </div>
     );

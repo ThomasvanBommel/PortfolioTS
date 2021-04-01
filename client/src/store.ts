@@ -3,7 +3,7 @@
  * Created: Wednesday March 24th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 6:30pm
+ * Last Modified: Wednesday March 31st 2021 7:45pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,15 +13,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import videoSlice from "./slices/videoSlice";
 import eventSlice from "./slices/eventSlice";
 import blogSlice from "./slices/blogSlice";
-import thunkMiddleware from "redux-thunk";
+import articleSlice from "./slices/articleSlice";
 
 const store = configureStore({
     reducer: {
         videos: videoSlice,
         events: eventSlice,
-        blogs: blogSlice
-    },
-    middleware: [ thunkMiddleware ]
+        blogs: blogSlice,
+        articles: articleSlice
+    }
 });
 
 export default store;

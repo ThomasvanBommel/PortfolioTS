@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 4:15pm
+ * Last Modified: Wednesday March 31st 2021 5:19pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -67,18 +67,25 @@ export default class Database{
         return [];
     }
 
-    /** Return all blog info except the article */
+    /** Return all blog info except the article and emoji count */
     async blogList(){
         if(this.isSetup)
             return this.db.select(
                 "id",
                 "slug",
-                "title",
-                "coffee",
-                "thumbsup",
-                "clap"
+                "title"
             ).from("blogs");
 
         return [];
+    }
+
+    async getArticle(slug: string){
+        return this.db.select(
+            "article",
+            "coffee",
+            "thumbsup",
+            "clap"
+        ).from("blogs")
+         .where({ slug: slug });
     }
 }

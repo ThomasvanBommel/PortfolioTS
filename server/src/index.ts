@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 4:17pm
+ * Last Modified: Wednesday March 31st 2021 5:20pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -51,9 +51,14 @@ app.get("/blogs", async (req, res) => {
     res.json(await db.blogs());
 });
 
-// endpoint for a list of available blogs (no article)
+// endpoint for a list of available blogs (no article or emoji count)
 app.get("/blogList", async (req, res) => {
     res.json(await db.blogList());
+});
+
+// get an article by slug
+app.get("/article/:slug", async (req, res) => {
+    res.json(await db.getArticle(req.params.slug));
 });
 
 // tell server to start listening

@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 11:43am
+ * Last Modified: Thursday April 1st 2021 12:30pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -57,10 +57,11 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
     const slug = req.params.slug;
     const emoji = req.params.emoji;
 
-    if(slug && (emoji === "coffee" || emoji === "thumbsup" || emoji === "clap"))
-        return res.json(db.incrementEmojiCount(slug, emoji));
-    
-    res.json(new Error("Blog not found or emoji is invalid"));
+    if(slug && (emoji === "coffee" || emoji === "thumbsup" || emoji === "clap")){
+        return res.json(await db.incrementEmojiCount(slug, emoji));
+    }else{
+        res.json(new Error("Blog not found or emoji is invalid"));
+    }
 });
 
 // tell server to start listening

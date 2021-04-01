@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 11:37am
+ * Last Modified: Thursday April 1st 2021 12:34pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -74,7 +74,14 @@ export default class Database{
         if(!this.isSetup) 
             return new Error("Database is not setup. Try again later");
 
-        // increment column and return blog
-        return await this.db.where({ slug: slug }).increment(emoji, 1).returning("*");
+        try{
+            // increment emoji count
+            await this.db("blogs").where({ slug: slug }).increment(emoji);
+
+            // return blog object
+            return await this.db("blogs").select("*").where({ slug: slug });
+        }catch(error){
+            return error;
+        }
     }
 }

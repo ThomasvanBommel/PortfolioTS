@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 11:49am
+ * Last Modified: Thursday April 1st 2021 12:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -24,9 +24,14 @@ export const fetchAllBlogs = async (): Promise<Blog[]> => {
 
 export const incrementEmojiCount = async (slug: string, emoji: string) => {
     return new Promise((resolve, reject) => {
-        fetch(`http://${config.host}:${config.port}/blog/${slug}/${emoji}`)
+        fetch(`http://${config.host}:${config.port}/blog/${slug}/${emoji}`, {
+            method: "POST"
+        })
             .then(res => res.json())
-            .then(json => resolve(json))
+            .then(json => {
+                console.log("response:", json);
+                resolve(json);
+            })
             .catch(err => reject(err));
     });
 };

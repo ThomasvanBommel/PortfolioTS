@@ -5,3 +5,5 @@ node_modules/
 
 **/.vscode
 **/tsconfig.tsbuildinfo
+
+sqlite.db

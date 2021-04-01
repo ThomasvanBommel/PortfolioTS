@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 5:19pm
+ * Last Modified: Thursday April 1st 2021 11:37am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -60,6 +60,7 @@ export default class Database{
         }
     }
 
+    // Get list of all blogs
     async blogs(){
         if(this.isSetup)
             return this.db.select("*").from("blogs");
@@ -67,25 +68,13 @@ export default class Database{
         return [];
     }
 
-    /** Return all blog info except the article and emoji count */
-    async blogList(){
-        if(this.isSetup)
-            return this.db.select(
-                "id",
-                "slug",
-                "title"
-            ).from("blogs");
+    // Incrmenet blogs emoji count
+    async incrementEmojiCount(slug: string, emoji: "coffee" | "thumbsup" | "clap"){
+        // Ensure database is setup and functioning
+        if(!this.isSetup) 
+            return new Error("Database is not setup. Try again later");
 
-        return [];
-    }
-
-    async getArticle(slug: string){
-        return this.db.select(
-            "article",
-            "coffee",
-            "thumbsup",
-            "clap"
-        ).from("blogs")
-         .where({ slug: slug });
+        // increment column and return blog
+        return await this.db.where({ slug: slug }).increment(emoji, 1).returning("*");
     }
 }

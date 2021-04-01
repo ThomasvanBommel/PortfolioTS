@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 10:52pm
+ * Last Modified: Wednesday March 31st 2021 11:44pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,35 +14,25 @@
  */
 
 import React from 'react';
+import store from "./store";
 import Home from "./home/Home";
 import Blog from "./blog/Blog";
 import Navbar from './navbar/Navbar';
+import { Provider } from "react-redux";
 import ContactForm from './contact/ContactForm';
-import ProgressBanner from "./progress_banner/ProgressBanner";
-
-import { Provider, useDispatch } from "react-redux";
-import store from "./store";
-import { fetchAllBlogs } from "./slices/blogSlice2";
-
 import { HashRouter, Switch, Route } from "react-router-dom";
+import ProgressBanner from "./progress_banner/ProgressBanner";
 
 function App(){
     return (
         <Provider store={ store }>
             <HashRouter>
-                <Init />
                 <Navbar />
                 <Content />
                 <ProgressBanner />
             </HashRouter>
         </Provider>
     );
-}
-
-function Init(){
-    // useDispatch()(fetchAllBlogs());
-
-    return <div></div>;
 }
 
 function Content(){

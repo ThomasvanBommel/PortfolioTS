@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 4:39pm
+ * Last Modified: Wednesday March 31st 2021 11:48pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,8 +13,8 @@ import React from "react";
 import style from "./Blog.module.css";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 
-import Master from "./Master";
-import Detail from "./Detail";
+import BlogMaster from "./BlogMaster";
+import BlogDetail from "./BlogDetail";
 
 function Blog(){
     const { path } = useRouteMatch();
@@ -23,11 +23,11 @@ function Blog(){
         <div className={ style.content }>
             <Switch>
                 <Route path={ `${ path }/:slug` }>
-                    <Detail />
+                    <BlogDetail />
                 </Route>
 
                 <Route path={ path }>
-                    <Master />
+                    <BlogMaster />
                 </Route>
             </Switch>
         </div>

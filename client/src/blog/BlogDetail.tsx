@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:40pm
+ * Last Modified: Wednesday March 31st 2021 11:48pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,11 +14,11 @@ import React from "react";
 import style from "./Blog.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getBlog, fetchedAll, fetchAllBlogs } from "../slices/blogSlice2";
+import { getBlog, fetchedAll, fetchAllBlogs } from "../slices/blogSlice";
 import { Blog } from "../../../common/types";
 
 /** Blog detail view */
-function Detail(){
+function BlogDetail(){
     const { slug } = useParams() as { slug: string };
     const fetched = useSelector(fetchedAll);
     const blog = useSelector(getBlog(slug));
@@ -76,4 +76,4 @@ function SideBar({ blog }: { blog: Blog}){
     );
 }
 
-export default Detail;
+export default BlogDetail;

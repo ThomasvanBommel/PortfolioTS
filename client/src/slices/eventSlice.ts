@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday March 29th 2021 8:16pm
+ * Last Modified: Wednesday March 31st 2021 11:47pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,7 +11,11 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState, AppDispatch } from "../store";
-import { LoadedAction } from "./blogSlice";
+
+export type LoadedAction = {
+    type: string,
+    payload?: boolean
+};
 
 export type Event = {
     id: number,

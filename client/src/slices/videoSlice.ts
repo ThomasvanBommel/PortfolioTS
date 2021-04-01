@@ -3,7 +3,7 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 5:36pm
+ * Last Modified: Wednesday March 31st 2021 11:46pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,8 +12,12 @@
 import { YouTubeVideo } from "../../../common/types";
 import { RootState, AppDispatch } from "../store";
 import { createSlice } from '@reduxjs/toolkit'
-import { LoadedAction } from "./blogSlice";
 import config from "../../../common/config.json";
+
+export type LoadedAction = {
+    type: string,
+    payload?: boolean
+};
 
 export type VideoAction = {
     type: string,

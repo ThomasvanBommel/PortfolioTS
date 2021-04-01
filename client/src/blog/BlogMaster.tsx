@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:21pm
+ * Last Modified: Wednesday March 31st 2021 11:49pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,10 +14,10 @@ import React from "react";
 import style from "./Blog.module.css";
 import { useRouteMatch, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { allBlogs, fetchAllBlogs, fetchedAll } from "../slices/blogSlice2";
+import { allBlogs, fetchAllBlogs, fetchedAll } from "../slices/blogSlice";
 
 /** Blog 'Master' view (all blog links) */
-function Master(){
+function BlogMaster(){
     const hasBeenFetched = useSelector(fetchedAll);
 
     // Check if all blogs have been fetched from the server, if not fetch them
@@ -69,4 +69,4 @@ function Design({ fetched }: { fetched: boolean }){
     );
 }
 
-export default Master;
+export default BlogMaster;

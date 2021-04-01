@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 12:58pm
+ * Last Modified: Thursday April 1st 2021 1:11pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,7 +17,7 @@ import {
 } from "@reduxjs/toolkit";
 import * as API from "../serverApi";
 import { RootState } from "../store";
-import { Blog } from "../../../common/types";
+import { Blog, Emoji } from "../../../common/types";
 
 /** Thunks -------------------------------------------------------------------------------------- */
 
@@ -31,9 +31,10 @@ export const fetchAllBlogs = createAsyncThunk(
 );
 
 // Increment blogs emoji count thunk
-export const incrementCoffeeCount= createAsyncThunk(
+export const incrementEmojiCount = createAsyncThunk(
     "blogs/incrementCoffee",
-    async (slug: string, thinkAPI) => await API.incrementEmojiCount(slug, "coffee")
+    async (options: { slug: string, emoji: Emoji }, thinkAPI) => 
+        await API.incrementEmojiCount(options.slug, options.emoji)
 );
 
 /** Adapters ------------------------------------------------------------------------------------ */
@@ -54,9 +55,9 @@ const blogSlice = createSlice({
         fetchedAll: false
     },
     reducers: {
-        createBlog(state, action) {},
-        updateBlog(state, action) {},
-        deleteBlog(state, action) {}
+        // createBlog(state, action) {},
+        // updateBlog(state, action) {},
+        // deleteBlog(state, action) {}
     },
     extraReducers: builder => {
         builder
@@ -64,12 +65,12 @@ const blogSlice = createSlice({
                 state.fetchedAll = true;
                 blogsAdapter.upsertMany(state, action);
             })
-            .addCase(incrementCoffeeCount.fulfilled, (state, { payload }) => {
-                console.log("incrementCoffeeCount Fulfilled:");
+            .addCase(incrementEmojiCount.fulfilled, (state, { payload }) => {
+                console.log("incrementEmojiCount Fulfilled:");
                 blogsAdapter.upsertOne(state, payload as Blog);
             })
-            .addCase(incrementCoffeeCount.rejected, (state, action) => {
-                console.log("incrementCoffeeCount Rejected:", action);
+            .addCase(incrementEmojiCount.rejected, (state, action) => {
+                console.log("incrementEmojiCount Rejected:", action);
             })
     }
 });
@@ -83,7 +84,7 @@ export const fetchedAll = (state: RootState) => state.blogs.fetchedAll;
 export const getBlog = (slug: string) => (state:RootState) => blogSelector.selectById(state, slug);
 
 // Actions
-export const { createBlog, updateBlog, deleteBlog } = blogSlice.actions;
+// export const { createBlog, updateBlog, deleteBlog } = blogSlice.actions;
 
 // Reducers
 export default blogSlice.reducer;

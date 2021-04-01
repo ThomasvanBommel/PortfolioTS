@@ -6,6 +6,8 @@
  */
 
 /** Blogs --------------------------------------------------------------------------------------- */
+export type Emoji = "coffee" | "thumbsup" | "clap";
+
 export type Blog = {
     id: number,
     title: string,

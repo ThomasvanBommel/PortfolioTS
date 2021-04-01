@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 11:59am
+ * Last Modified: Thursday April 1st 2021 1:09pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,13 +14,13 @@ import {
     getBlog, 
     fetchedAll, 
     fetchAllBlogs, 
-    incrementCoffeeCount 
+    incrementEmojiCount 
 } from "../slices/blogSlice";
 import React from "react";
 import style from "./Blog.module.css";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Blog } from "../../../common/types";
+import { Blog, Emoji } from "../../../common/types";
 
 /** Blog detail view */
 function BlogDetail(){
@@ -66,21 +66,20 @@ function Article({ blog }: { blog: Blog}){
 function SideBar({ blog }: { blog: Blog}){
     const dispatch = useDispatch();
 
-    const handleCoffeeClick = () => {
-        dispatch(incrementCoffeeCount(blog.slug));
-    }
+    const handleEmojiClick = (emoji: Emoji) => 
+        dispatch(incrementEmojiCount({ slug: blog.slug, emoji: emoji }));
 
     return (
         <div className={ style.sidebar }>
-            <button onClick={ handleCoffeeClick }>
+            <button onClick={ () => handleEmojiClick("coffee") }>
                 ☕ { blog.coffee }
             </button>
             <br/>
-            <button>
+            <button onClick={ () => handleEmojiClick("thumbsup") }>
                 👍 { blog.thumbsup }
             </button>
             <br/>
-            <button>
+            <button onClick={ () => handleEmojiClick("clap") }>
                 👏 { blog.clap }
             </button>
         </div>

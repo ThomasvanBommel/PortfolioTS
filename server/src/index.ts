@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 1:37pm
+ * Last Modified: Friday April 2nd 2021 2:10pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,6 +17,7 @@ import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
 import https from "https";
+import http from "http";
 import path from "path";
 import fs from "fs";
 
@@ -31,12 +32,13 @@ let db = new Database();
 const app = express();
 const yt = new YouTube(config.channelId);
 
-// set headers using middleware
-app.use((req, res, next) => {
+// set headers middleware
+app.use(setHeaders);
+function setHeaders(req: express.Request, res: express.Response, next: express.NextFunction){
     res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
     res.set("X-Powered-By", "Sagittarius A*");
     next();
-});
+};
 
 // request and cache videos every hour
 yt.startCache();
@@ -75,12 +77,28 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
     }
 });
 
-// tell server to start listening
-// app.listen(config.port, config.host ?? "", () => {
-//     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
-// });
-
-// tell server to start listening
-https.createServer(credentials, app).listen(config.port, config.host ?? "", () => {
+// tell server to start listening on secure port
+https.createServer(credentials, app).listen(config.port, config.host, () => {
     console.log(`👂 Listening @ https://${ config.host }:${ config.port }`);
 });
+
+// redirect from insecure to secure port
+const redirect = express();
+
+// use the same headers
+redirect.use(setHeaders);
+
+// redirect traffic from all endpoints
+redirect.all("*", (req, res) => {
+    
+    // replace the port with the secure version
+    const host = req.headers.host?.replace(/:\d+/g, `:${ config.port }`);
+
+    // redirect
+    res.redirect(`https://${ host }${ req.url }`);
+});
+
+// listen for requests
+redirect.listen(config.redirect, config.host, () => 
+    console.log(`⏩ Redirect  @  http://${ config.host }:${ config.redirect }`)
+);

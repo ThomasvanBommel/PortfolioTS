@@ -3,7 +3,7 @@
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 4:54pm
+ * Last Modified: Friday April 2nd 2021 11:40am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -94,20 +94,50 @@ export default class YouTube {
      * lastCache time and optionally adding video statistics 
      * @param { boolean } withStatistics - Should the cached videos include statistics
      */
-    async cache(withStatistics: boolean){
+    // async cache_old_do_not_use(withStatistics: boolean){
+
+    //     // Get video snippets
+    //     const videos = await this.getVideoSnippets();
+
+    //     // Optionally add statistics
+    //     if(withStatistics)
+    //         await this.addVideoStatistics(videos, true);
+
+    //     // Update cache time
+    //     this.lastCached = new Date();
+
+    //     // Update video cache
+    //     this.videos = videos;
+    // }
+
+    /**
+     * Request videos from the YouTube API and store that 'cache' in this.videos after updating
+     * lastCache time and optionally adding video statistics 
+     * @param { boolean } withStatistics - Should the cached videos include statistics
+     */
+     cache(withStatistics: boolean){
+        const setVideos = (videos: YouTubeVideo[]) => {
+            // Update cache time
+            this.lastCached = new Date();
+
+            // Update video cache
+            this.videos = videos;
+        };
 
         // Get video snippets
-        const videos = await this.getVideoSnippets();
+        this.getVideoSnippets()
+            .then(videos => {
 
-        // Optionally add statistics
-        if(withStatistics)
-            await this.addVideoStatistics(videos, true);
-
-        // Update cache time
-        this.lastCached = new Date();
-
-        // Update video cache
-        this.videos = videos;
+                // Optionally add statistics
+                if(withStatistics){
+                    this.addVideoStatistics(videos, true)
+                        .then(() => setVideos(videos))
+                        .catch(err => console.error(err));
+                }else{
+                    setVideos(videos);
+                }
+            })
+            .catch(err => console.error(err));
     }
 
     /**

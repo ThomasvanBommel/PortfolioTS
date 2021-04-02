@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 10:58am
+ * Last Modified: Friday April 2nd 2021 11:05am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 // request and cache videos every hour
-// yt.startCache();
+yt.startCache();
 
 // expose client build and dependencies folders
 app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bundle.js")));

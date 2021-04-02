@@ -3,7 +3,7 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 1:22pm
+ * Last Modified: Friday April 2nd 2021 4:10pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -61,7 +61,8 @@ export const getCurrentVideoIndex = (store: RootState) => store.videos.currentIn
 export async function fetchVideos(dispatch: AppDispatch, getState: () => RootState) {
     console.log("Loading videos...");
     
-    const videos = await (await fetch(`https://${ config.host }:${config.port}/youtube`)).json();
+    // const videos = await (await fetch(`https://${ config.host }:${config.port}/youtube`)).json();
+    const videos = await (await fetch(new Request(`youtube`))).json();
     dispatch({ ...setVideos(), payload: videos });
     dispatch({ ...setLoaded(), payload: true });
 }

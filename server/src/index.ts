@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 1:03pm
+ * Last Modified: Friday April 2nd 2021 1:11pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,6 +16,7 @@ import config from "../../common/config.json";
 import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
+import helmet from "helmet";
 import path from "path";
 
 let db = new Database();
@@ -24,7 +25,10 @@ let db = new Database();
 const app = express();
 const yt = new YouTube(config.channelId);
 
-// Set headers using middleware
+// setup helmet to protect from some well-known web vulnerabilities 
+app.use(helmet());
+
+// set headers using middleware
 app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
     res.set("X-Powered-By", "Sagittarius A*");

@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 11:50am
+ * Last Modified: Friday April 2nd 2021 1:03pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,7 +20,7 @@ import path from "path";
 
 let db = new Database();
 
-// initialize express and youtube modules
+// initialize express and youtube modules 
 const app = express();
 const yt = new YouTube(config.channelId);
 

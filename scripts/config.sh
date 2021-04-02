@@ -2,7 +2,7 @@
  # Created: Tuesday March 30th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Tuesday March 30th 2021 6:19pm
+ # Last Modified: Friday April 2nd 2021 1:20pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -11,7 +11,7 @@
 
 ## Check if common/config.json exists, if not create it.
 if [ ! -f "common/config.json" ]; then
-    PORT=$([ "$NODE_ENV" = "development" ] && echo 8000 || echo 80)
+    PORT=$([ "$NODE_ENV" = "development" ] && echo 8443 || echo 443)
     HOST=$(hostname -I | awk '{ print $1 }')
     ID='UCbVqDf-obg_ylZZjNp1hK7Q'
 

@@ -3,7 +3,7 @@
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 7:36pm
+ * Last Modified: Friday April 2nd 2021 7:54pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -73,10 +73,10 @@ export default class YouTube {
     /**
      * Cache videos in this.videos every refreshInterval, optionally with statistics
      * @param { boolean } [ withStatistics=true ] - Add videos statistics to the YouTubeVideo object
-     * @param { number } [ refreshInterval=3600000 ] - How often to refresh the cache in 
-     * milliseconds, (default 1h) 
+     * @param { number } [ refreshInterval=7200000 ] - How often to refresh the cache in 
+     * milliseconds, (default 2h) 
      */
-    startCache(withStatistics=true, refreshInterval: number = _1hour){
+    startCache(withStatistics=true, refreshInterval: number=_1hour * 2){
 
         // Clear previous interval, if any
         if(this.cacheInterval_)
@@ -86,7 +86,7 @@ export default class YouTube {
         this.cache(withStatistics);
 
         // Run every refreshInterval
-        this.cacheInterval_ = setInterval(this.cache, refreshInterval, withStatistics);
+        this.cacheInterval_ = setInterval(this.cache.bind(this), refreshInterval, withStatistics);
     }
 
     /**
@@ -125,12 +125,12 @@ export default class YouTube {
         };
 
         // Get video snippets
-        this.getVideoSnippets.bind(this)()
+        this.getVideoSnippets()
             .then(videos => {
 
                 // Optionally add statistics
                 if(withStatistics){
-                    this.addVideoStatistics.bind(this)(videos, true)
+                    this.addVideoStatistics(videos, true)
                         .then(() => setVideos(videos))
                         .catch(err => console.error(err));
                 }else{
@@ -168,7 +168,7 @@ export default class YouTube {
                 params["chart"] = "mostPopular";
 
             // Attempt request
-            const response = await this.recurseResponse_.bind(this)<YouTubeSnippet>({
+            const response = await this.recurseResponse_<YouTubeSnippet>({
                 hostname: "youtube.googleapis.com",
                 path: `/youtube/v3/${location}`,
                 parameters: params
@@ -212,7 +212,7 @@ export default class YouTube {
             const ids = videosCopy.map(video => video.id).join(",");
 
             // Attempt request
-            const response = await this.recurseResponse_.bind(this)<YouTubeStatistics>({
+            const response = await this.recurseResponse_<YouTubeStatistics>({
                 hostname: "youtube.googleapis.com",
                 path: "/youtube/v3/videos",
                 parameters: { 
@@ -271,7 +271,7 @@ export default class YouTube {
                 // Return this page and next page's items
                 return Promise.resolve([ 
                     ...<T[]> youtubeResponse.items,
-                    ...await this.recurseResponse_.bind(this)<T>(options, pageLimit, youtubeResponse.nextPageToken)
+                    ...await this.recurseResponse_<T>(options, pageLimit, youtubeResponse.nextPageToken)
                 ]);
 
             // Return result, we're finished!

@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 11:05am
+ * Last Modified: Friday April 2nd 2021 11:50am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -37,6 +37,9 @@ yt.startCache();
 // expose client build and dependencies folders
 app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bundle.js")));
 app.use(express.static(path.join(__dirname, "../../../public")));
+
+// expose .well-known/acme-challenge for certbot acme challenges
+app.use(express.static(path.join(__dirname, "../../../.well-known/acme-challenge")));
 
 // home get request
 app.get("/", (req, res) => {

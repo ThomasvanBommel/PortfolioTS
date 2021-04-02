@@ -7,3 +7,5 @@ node_modules/
 **/tsconfig.tsbuildinfo
 
 sqlite.db
+
+**/.well-known/

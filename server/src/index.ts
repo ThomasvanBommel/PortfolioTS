@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 1:11pm
+ * Last Modified: Friday April 2nd 2021 1:19pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -17,7 +17,14 @@ import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
 import helmet from "helmet";
+import https from "https";
 import path from "path";
+import fs from "fs";
+
+const credentials = {
+    cert: fs.readFileSync("../../../.cert/cert.pem"),
+    key: fs.readFileSync("../../../.cert/privkey.pem")
+};
 
 let db = new Database();
 
@@ -73,6 +80,11 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
 });
 
 // tell server to start listening
-let server = app.listen(config.port, config.host ?? "", () => {
-    console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
+// app.listen(config.port, config.host ?? "", () => {
+//     console.log(`👂 Listening @ http://${ config.host }:${ config.port }`);
+// });
+
+// tell server to start listening
+https.createServer(credentials, app).listen(config.port, config.host ?? "", () => {
+    console.log(`👂 Listening @ https://${ config.host }:${ config.port }`);
 });

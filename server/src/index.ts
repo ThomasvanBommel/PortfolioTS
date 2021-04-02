@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 2:10pm
+ * Last Modified: Friday April 2nd 2021 3:56pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -35,7 +35,7 @@ const yt = new YouTube(config.channelId);
 // set headers middleware
 app.use(setHeaders);
 function setHeaders(req: express.Request, res: express.Response, next: express.NextFunction){
-    res.set("Access-Control-Allow-Origin", "http://vanbommel.ca");
+    res.set("Access-Control-Allow-Origin", "https://vanbommel.ca");
     res.set("X-Powered-By", "Sagittarius A*");
     next();
 };

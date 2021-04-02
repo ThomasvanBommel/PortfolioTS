@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 1:19pm
+ * Last Modified: Friday April 2nd 2021 1:37pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,14 +16,13 @@ import config from "../../common/config.json";
 import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
-import helmet from "helmet";
 import https from "https";
 import path from "path";
 import fs from "fs";
 
 const credentials = {
-    cert: fs.readFileSync("../../../.cert/cert.pem"),
-    key: fs.readFileSync("../../../.cert/privkey.pem")
+    cert: fs.readFileSync(path.join(__dirname, "../../../.cert/cert.pem")),
+    key: fs.readFileSync(path.join(__dirname, "../../../.cert/privkey.pem"))
 };
 
 let db = new Database();
@@ -31,9 +30,6 @@ let db = new Database();
 // initialize express and youtube modules 
 const app = express();
 const yt = new YouTube(config.channelId);
-
-// setup helmet to protect from some well-known web vulnerabilities 
-app.use(helmet());
 
 // set headers using middleware
 app.use((req, res, next) => {

@@ -7,8 +7,8 @@
 
 import YouTube, { YouTubeParameters } from "../src/youtube";
 import { YouTubeVideo } from "../../common/types";
-import assert from "assert";
 import config from "../../common/config.json";
+import assert from "assert";
 
 describe("youtube", function() {
     let youtube = new YouTube(config.channelId);

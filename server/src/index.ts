@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 3:56pm
+ * Last Modified: Friday April 2nd 2021 7:37pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -41,7 +41,7 @@ function setHeaders(req: express.Request, res: express.Response, next: express.N
 };
 
 // request and cache videos every hour
-yt.startCache();
+yt.startCache.bind(yt)(true, 30000);
 
 // expose client build and dependencies folders
 app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bundle.js")));

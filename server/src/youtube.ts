@@ -3,7 +3,7 @@
  * Created Date: Saturday, March 6th 2021, 9:30:43 pm
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 11:40am
+ * Last Modified: Friday April 2nd 2021 7:36pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -125,12 +125,12 @@ export default class YouTube {
         };
 
         // Get video snippets
-        this.getVideoSnippets()
+        this.getVideoSnippets.bind(this)()
             .then(videos => {
 
                 // Optionally add statistics
                 if(withStatistics){
-                    this.addVideoStatistics(videos, true)
+                    this.addVideoStatistics.bind(this)(videos, true)
                         .then(() => setVideos(videos))
                         .catch(err => console.error(err));
                 }else{
@@ -168,7 +168,7 @@ export default class YouTube {
                 params["chart"] = "mostPopular";
 
             // Attempt request
-            const response = await this.recurseResponse_<YouTubeSnippet>({
+            const response = await this.recurseResponse_.bind(this)<YouTubeSnippet>({
                 hostname: "youtube.googleapis.com",
                 path: `/youtube/v3/${location}`,
                 parameters: params
@@ -212,7 +212,7 @@ export default class YouTube {
             const ids = videosCopy.map(video => video.id).join(",");
 
             // Attempt request
-            const response = await this.recurseResponse_<YouTubeStatistics>({
+            const response = await this.recurseResponse_.bind(this)<YouTubeStatistics>({
                 hostname: "youtube.googleapis.com",
                 path: "/youtube/v3/videos",
                 parameters: { 
@@ -271,7 +271,7 @@ export default class YouTube {
                 // Return this page and next page's items
                 return Promise.resolve([ 
                     ...<T[]> youtubeResponse.items,
-                    ...await this.recurseResponse_<T>(options, pageLimit, youtubeResponse.nextPageToken)
+                    ...await this.recurseResponse_.bind(this)<T>(options, pageLimit, youtubeResponse.nextPageToken)
                 ]);
 
             // Return result, we're finished!

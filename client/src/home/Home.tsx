@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 10:36am
+ * Last Modified: Saturday April 3rd 2021 10:41am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -121,17 +121,22 @@ function DeleteEventElement({ event }: { event: DeleteEvent }){
 
 function IssuesEventElement({ event }: { event: IssuesEvent }){
     return (
-        <p><br/>{ event.payload.action } issue <b>{ event.payload.issue.title }</b></p>
+        <p><br/>{ capFirstLetter(event.payload.action) } issue <b>{ event.payload.issue.title }</b></p>
     );
 }
 
 function IssueCommentEventElement({ event }: { event: IssueCommentEvent }){
     return (
         <div>
-            <p><br/>{ event.payload.action } comment on issue <b>{ event.payload.issue.title }</b></p>
-            <p>{ event.payload.comment.body }</p>
+            <br/>
+            <p>{ capFirstLetter(event.payload.action) } comment on issue <b>{ event.payload.issue.title }</b></p>
+            <p>"{ event.payload.comment.body }"</p>
         </div>
     );
+}
+
+function capFirstLetter(input: string){
+    return `${ input.charAt(0).toUpperCase() }${ input.slice(1) }`;
 }
 
 function timeSince(date: string){

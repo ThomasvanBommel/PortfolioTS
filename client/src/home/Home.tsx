@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 10:06am
+ * Last Modified: Saturday April 3rd 2021 10:36am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,7 +13,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEvents, getEvents, isLoaded as eventsLoaded, } from '../slices/eventSlice';
-import { Event, PushEvent, DeleteEvent, CreateEvent } from "../slices/eventTypes";
+import { Event, PushEvent, DeleteEvent, CreateEvent, IssuesEvent, IssueCommentEvent } from "../slices/eventTypes";
 import { fetchVideos, isLoaded as videosLoaded } from "../slices/videoSlice";
 
 import Carousel from "../youtube/Carousel";
@@ -64,6 +64,12 @@ function EventElement({ event }: { event: Event }){
             case "CreateEvent":
                 return <CreateEventElement event={ event as CreateEvent } />
 
+            case "IssuesEvent":
+                return <IssuesEventElement event={ event as IssuesEvent } />
+
+            case "IssueCommentEvent":
+                return <IssueCommentEventElement event={ event as IssueCommentEvent } />
+
             default:
                 return null;
         }
@@ -110,6 +116,21 @@ function CreateEventElement({ event }: { event: CreateEvent }){
 function DeleteEventElement({ event }: { event: DeleteEvent }){
     return (
         <p><br/>Deleted { event.payload.ref_type } <b>{ event.payload.ref }</b></p>
+    );
+}
+
+function IssuesEventElement({ event }: { event: IssuesEvent }){
+    return (
+        <p><br/>{ event.payload.action } issue <b>{ event.payload.issue.title }</b></p>
+    );
+}
+
+function IssueCommentEventElement({ event }: { event: IssueCommentEvent }){
+    return (
+        <div>
+            <p><br/>{ event.payload.action } comment on issue <b>{ event.payload.issue.title }</b></p>
+            <p>{ event.payload.comment.body }</p>
+        </div>
     );
 }
 

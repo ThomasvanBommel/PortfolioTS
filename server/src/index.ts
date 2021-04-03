@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 8:07pm
+ * Last Modified: Saturday April 3rd 2021 8:34pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -106,7 +106,7 @@ app.post("/contact", (req, res) => {
 
             // send email
             mailer.sendMail({
-                from: `"${ req.body.name }"`,
+                from: `"${ req.body.name }" <${ req.body.email }>`,
                 to: "thomas@vanbommel.ca",
                 subject: req.body.subject,
                 text: req.body.message + "\n\nFrom: " + req.body.email

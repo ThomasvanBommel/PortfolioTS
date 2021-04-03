@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 1:11pm
+ * Last Modified: Saturday April 3rd 2021 1:45pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -81,7 +81,7 @@ const blogSlice = createSlice({
 export const blogSelector = blogsAdapter.getSelectors<RootState>(state => state.blogs);
 export const allBlogs = (state: RootState) => blogSelector.selectAll(state);
 export const fetchedAll = (state: RootState) => state.blogs.fetchedAll;
-export const getBlog = (slug: string) => (state:RootState) => blogSelector.selectById(state, slug);
+export const getBlog = (slug: string) => (state: RootState) => blogSelector.selectById(state, slug);
 
 // Actions
 // export const { createBlog, updateBlog, deleteBlog } = blogSlice.actions;

@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 1:22pm
+ * Last Modified: Saturday April 3rd 2021 1:49pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,6 +13,7 @@
 import React, { useState } from 'react';
 import Spinner from "../spinner/Spinner";
 import style from "./ContactForm.module.css";
+// import { updateInput } from "../slices/contactSlice";
 
 type InputTarget= { target: HTMLInputElement | HTMLTextAreaElement };
 

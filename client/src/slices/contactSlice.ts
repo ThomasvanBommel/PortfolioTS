@@ -3,7 +3,7 @@
  * Created: Saturday April 3rd 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 6:25pm
+ * Last Modified: Saturday April 3rd 2021 8:18pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -33,10 +33,10 @@ const contactSlice = createSlice({
         validated: false,
         response: "",
         form: {
-            name: "123",
-            email: "123@m.ca",
-            subject: "123",
-            message: "123"
+            name: "",
+            email: "",
+            subject: "",
+            message: ""
         }
     },
     reducers: {

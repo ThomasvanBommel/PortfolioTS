@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 7:16pm
+ * Last Modified: Saturday April 3rd 2021 8:07pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -13,11 +13,11 @@
  */
 
 import config from "../../common/config.json";
+import nodemailer from "nodemailer";
 import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
 import https from "https";
-import http from "http";
 import path from "path";
 import fs from "fs";
 
@@ -27,6 +27,17 @@ const credentials = {
 };
 
 let db = new Database();
+
+console.log(process.env.GMAIL_USER);
+
+// setup mail transporter
+const mailer = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
+    }
+});
 
 // initialize express and youtube modules 
 const app = express();
@@ -83,19 +94,53 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
 
 // endpoint for collecting contact form data
 app.post("/contact", (req, res) => {
-    console.log(req.ip, req.body);
 
-    if("email" in req.body)
-        if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(req.body.email))
-            return res.json({ 
-                type: "success",
-                message: "Thanks! A notification has been sent." 
+    // check for required parameters
+    if("email" in req.body && "name" in req.body && "subject" in req.body && "message" in req.body){
+
+        // check they are submitting a properly formatted email address
+        if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(req.body.email)){
+
+            // log request
+            console.log(req.ip, req.body);
+
+            // send email
+            mailer.sendMail({
+                from: `"${ req.body.name }"`,
+                to: "thomas@vanbommel.ca",
+                subject: req.body.subject,
+                text: req.body.message + "\n\nFrom: " + req.body.email
+            }, (err, info) => {
+                if(err){
+                    console.error(err);
+
+                    // error sending email
+                    return res.json({ 
+                        type: "error",
+                        message: "Internal error."
+                    });
+                }else{
+                    // email successful!
+                    return res.json({ 
+                        type: "success",
+                        message: "Thanks! I'll be in touch." 
+                    });
+                }
             });
-
-    res.json({ 
-        type: "error",
-        message: "The email provided was invalid or missing..." 
-    });
+        }else{
+            // invalid email address
+            res.json({ 
+                type: "error",
+                message: "Invalid email adress..." 
+            });
+        }
+    }else{
+        // missing parameters
+        res.json({ 
+            type: "error",
+            message: "Missing parameters..." 
+        });
+    }
 });
 
 // tell server to start listening on secure port

@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 2:21pm
+ * Last Modified: Saturday April 3rd 2021 7:48pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -67,6 +67,7 @@
 }
 
 .response{
+    max-width: 100%;
     width:max-content;
     margin: 2rem auto;
 }

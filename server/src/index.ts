@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 11:47am
+ * Last Modified: Saturday April 3rd 2021 7:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -81,14 +81,21 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
     }
 });
 
-app.post("/", (req, res) => {
-    console.log(req.body);
+// endpoint for collecting contact form data
+app.post("/contact", (req, res) => {
+    console.log(req.ip, req.body);
 
     if("email" in req.body)
         if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(req.body.email))
-            return res.send("Thanks! A notification has been sent.");
+            return res.json({ 
+                type: "success",
+                message: "Thanks! A notification has been sent." 
+            });
 
-    res.send("The email provided was invalid or missing...");
+    res.json({ 
+        type: "error",
+        message: "The email provided was invalid or missing..." 
+    });
 });
 
 // tell server to start listening on secure port

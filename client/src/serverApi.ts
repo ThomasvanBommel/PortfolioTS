@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 12:48pm
+ * Last Modified: Saturday April 3rd 2021 7:15pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -38,8 +38,34 @@ export const incrementEmojiCount = async (slug: string, emoji: string) => {
     });
 };
 
-export const submitContactForm = async () => {
-    return new Promise((resolve, reject) => {
+export type Form = {
+    email: string,
+    message: string,
+    name: string,
+    subject: string
+};
 
+// Submit contact form
+export const submitContactForm = async (form: Form) => {
+    console.log("submitting form...");
+
+    return new Promise<string>((resolve, reject) => {
+        setTimeout(() => {
+            fetch(new Request("contact"), {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)
+            })
+                .then(res => res.json())
+                .then(({ type, message }: { type: string, message: string }) => {
+                    if(type !== "error")
+                        return resolve(message);
+
+                    reject(message);
+                })
+                .catch(err => reject(err));
+        }, 1000);
     });
 }

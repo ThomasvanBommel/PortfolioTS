@@ -3,7 +3,7 @@
  * Created: Saturday April 3rd 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 2:47pm
+ * Last Modified: Saturday April 3rd 2021 6:25pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -21,19 +21,7 @@ import { RootState } from "../store";
 
 export const submitForm = createAsyncThunk(
     "contact/submit",
-    async () => {
-        console.log("submitting form...");
-
-        return new Promise<string>((resolve, reject) => {
-            setTimeout(() => {
-                if(Math.random() > 0.8){
-                    reject("Issue with the form content");
-                }else{
-                    resolve("Thank you! Ill be in touch.");
-                }
-            }, 3000);
-        });
-    }
+    API.submitContactForm
 );
 
 /** Slice --------------------------------------------------------------------------------------- */
@@ -45,10 +33,10 @@ const contactSlice = createSlice({
         validated: false,
         response: "",
         form: {
-            name: "",
-            email: "",
-            subject: "",
-            message: ""
+            name: "123",
+            email: "123@m.ca",
+            subject: "123",
+            message: "123"
         }
     },
     reducers: {

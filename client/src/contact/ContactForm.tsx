@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 2:50pm
+ * Last Modified: Saturday April 3rd 2021 6:35pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -86,7 +86,7 @@ function Form(){
         event.preventDefault();
 
         dispatch(setLoading(true));
-        dispatch(submitForm());
+        dispatch(submitForm(form));
     }
 
     return (

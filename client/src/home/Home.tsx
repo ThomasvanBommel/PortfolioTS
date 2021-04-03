@@ -3,15 +3,17 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 11:59pm
+ * Last Modified: Saturday April 3rd 2021 10:06am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-03	TvB	Updated to use eventTypes
  */
 
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { fetchEvents, getEvents, Event, PushEvent, isLoaded as eventsLoaded, DeleteEvent, CreateEvent } from '../slices/eventSlice';
+import { fetchEvents, getEvents, isLoaded as eventsLoaded, } from '../slices/eventSlice';
+import { Event, PushEvent, DeleteEvent, CreateEvent } from "../slices/eventTypes";
 import { fetchVideos, isLoaded as videosLoaded } from "../slices/videoSlice";
 
 import Carousel from "../youtube/Carousel";
@@ -39,7 +41,7 @@ function Content(){
             <div className={ style.container }>
                 <h2>Latest GitHub Activity:</h2>
                 { 
-                    events.map(event => 
+                    events.map((event) => 
                         <EventElement event={ event } key={ event.id.toString() } />
                     ) 
                 }

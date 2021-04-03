@@ -3,79 +3,20 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:47pm
+ * Last Modified: Saturday April 3rd 2021 10:07am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-03	TvB	Updated to use eventTypes
  */
 
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState, AppDispatch } from "../store";
+import { Event } from "./eventTypes";
 
 export type LoadedAction = {
     type: string,
     payload?: boolean
-};
-
-export type Event = {
-    id: number,
-    type: string,
-    actor: {
-        id: number,
-        login: string,
-        display_login: string,
-        gravatar_id: string,
-        url: string,
-        avatar_url: string
-    },
-    repo: {
-        id: number,
-        name: string,
-        url: string
-    },
-    public: boolean,
-    created_at: string
-};
-
-export type Commit = {
-    sha: string,
-    author: {
-        email: string,
-        name: string
-    },
-    message: string,
-    distinct: boolean,
-    url: string
-};
-
-export type PushEvent = Event & {
-    payload: {
-        push_id: number,
-        size: number,
-        distinct_size: number,
-        ref: string,
-        head: string,
-        before: string,
-        commits: Commit[]
-    }
-};
-
-export type CreateEvent = Event & {
-    payload: {
-        ref: string,
-        ref_type: string,
-        master_branch: string,
-        description: string,
-        pusher_type: string
-    }
-};
-
-export type DeleteEvent = Event & {
-    payload: {
-        ref: string,
-        ref_type: string,
-        pusher_type: string
-    }
 };
 
 export type EventAction = {

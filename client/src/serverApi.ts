@@ -3,19 +3,17 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 4:09pm
+ * Last Modified: Saturday April 3rd 2021 12:48pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
-import config from "../../common/config.json";
 import { Blog, isBlog } from "../../common/types";
 
 // Fetch all blogs from the server database
 export const fetchAllBlogs = async (): Promise<Blog[]> => {
     return new Promise((resolve, reject) => {
-        // fetch(`https://${config.host}:${config.port}/blogs`)
         fetch(new Request("blogs"))
             .then(res  => res.json())
             .then(json => resolve(json))
@@ -23,9 +21,9 @@ export const fetchAllBlogs = async (): Promise<Blog[]> => {
     });
 };
 
+// Increment blogs emoji counter
 export const incrementEmojiCount = async (slug: string, emoji: string) => {
     return new Promise((resolve, reject) => {
-        // fetch(`https://${config.host}:${config.port}/blog/${slug}/${emoji}`, {
         fetch(new Request(`blog/${slug}/${emoji}`, {
             method: "POST"
         }))
@@ -39,3 +37,9 @@ export const incrementEmojiCount = async (slug: string, emoji: string) => {
             .catch(err => reject(err));
     });
 };
+
+export const submitContactForm = async () => {
+    return new Promise((resolve, reject) => {
+
+    });
+}

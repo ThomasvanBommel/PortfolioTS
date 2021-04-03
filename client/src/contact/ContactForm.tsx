@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 18th 2021 9:02pm
+ * Last Modified: Saturday April 3rd 2021 11:46am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -21,13 +21,13 @@ function ContactForm(){
     const [ name, setName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ subject, setSubject ] = useState("");
-    const [ message, setMessage ] = useState("This form is disabled");
+    const [ message, setMessage ] = useState("");
 
     // Update an inputs value and check form validation
     const update = (func: React.Dispatch<React.SetStateAction<string>>, val: string) => {
         func(val);
-        // Disabled validation
-        // setValidation(!!name && !!email && !!subject && !!message);
+        
+        setValidation(!!name && !!email && !!subject && !!message);
     };
 
     // Change handlers for each input
@@ -38,10 +38,10 @@ function ContactForm(){
 
     return (
         <div className={ style.disabled }>
-            <form action="/" className={ style.container }>
+            <form action="/#/contact" method="POST" className={ style.container }>
                 <h1 className={ style.title }>Message me</h1>
                 <Input label="name" value={ name } onChange={ handleNameChange } />
-                <Input label="email" value={ email } onChange={ handleEmailChange } />
+                <Input label="email" value={ email } onChange={ handleEmailChange } pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
                 <Input label="subject" value={ subject } onChange={ handleSubjectChange } />
 
                 <label htmlFor="message">Message</label>
@@ -67,8 +67,8 @@ function ContactForm(){
 }
 
 /** Form 'text' input elements */
-function Input({ label, value, onChange }
-    : { label: string, value: string, onChange: React.ChangeEventHandler<HTMLInputElement> } ){
+function Input({ label, value, onChange, pattern=".*" }
+    : { label: string, value: string, onChange: React.ChangeEventHandler<HTMLInputElement>, pattern?: string } ){
 
     // Copy label, capitalize the first letter, and pad with spaces
     const paddedLabel = (label.charAt(0).toUpperCase() + label.slice(1)).padEnd(10, "\u00a0");
@@ -77,6 +77,7 @@ function Input({ label, value, onChange }
         <div className={ style.input }>
             <label htmlFor={ label }>{ paddedLabel }</label>
             <input 
+                pattern={ pattern }
                 className={ !!value ? null : style.invalid }
                 onChange={ onChange }
                 value={ value }

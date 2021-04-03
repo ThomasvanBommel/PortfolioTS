@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 10:59am
+ * Last Modified: Saturday April 3rd 2021 11:47am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -39,6 +39,10 @@ function setHeaders(req: express.Request, res: express.Response, next: express.N
     res.set("X-Powered-By", "Sagittarius A*");
     next();
 };
+
+// Body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // request and cache videos every hour
 yt.startCache();
@@ -77,8 +81,14 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
     }
 });
 
-app.post("/contact", (req, res) => {
-    res.send("Thanks! A notification has been sent.");
+app.post("/", (req, res) => {
+    console.log(req.body);
+
+    if("email" in req.body)
+        if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(req.body.email))
+            return res.send("Thanks! A notification has been sent.");
+
+    res.send("The email provided was invalid or missing...");
 });
 
 // tell server to start listening on secure port

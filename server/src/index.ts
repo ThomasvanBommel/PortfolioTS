@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 7:59pm
+ * Last Modified: Saturday April 3rd 2021 10:59am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -75,6 +75,10 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
     }else{
         res.json(new Error("Blog not found or emoji is invalid"));
     }
+});
+
+app.post("/contact", (req, res) => {
+    res.send("Thanks! A notification has been sent.");
 });
 
 // tell server to start listening on secure port

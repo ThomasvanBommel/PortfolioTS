@@ -3,72 +3,50 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 1:49pm
+ * Last Modified: Saturday April 3rd 2021 2:50pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-03	TvB	Updated to use the new contactSlice
  * 2021-03-15   TvB	Refactored to use react function components
  */
 
+import { 
+    getIsValidated, 
+    clearResponse,
+    getIsLoading, 
+    updateInput, 
+    getResponse,
+    setLoading, 
+    submitForm, 
+    getForm
+} from "../slices/contactSlice";
 import React, { useState } from 'react';
 import Spinner from "../spinner/Spinner";
 import style from "./ContactForm.module.css";
-// import { updateInput } from "../slices/contactSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 type InputTarget= { target: HTMLInputElement | HTMLTextAreaElement };
 
 /** Contact form */
 function ContactForm(){
-    const [ loading, setLoading ] = useState(false);
-    const [ validated, setValidation ] = useState(false);
-    const [ name, setName ] = useState("");
-    const [ email, setEmail ] = useState("");
-    const [ subject, setSubject ] = useState("");
-    const [ message, setMessage ] = useState("");
+    useDispatch()(clearResponse());
 
-    // Update an inputs value and check form validation
-    const update = (func: React.Dispatch<React.SetStateAction<string>>, val: string) => {
-        func(val);
-        
-        setValidation(!!name && !!email && !!subject && !!message);
-    };
+    return <Element />   
+}
 
-    // Change handlers for each input
-    const handleNameChange    = ({ target }: InputTarget) => update(setName,    target.value);
-    const handleEmailChange   = ({ target }: InputTarget) => update(setEmail,   target.value);
-    const handleSubjectChange = ({ target }: InputTarget) => update(setSubject, target.value);
-    const handleMessageChange = ({ target }: InputTarget) => update(setMessage, target.value);
-
-    const handleFormSubmission = (event: React.FormEvent) => {
-        console.log(event);
-        event.preventDefault();
-        setLoading(true);
-    }
+function Element(){
+    const loading = useSelector(getIsLoading);
+    const response = useSelector(getResponse);
 
     return (
-        <div className={ style.disabled } onSubmit={ handleFormSubmission }>
+        <div>
+            { !!response ? (
+                <div className={ style.response }>{ response }</div>
+            ) : ("") }
             { !loading ? (
                 <div>
-                    <form className={ style.container }>
-                        <h1 className={ style.title }>Message me</h1>
-                        <Input label="name" value={ name } onChange={ handleNameChange } />
-                        <Input label="email" value={ email } onChange={ handleEmailChange } pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
-                        <Input label="subject" value={ subject } onChange={ handleSubjectChange } />
-
-                        <label htmlFor="message">Message</label>
-                        <textarea 
-                            className={ !!message ? null : style.invalid }
-                            onChange={ handleMessageChange } 
-                            value={ message } 
-                            name="message" 
-                            id="message" 
-                            cols={ 30 } 
-                            rows={ 5 } 
-                            required
-                        ></textarea>
-
-                        <input type="submit" value="Submit" disabled={ !validated } />
-                    </form>
+                    <Form />
                     <address className={ style.address }>
                         <p>Alternatively send an email to:</p>
                         <a href="mailto:thomas@vanbommel.ca">thomas@vanbommel.ca</a>
@@ -80,6 +58,60 @@ function ContactForm(){
                     <p>Awaiting server response...</p>
                 </div>
             ) }
+        </div>
+    );
+}
+
+function Form(){
+    const dispatch = useDispatch();
+    const validated = useSelector(getIsValidated);
+    const form = useSelector(getForm);
+
+    // Handle input change
+    const handleInputChange = ({ target }: InputTarget) => {
+        switch(target.name){
+            case "name":
+            case "email":
+            case "subject":
+            case "message":
+                dispatch(updateInput({
+                    target: target.name, 
+                    value: target.value
+                }));
+        }
+    }
+
+    // Handle form submission
+    const handleFormSubmission = (event: React.FormEvent) => {
+        event.preventDefault();
+
+        dispatch(setLoading(true));
+        dispatch(submitForm());
+    }
+
+    return (
+        <div>
+            <form className={ style.container } onSubmit={ handleFormSubmission }>
+                <h1 className={ style.title }>Message me</h1>
+                <Input label="name" value={ form.name } onChange={ handleInputChange } />
+                <Input label="email" value={ form.email } onChange={ handleInputChange } pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                <Input label="subject" value={ form.subject } onChange={ handleInputChange } />
+
+                <label htmlFor="message">Message</label>
+                <textarea 
+                    className={ !!form.message ? null : style.invalid }
+                    onChange={ handleInputChange } 
+                    value={ form.message } 
+                    name="message" 
+                    id="message" 
+                    cols={ 30 } 
+                    rows={ 5 } 
+                    required
+                ></textarea>
+
+                <input type="submit" value="Submit" disabled={ !validated } />
+            </form>
+            
         </div>
     );
 }

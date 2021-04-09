@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday March 31st 2021 11:44pm
+ * Last Modified: Friday April 9th 2021 11:26am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -29,7 +29,7 @@ function App(){
             <HashRouter>
                 <Navbar />
                 <Content />
-                <ProgressBanner />
+                {/* <ProgressBanner /> */}
             </HashRouter>
         </Provider>
     );

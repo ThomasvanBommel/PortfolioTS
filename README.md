@@ -1,26 +1,38 @@
 # PortfolioTS
 Typescript portfolio with a ReactJS front-end
 
-This project gets auto-deployed to [vanbommel.ca](http://vanbommel.ca)
+This project gets auto-deployed to [vanbommel.ca](https://vanbommel.ca)
 
 ## Features
  - Continuous integration
  - Continuous deployment
- - Webpack + TSC transpiling
+ - Webpack client code
+ - TSC transpiling
  - Express network router
  - React front-end
  - Developer mode (watch files and auto-transpile)
  - Production mode
- - Complete test suite
+ - Mocha test suite
 
-## Technology Stack
-Server
- - [Express](https://www.npmjs.com/package/express) - Rounting engine
- - [Mocha](https://www.npmjs.com/package/mocha) - Test framework
+## Configuration
+Environment variables:
+ - **YT_API_KEY**: needs to be set to allow the server to access the YouTube API
+ - **NODE_ENV**: will change how the client transpiles
+   - "development" will keep comments intact
+   - "production" or if it's not set; will remove comments and minify the clients code (takes longer to transpile)
+ - **GMAIL_USER**: gmail username / email for the account used to send emails (from the contact form)
+ - **GMAIL_PASS**: gmail password for the account used to send emails (from the contact form)
 
-Client
- - [React](https://reactjs.org/) - UI framework
- - [webpack](https://webpack.js.org/) - Module bundling
+TLS Certificate:
+ - Create and store a TLS certificate pair in the `.cert` directory, named `cert.pem` and `privkey.pem`
+   - Can be generated with `openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out cert.pem -days 365 -nodes -subj '/CN=localhost'`
+
+## Available Commands
+All commands are run using `npm run <command>`
+ - `test`: run test suite
+ - `start`: start-up the server
+ - `cleanup`: clean-up generated files
+ - `watch`: watch client files for changes and auto-transpile (used for client development)
 
 ## Requirements
 You need the following in order to run this project
@@ -29,7 +41,7 @@ You need the following in order to run this project
 
 ## Run the project
 Prerequisite:
- - Set environment variable **YT_API_KEY** to a valid youtube api key
+ - Configure the server, see [Configuration](## Configuration)
  - Install npm packages with `npm i`
 
 Run in production mode:

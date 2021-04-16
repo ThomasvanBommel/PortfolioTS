@@ -3,17 +3,26 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 10:41am
+ * Last Modified: Friday April 16th 2021 8:51pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-16	TvB	Added repository overview showing which repos were modified
  * 2021-04-03	TvB	Updated to use eventTypes
  */
 
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
+
+import { 
+    Event, 
+    PushEvent, 
+    DeleteEvent, 
+    CreateEvent, 
+    IssuesEvent, 
+    IssueCommentEvent 
+} from "../slices/eventTypes";
 import { fetchEvents, getEvents, isLoaded as eventsLoaded, } from '../slices/eventSlice';
-import { Event, PushEvent, DeleteEvent, CreateEvent, IssuesEvent, IssueCommentEvent } from "../slices/eventTypes";
 import { fetchVideos, isLoaded as videosLoaded } from "../slices/videoSlice";
 
 import Carousel from "../youtube/Carousel";
@@ -33,6 +42,11 @@ function Home(){
 
 function Content(){
     const events = useSelector(getEvents);
+    let repos: { [key: string]: string } = {};
+
+    for(const event of events)
+        if(!(event.repo.name in repos))
+            repos[event.repo.name] = event.created_at;
 
     return (
         <div className={ style.scrollable }>
@@ -40,10 +54,19 @@ function Content(){
             
             <div className={ style.container }>
                 <h2>Latest GitHub Activity:</h2>
+                <div className={ style.overview }>
+                    {
+                        Object.entries(repos).map(([key, val]) => (
+                            <p key={ key }>
+                                <a href={ `https://github.com/${key}` }>{ key }</a>
+                                <span className={ style.right }>{ timeSince(val) }</span>
+                            </p>
+                        ))
+                    }
+                </div>
                 { 
                     events.map((event) => 
-                        <EventElement event={ event } key={ event.id.toString() } />
-                    ) 
+                        <EventElement event={ event } key={ event.id.toString() } />) 
                 }
             </div>
         </div>
@@ -121,7 +144,9 @@ function DeleteEventElement({ event }: { event: DeleteEvent }){
 
 function IssuesEventElement({ event }: { event: IssuesEvent }){
     return (
-        <p><br/>{ capFirstLetter(event.payload.action) } issue <b>{ event.payload.issue.title }</b></p>
+        <p>
+            <br/>{ capFirstLetter(event.payload.action) } issue <b>{ event.payload.issue.title }</b>
+        </p>
     );
 }
 
@@ -129,7 +154,10 @@ function IssueCommentEventElement({ event }: { event: IssueCommentEvent }){
     return (
         <div>
             <br/>
-            <p>{ capFirstLetter(event.payload.action) } comment on issue <b>{ event.payload.issue.title }</b></p>
+            <p>
+                { capFirstLetter(event.payload.action) } comment on issue
+                <b>&nbsp;{ event.payload.issue.title }</b>
+            </p>
             <p>"{ event.payload.comment.body }"</p>
         </div>
     );

@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 8:24pm
+ * Last Modified: Saturday April 17th 2021 8:40pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -39,6 +39,9 @@ function Carousel(){
     const [ documentWidth, setDocumentWidth ] = useState(document.body.clientWidth);
     const itemWidth = getItemWidth(documentWidth);
 
+    // Video slice isAnimated (enable / disable animations)
+    const animated = useSelector(isAnimated);
+
     // Listen and response to resize events
     useEffect(() => {
         const resizeEvent = () => setDocumentWidth(document.body.clientWidth);
@@ -53,7 +56,7 @@ function Carousel(){
     const videos = useSelector(getVideos);
 
     // Animation stuffs...
-    const [ animating, setAnimating ] = useState(true);
+    const [ animating, setAnimating ] = useState(true && animated);
     const offset = currentIndex * itemWidth;
     const perPage = Math.floor(documentWidth / itemWidth);
 
@@ -84,7 +87,6 @@ function Carousel(){
     }
 
     // Video slice isAnimated (enable / disable animations)
-    const animated = useSelector(isAnimated);
     function toggleIsAnimated(){
         dispatch(setIsAnimated(!animated));
     }

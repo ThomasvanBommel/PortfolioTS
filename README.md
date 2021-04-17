@@ -41,7 +41,7 @@ You need the following in order to run this project
 
 ## Run the project
 Prerequisite:
- - Configure the server, see [Configuration](## Configuration)
+ - Configure the server, see [Configuration](##-configuration)
  - Install npm packages with `npm i`
 
 Run in production mode:

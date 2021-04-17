@@ -3,16 +3,17 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 2nd 2021 4:10pm
+ * Last Modified: Saturday April 17th 2021 8:05pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-17	TvB	Added animated state
+ * 2021-04-17	TvB	Added setCurrentIndex reducer
  */
 
 import { YouTubeVideo } from "../../../common/types";
 import { RootState, AppDispatch } from "../store";
 import { createSlice } from '@reduxjs/toolkit'
-import config from "../../../common/config.json";
 
 export type LoadedAction = {
     type: string,
@@ -29,7 +30,8 @@ export const videoSlice = createSlice({
     initialState: {
         videos: [] as YouTubeVideo[],
         currentIndex: 0,
-        isLoaded: false
+        isLoaded: false,
+        animated: true
     },
     reducers: {
         // Increment current index
@@ -47,15 +49,26 @@ export const videoSlice = createSlice({
         setLoaded: (state, action: LoadedAction) => {
             if(action)
                 state.isLoaded = action.payload;
+        },
+        // Set the current video index
+        setCurrentIndex: (state, { payload }: { payload: number }) => {
+            if(payload != undefined)
+                state.currentIndex = Math.max(Math.min(state.videos.length - 1, payload), 0);
+        },
+        // Set if videos should be animated (carousel)
+        setIsAnimated: (state, { payload }: { payload: boolean }) => {
+            if(payload != undefined)
+                state.animated = payload;
         }
     }
 });
 
 export default videoSlice.reducer;
 
-export const { increment, decrement, setVideos, setLoaded } = videoSlice.actions;
+export const { increment, decrement, setVideos, setLoaded, setCurrentIndex, setIsAnimated } = videoSlice.actions;
 export const getVideos = (store: RootState) => store.videos.videos;
-export const isLoaded = (store: RootState) => store.events.isLoaded;
+export const isLoaded = (store: RootState) => store.videos.isLoaded;
+export const isAnimated = (store: RootState) => store.videos.animated;
 export const getCurrentVideoIndex = (store: RootState) => store.videos.currentIndex;
 
 export async function fetchVideos(dispatch: AppDispatch, getState: () => RootState) {

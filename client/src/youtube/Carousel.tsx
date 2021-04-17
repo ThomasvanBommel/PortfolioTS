@@ -3,10 +3,11 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday March 30th 2021 4:59pm
+ * Last Modified: Saturday April 17th 2021 8:24pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-17	TvB	Added embeded video iframe
  * 2021-03-27	TvB	Fixed animation
  * 2021-03-25	TvB	Changed file name
  * 2021-03-18	TvB	Finished carousel2 ? (I hope so)
@@ -15,7 +16,15 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { getVideos, getCurrentVideoIndex, increment, decrement } from "../slices/videoSlice";
+import { 
+    getVideos, 
+    increment, 
+    decrement, 
+    isAnimated, 
+    setIsAnimated,
+    setCurrentIndex, 
+    getCurrentVideoIndex, 
+} from "../slices/videoSlice";
 import CarouselItem from "./CarouselItem";
 import style from "./Carousel.module.css";
 
@@ -51,7 +60,7 @@ function Carousel(){
     // Animate videos
     useEffect(() => {
         if(animating){
-            const interval = setInterval(handleClickForward, 3000);
+            const interval = setInterval(handleClickForward, 8000);
             return () => clearInterval(interval);
         }
     }, [ animating ]);
@@ -66,19 +75,63 @@ function Carousel(){
         dispatch(decrement());
     }
 
+    // Calculate embeded video size
+    const embedSize = Math.min(1000, documentWidth);
+
+    // Handle video click and change the current active video
+    function handleItemClick(i: number){
+        dispatch(setCurrentIndex(i));
+    }
+
+    // Video slice isAnimated (enable / disable animations)
+    const animated = useSelector(isAnimated);
+    function toggleIsAnimated(){
+        dispatch(setIsAnimated(!animated));
+    }
+
     // Render carousel
     return (
         <div>
-            <div className={ style.carousel } 
-                 onMouseEnter={ () => setAnimating(false) } 
-                 onMouseLeave={ () => setAnimating(true) }>
+            <div onMouseEnter={ () => setAnimating(false) } 
+                 onMouseLeave={ () => setAnimating(true && animated) }>
+                <div className={ style.embed }>
+                    {
+                        videos.length < 1 ? "" : (
+                            <iframe width={ embedSize } height={ embedSize * 9/16 }
+                                src={ `https://www.youtube.com/embed/${ videos[currentIndex].id }` }>
+                            </iframe> 
+                        )
+                    }
+                    <div className={ style.animated }>
+                        <input type="checkbox" checked={ animated } onClick={ toggleIsAnimated } />
+                        &nbsp;Animated&nbsp;
+                        <span className={ style.indicator } 
+                            style={{ backgroundColor: animating ? "lightgreen" : "red" }}></span>
+                    </div>
+                </div>
+                <div className={ style.carousel }>
 
-                <div className={ style.itemContainer } style={{ transform: `translateX(${ -offset }px)` }}>{
-                    videos.map(video => <CarouselItem width={ itemWidth } video={ video } key={ video.id } />)
-                }</div>
+                    <div className={ style.itemContainer } style={{ 
+                        transform: `translateX(${ -offset }px)`,
+                    }}>{
+                        videos.map((video, i) => 
+                            <CarouselItem width={ itemWidth } 
+                                clickHandler={ () => { handleItemClick(i) } }
+                                key={ video.id } 
+                                video={ video } />
+                        )
+                    }</div>
 
-                <button className={ style.backButton } onClick={ handleClickBack }>&lt;</button>
-                <button className={ style.forwardButton } onClick={ handleClickForward }>&gt;</button>
+                    <button className={ style.backButton } onClick={ handleClickBack }>&lt;</button>
+                    <button className={ style.forwardButton } onClick={ handleClickForward }>&gt;</button>
+                </div>
+            </div>
+            <div className={ style.pageDisplay }>
+                <span className={ style.skipButton } 
+                    onClick={ () => { dispatch(setCurrentIndex(0)) } }>&lt;&lt;</span>
+                { currentIndex + 1 } of { videos.length }
+                <span className={ style.skipButton } 
+                    onClick={ () => { dispatch(setCurrentIndex(videos.length)) } }>&gt;&gt;</span>
             </div>
             <div className={ style.info }>
                 <p>dwidth={ documentWidth }</p>

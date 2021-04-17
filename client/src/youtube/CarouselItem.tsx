@@ -3,10 +3,11 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday March 27th 2021 1:40pm
+ * Last Modified: Saturday April 17th 2021 6:22pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-17	TvB	Added clickHandler
  */
 
 import React from 'react';
@@ -14,12 +15,14 @@ import { YouTubeVideo } from "../../../common/types";
 import style from "./Carousel.module.css";
 
 /** Carousel video item */
-export default function CarouselItem({ width, video }: { width: number, video: YouTubeVideo }){
+export default function CarouselItem({ width, video, clickHandler }
+    : { width: number, video: YouTubeVideo, clickHandler: () => void }){
+
     const thumbnail = video.snippet.thumbnails["medium"];
 
     return (
         <div key={ video.id } className={ style.item } style={{ width: width }}>
-            <div className={ style.videoThumbnail }>
+            <div className={ style.videoThumbnail } onClick={ clickHandler }>
                 <img src={ thumbnail.url } alt="Video thumbnail"/>
                 <table className={ style.videoDetails }
                        style={{ 

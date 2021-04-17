@@ -3,10 +3,11 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Sunday March 28th 2021 1:52pm
+ * Last Modified: Saturday April 17th 2021 8:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-17	TvB	Added videoThumbnail hover
  * 2021-03-18	TvB	Clean up
  */
 
@@ -32,6 +33,10 @@
 
 .videoThumbnail{
     position:relative;
+}
+
+.videoThumbnail:hover{
+    cursor:pointer;
 }
 
 .item img{
@@ -78,11 +83,12 @@
 }
 
 .backButton, .forwardButton{
-    height:100%;
+    /* height:100%; */
+    height:50%;
     opacity: 0.5;
     border-radius: 0;
     position:absolute;
-    top:0;
+    top:25%;
     padding:0 0.5rem;
 }
 
@@ -105,4 +111,49 @@
     padding: 1rem;
     opacity: 0.5;
     display:none;
+}
+
+.embed{
+    background-color: var(--dark);
+}
+
+.embed iframe{
+    max-width:100%;
+    display:block;
+    margin:0 auto;
+    padding: 0.5rem 0;
+}
+
+.pageDisplay{
+    width:max-content;
+    margin:0 auto;
+    padding:0.25rem;
+}
+
+.skipButton{
+    margin:0 1rem;
+    padding:0.12rem;
+    padding-left:0.3rem;
+    padding-right:0.3rem;
+    border-radius: 0.2rem;
+}
+
+.skipButton:hover{
+    cursor: pointer;
+    background-color:var(--dark);
+    color:var(--light);
+}
+
+.animated{
+    width: max-content;
+    margin:0 auto;
+    color: white;
+    padding-bottom:0.5rem;
+}
+
+.indicator{
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    display:inline-block;
 }

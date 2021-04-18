@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 10:24pm
+ * Last Modified: Saturday April 17th 2021 10:56pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -32,7 +32,7 @@
     margin: 1rem;
     padding: 1rem;
     border-radius: 0.5rem;
-    border: 1px solid black;
+    border: 1px solid #aaa;
     box-sizing: border-box;
 }
 
@@ -65,6 +65,7 @@
 .overview{
     padding:1rem;
     padding-bottom: 0;
+    padding-top:0.5rem;
 }
 
 .overview p{

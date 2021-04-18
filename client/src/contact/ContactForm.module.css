@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 7:48pm
+ * Last Modified: Saturday April 17th 2021 10:27pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -54,7 +54,7 @@
 }
 
 .invalid{
-    background-color: rgba(255, 99, 71, 0.1);
+    background-color: rgba(255, 99, 71, 0.05);
 }
 
 .spinner{

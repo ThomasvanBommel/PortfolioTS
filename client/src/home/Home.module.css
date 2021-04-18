@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 6:39pm
+ * Last Modified: Saturday April 17th 2021 10:24pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,6 +20,7 @@
     max-width: 100%;
     margin:0 auto;
     margin-top:1rem;
+    background-color: #eee;
 }
 
 .container h2{

@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 16th 2021 8:51pm
+ * Last Modified: Saturday April 17th 2021 11:05pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -103,7 +103,7 @@ function EventElement({ event }: { event: Event }){
             <div className={ style.header }>
                 <div>
                     <p>{ event.type }</p>
-                    <p><a href={ event.repo.url }>{ event.repo.name }</a></p>
+                    <p><a href={ cleanURL(event.repo.url) }>{ event.repo.name }</a></p>
                 </div>
                 <div className={ style.spacer }></div>
                 <div>
@@ -122,7 +122,7 @@ function PushEventElement({ event }: { event: PushEvent }){
             Commit{ event.payload.commits.length > 1 ? "s" : "" }:
             { event.payload.commits.map(commit => (
                 <div className={ style.commit }>
-                    <p><a href={ commit.url }>{ commit.sha.slice(0, 7) }</a></p>
+                    <p><a href={ cleanURL(commit.url) }>{ commit.sha.slice(0, 7) }</a></p>
                     <p>{ commit.message }</p>
                 </div>
             )) }
@@ -165,6 +165,10 @@ function IssueCommentEventElement({ event }: { event: IssueCommentEvent }){
 
 function capFirstLetter(input: string){
     return `${ input.charAt(0).toUpperCase() }${ input.slice(1) }`;
+}
+
+function cleanURL(str: string){
+    return str.replace(/\/\/api./g, "//").replace(/\/repos\//g, "/");
 }
 
 function timeSince(date: string){

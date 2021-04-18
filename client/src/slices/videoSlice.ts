@@ -3,7 +3,7 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 8:05pm
+ * Last Modified: Saturday April 17th 2021 10:43pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -31,7 +31,7 @@ export const videoSlice = createSlice({
         videos: [] as YouTubeVideo[],
         currentIndex: 0,
         isLoaded: false,
-        animated: true
+        autoScrolling: true
     },
     reducers: {
         // Increment current index
@@ -56,19 +56,19 @@ export const videoSlice = createSlice({
                 state.currentIndex = Math.max(Math.min(state.videos.length - 1, payload), 0);
         },
         // Set if videos should be animated (carousel)
-        setIsAnimated: (state, { payload }: { payload: boolean }) => {
+        setAutoScrolling: (state, { payload }: { payload: boolean }) => {
             if(payload != undefined)
-                state.animated = payload;
+                state.autoScrolling = payload;
         }
     }
 });
 
 export default videoSlice.reducer;
 
-export const { increment, decrement, setVideos, setLoaded, setCurrentIndex, setIsAnimated } = videoSlice.actions;
+export const { increment, decrement, setVideos, setLoaded, setCurrentIndex, setAutoScrolling } = videoSlice.actions;
 export const getVideos = (store: RootState) => store.videos.videos;
 export const isLoaded = (store: RootState) => store.videos.isLoaded;
-export const isAnimated = (store: RootState) => store.videos.animated;
+export const autoScrolling = (store: RootState) => store.videos.autoScrolling;
 export const getCurrentVideoIndex = (store: RootState) => store.videos.currentIndex;
 
 export async function fetchVideos(dispatch: AppDispatch, getState: () => RootState) {

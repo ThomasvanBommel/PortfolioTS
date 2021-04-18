@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 8:40pm
+ * Last Modified: Saturday April 17th 2021 10:44pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -20,8 +20,8 @@ import {
     getVideos, 
     increment, 
     decrement, 
-    isAnimated, 
-    setIsAnimated,
+    autoScrolling, 
+    setAutoScrolling,
     setCurrentIndex, 
     getCurrentVideoIndex, 
 } from "../slices/videoSlice";
@@ -40,7 +40,7 @@ function Carousel(){
     const itemWidth = getItemWidth(documentWidth);
 
     // Video slice isAnimated (enable / disable animations)
-    const animated = useSelector(isAnimated);
+    const autoScroll = useSelector(autoScrolling);
 
     // Listen and response to resize events
     useEffect(() => {
@@ -56,7 +56,7 @@ function Carousel(){
     const videos = useSelector(getVideos);
 
     // Animation stuffs...
-    const [ animating, setAnimating ] = useState(true && animated);
+    const [ animating, setAnimating ] = useState(true && autoScroll);
     const offset = currentIndex * itemWidth;
     const perPage = Math.floor(documentWidth / itemWidth);
 
@@ -88,14 +88,14 @@ function Carousel(){
 
     // Video slice isAnimated (enable / disable animations)
     function toggleIsAnimated(){
-        dispatch(setIsAnimated(!animated));
+        dispatch(setAutoScrolling(!autoScroll));
     }
 
     // Render carousel
     return (
         <div>
             <div onMouseEnter={ () => setAnimating(false) } 
-                 onMouseLeave={ () => setAnimating(true && animated) }>
+                 onMouseLeave={ () => setAnimating(true && autoScroll) }>
                 <div className={ style.embed }>
                     {
                         videos.length < 1 ? "" : (
@@ -105,8 +105,8 @@ function Carousel(){
                         )
                     }
                     <div className={ style.animated }>
-                        <input type="checkbox" checked={ animated } onClick={ toggleIsAnimated } />
-                        &nbsp;Animated&nbsp;
+                        <input type="checkbox" checked={ autoScroll } onClick={ toggleIsAnimated } />
+                        &nbsp;Auto-scrolling&nbsp;
                         <span className={ style.indicator } 
                             style={{ backgroundColor: animating ? "lightgreen" : "red" }}></span>
                     </div>

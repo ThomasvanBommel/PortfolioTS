@@ -1,0 +1,28 @@
+/*
+ * File: Footer.module.css
+ * Created: Saturday April 17th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Saturday April 17th 2021 11:36pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+.footer{
+    width: calc(100% - 1rem);
+    display: flex;
+    opacity: 0.5;
+    padding: 0.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.left, .right{
+    flex: 1;
+}
+
+.right{
+    text-align: end;
+}

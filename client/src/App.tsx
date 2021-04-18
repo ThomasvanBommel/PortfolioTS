@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 9th 2021 11:26am
+ * Last Modified: Saturday April 17th 2021 11:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -49,6 +49,7 @@ function Content(){
             <Route path="/">
                 <Home />
             </Route>
+            
         </Switch>
     );
 }

@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 10:44pm
+ * Last Modified: Saturday April 17th 2021 10:49pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -63,7 +63,7 @@ function Carousel(){
     // Animate videos
     useEffect(() => {
         if(animating){
-            const interval = setInterval(handleClickForward, 8000);
+            const interval = setInterval(handleClickForward, 10000);
             return () => clearInterval(interval);
         }
     }, [ animating ]);

@@ -3,10 +3,11 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday April 19th 2021 8:28pm
+ * Last Modified: Monday April 19th 2021 8:34pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-19	TvB	Added robots.txt and sitemap.xml endpoints
  * 2021-03-30	TvB	Reverted back to relative file paths (new build dir)
  * 2021-03-27	TvB	Added requirement for process.env.ROOT 
  * 2021-03-25	TvB	Changed output formatting

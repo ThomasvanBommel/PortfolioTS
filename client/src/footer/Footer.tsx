@@ -3,10 +3,11 @@
  * Created: Saturday April 17th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday April 19th 2021 8:23pm
+ * Last Modified: Monday April 19th 2021 8:40pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-19	TvB	Updates sitemap link
  */
 
 import React from 'react';

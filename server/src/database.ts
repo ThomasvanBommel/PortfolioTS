@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 1st 2021 12:52pm
+ * Last Modified: Monday April 19th 2021 7:30pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,6 +11,7 @@
 
 import knex from "knex";
 import { makeSlug } from "../../common/slug";
+import { Blog } from "../../common/types";
 
 export default class Database{
 
@@ -61,7 +62,7 @@ export default class Database{
     }
 
     // Get list of all blogs
-    async blogs(){
+    async blogs(): Promise<Blog[]>{
         if(this.isSetup)
             return this.db.select("*").from("blogs");
 

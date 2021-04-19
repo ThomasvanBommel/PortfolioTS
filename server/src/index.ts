@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 8:34pm
+ * Last Modified: Monday April 19th 2021 8:28pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,6 +14,7 @@
 
 import config from "../../common/config.json";
 import nodemailer from "nodemailer";
+import { sitemap } from "./robots";
 import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
@@ -27,8 +28,6 @@ const credentials = {
 };
 
 let db = new Database();
-
-console.log(process.env.GMAIL_USER);
 
 // setup mail transporter
 const mailer = nodemailer.createTransport({
@@ -89,6 +88,26 @@ app.post("/blog/:slug/:emoji", async (req, res) => {
         return res.json(await db.incrementEmojiCount(slug, emoji));
     }else{
         res.json(new Error("Blog not found or emoji is invalid"));
+    }
+});
+
+// endpoint for robot crawlers
+app.get("/robots.txt", (req, res) => {
+    res.type("txt");
+    res.send(`
+        User-agent: *
+        Disallow:
+        Sitemap: https://vanbommel.ca/sitemap.xml
+    `.replace(/  +/g, "").replace(/^\n/g, ""));
+});
+
+// endpoint for sitemap
+app.get("/sitemap.xml", async (req, res) => {
+    try{
+        res.type("xml");
+        res.send(sitemap(await db.blogs()));
+    }catch{
+        res.sendStatus(404);
     }
 });
 

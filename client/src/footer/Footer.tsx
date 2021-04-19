@@ -3,7 +3,7 @@
  * Created: Saturday April 17th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 11:35pm
+ * Last Modified: Monday April 19th 2021 8:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -16,7 +16,7 @@ function Footer(){
     return (
         <footer className={ style.footer }>
             <span className={ style.left }>&copy; Thomas vanBommel</span>
-            <a href="#" className={ style.right }>site-map</a>
+            <a href="/sitemap.xml" className={ style.right }>site-map</a>
         </footer>
     );
 }

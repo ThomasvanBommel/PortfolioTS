@@ -1,0 +1,40 @@
+/*
+ * File: GitHubActivity.module.css
+ * Created: Tuesday April 20th 2021
+ * Author: Thomas vanBommel
+ * 
+ * Last Modified: Tuesday April 20th 2021 9:16am
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ */
+
+.container{
+    width:max-content;
+    max-width: 100%;
+    margin:0 auto;
+    margin-top:1rem;
+    background-color: #eee;
+}
+
+.container h2{
+    margin-left:1rem;
+}
+
+.overview{
+    padding:1rem;
+    padding-bottom: 0;
+    padding-top:0.5rem;
+}
+
+.overview p{
+    padding:0.1rem;
+}
+
+.overview p:nth-child(even){
+    background-color:rgba(0, 0, 0, 0.05);
+}
+
+.right{
+    float:right;
+}

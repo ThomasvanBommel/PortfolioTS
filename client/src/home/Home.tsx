@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 9:28am
+ * Last Modified: Tuesday April 20th 2021 4:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -22,7 +22,6 @@ import { Helmet } from "react-helmet";
 
 import Carousel from "../youtube/Carousel";
 import style from "./Home.module.css";
-import Footer from "../footer/Footer";
 import GitHubActivity from "./github/GitHubActivity";
 
 function Home(){
@@ -57,7 +56,6 @@ function Content(){
         <div className={ style.scrollable }>
             <Carousel />
             <GitHubActivity repos={ repos } />
-            <Footer />
         </div>
     );
 }

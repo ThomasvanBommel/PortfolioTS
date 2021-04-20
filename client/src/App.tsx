@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 11:12am
+ * Last Modified: Tuesday April 20th 2021 4:15pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -18,7 +18,9 @@ import store from "./store";
 import Home from "./home/Home";
 import Blog from "./blog/Blog";
 import Navbar from './navbar/Navbar';
+import Footer from "./footer/Footer";
 import { Provider } from "react-redux";
+import AdminLogin from "./admin/AdminLogin";
 import ContactForm from './contact/ContactForm';
 import { HashRouter, Switch, Route } from "react-router-dom";
 
@@ -35,20 +37,28 @@ function App(){
 
 function Content(){
     return (
-        <Switch>
-            <Route path="/blog">
-                <Blog />
-            </Route>
+        <div>
+            <Switch>
+                <Route path="/blog">
+                    <Blog />
+                </Route>
 
-            <Route path="/contact">
-                <ContactForm />
-            </Route>
+                <Route path="/contact">
+                    <ContactForm />
+                </Route>
 
-            <Route path="/">
-                <Home />
-            </Route>
-            
-        </Switch>
+                <Route path="/login">
+                    <AdminLogin />
+                </Route>
+
+                <Route path="/">
+                    <Home />
+                </Route>
+            </Switch>
+
+            <Footer />
+        </div>
+        
     );
 }
 

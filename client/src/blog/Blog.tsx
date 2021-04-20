@@ -3,7 +3,7 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 11:14am
+ * Last Modified: Tuesday April 20th 2021 4:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -18,7 +18,6 @@ import { Helmet } from "react-helmet";
 
 import BlogMaster from "./BlogMaster";
 import BlogDetail from "./BlogDetail";
-import Footer from "../footer/Footer";
 
 function Blog(){
     const { path } = useRouteMatch();
@@ -32,12 +31,10 @@ function Blog(){
             <Switch>
                 <Route path={ `${ path }/:slug` }>
                     <BlogDetail />
-                    <Footer />
                 </Route>
 
                 <Route path={ path }>
                     <BlogMaster />
-                    <Footer />
                 </Route>
             </Switch>
         </div>

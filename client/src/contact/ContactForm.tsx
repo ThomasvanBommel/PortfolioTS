@@ -3,7 +3,7 @@
  * Created: Saturday March 13th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 8:45am
+ * Last Modified: Tuesday April 20th 2021 4:16pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -26,7 +26,6 @@ import React, { useState } from 'react';
 import Spinner from "../spinner/Spinner";
 import style from "./ContactForm.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import Footer from "../footer/Footer";
 import { Helmet } from "react-helmet";
 
 type InputTarget= { target: HTMLInputElement | HTMLTextAreaElement };
@@ -69,8 +68,6 @@ function Element(){
                     <p>Awaiting server response...</p>
                 </div>
             ) }
-
-            <Footer />
         </div>
     );
 }

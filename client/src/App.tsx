@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 11:23pm
+ * Last Modified: Tuesday April 20th 2021 11:12am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -21,7 +21,6 @@ import Navbar from './navbar/Navbar';
 import { Provider } from "react-redux";
 import ContactForm from './contact/ContactForm';
 import { HashRouter, Switch, Route } from "react-router-dom";
-import ProgressBanner from "./progress_banner/ProgressBanner";
 
 function App(){
     return (
@@ -29,7 +28,6 @@ function App(){
             <HashRouter>
                 <Navbar />
                 <Content />
-                {/* <ProgressBanner /> */}
             </HashRouter>
         </Provider>
     );

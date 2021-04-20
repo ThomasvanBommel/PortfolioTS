@@ -3,7 +3,7 @@
  * Created: Saturday April 17th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 11:36pm
+ * Last Modified: Tuesday April 20th 2021 12:55pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -11,12 +11,26 @@
 
 .footer{
     width: calc(100% - 1rem);
-    display: flex;
     opacity: 0.5;
     padding: 0.5rem;
     position: fixed;
     bottom: 0;
     left: 0;
+}
+
+.footer.open{
+    opacity: 1;
+    background-color: var(--dark);
+    color:var(--light);
+}
+
+.footer.open a, .link{
+    color:rgb(188, 149, 207);
+    cursor: pointer;
+}
+
+.flex{
+    display: flex;
 }
 
 .left, .right{
@@ -25,4 +39,12 @@
 
 .right{
     text-align: end;
+}
+
+.footer .info{
+    display:none;
+}
+
+.footer.open .info{
+    display:block;
 }

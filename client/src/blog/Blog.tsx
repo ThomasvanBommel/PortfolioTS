@@ -3,10 +3,11 @@
  * Created: Saturday March 27th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 8:46am
+ * Last Modified: Tuesday April 20th 2021 11:14am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-20	TvB	Broke up component
  * 2021-04-20	TvB	Added react helmet support
  */
 

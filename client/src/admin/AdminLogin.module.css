@@ -3,7 +3,7 @@
  * Created: Tuesday April 20th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 4:22pm
+ * Last Modified: Wednesday April 21st 2021 11:34am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -15,9 +15,19 @@
 
     margin: 1rem auto;
 
-    text-align: center;
 }
 
 .container input{
-    margin: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.container form{
+    text-align: center;
+}
+
+.error{
+    padding-bottom: 0.5rem;
+    width: max-content;
+    margin:0 auto;
+    /* color:red; */
 }

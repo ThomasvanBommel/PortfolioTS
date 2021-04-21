@@ -3,7 +3,7 @@
  * Created: Monday April 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday April 21st 2021 10:37am
+ * Last Modified: Wednesday April 21st 2021 10:50am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -18,6 +18,7 @@ export function sitemap(blogs: Blog[]){
             <url><loc>${ host }</loc></url>
             <url><loc>${ host }/r/</loc></url>
             <url><loc>${ host }/r/contact</loc></url>
+            <url><loc>${ host }/r/login</loc></url>
             <url><loc>${ host }/r/blog</loc></url>
             ${ blogs.map(blog => 
                 `<url><loc>${ host }/r/blog/${ blog.slug }</loc></url>`    

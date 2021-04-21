@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday April 21st 2021 10:37am
+ * Last Modified: Wednesday April 21st 2021 11:35am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -161,6 +161,13 @@ app.post("/contact", (req, res) => {
             message: "Missing parameters..." 
         });
     }
+});
+
+// Login endpoint
+app.post("/login", (req, res) => {
+    // const username = req.body.
+    // console.log(req.body);
+    res.send({ type: "error", message: "Invalid login" });
 });
 
 // tell server to start listening on secure port

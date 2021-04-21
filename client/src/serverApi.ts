@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday April 21st 2021 10:33am
+ * Last Modified: Wednesday April 21st 2021 11:18am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -69,3 +69,31 @@ export const submitContactForm = async (form: Form) => {
         }, 1000);
     });
 }
+
+export type LoginForm = {
+    username: string,
+    password: string
+};
+
+// Attempt login
+export const login = async (form: LoginForm) => {
+    return new Promise<string>((resolve, reject) => {
+        setTimeout(() => {
+            fetch(new Request("/login"), {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)
+            })
+                .then(res => res.json())
+                .then(({ type, message }: { type: string, message: string }) => {
+                    if(type !== "error")
+                        return resolve(message);
+
+                    reject(message);
+                })
+                .catch(err => reject(err));
+        }, 1000);
+    });
+};

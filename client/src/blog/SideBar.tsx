@@ -3,7 +3,7 @@
  * Created: Tuesday April 20th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 3:24pm
+ * Last Modified: Wednesday April 21st 2021 10:33am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -26,17 +26,17 @@ function SideBar({ blog }: { blog: Blog}){
     return (
         <div className={ style.sidebar }>
             <button onClick={ () => handleEmojiClick("coffee") }>
-                <img src="coffee.png" alt="coffee"/>
+                <img src="/coffee.png" alt="coffee"/>
                 &nbsp;{ blog.coffee }
             </button>
             <br/>
             <button onClick={ () => handleEmojiClick("thumbsup") }>
-                <img src="thumbsup.png" alt="thumbs up"/>
+                <img src="/thumbsup.png" alt="thumbs up"/>
                 &nbsp;{ blog.thumbsup }
             </button>
             <br/>
             <button onClick={ () => handleEmojiClick("clap") }>
-                <img src="clap.png" alt="clap"/>
+                <img src="/clap.png" alt="clap"/>
                 &nbsp;{ blog.clap }
             </button>
         </div>

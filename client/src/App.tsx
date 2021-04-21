@@ -3,7 +3,7 @@
  * Created: Saturday February 6th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 4:15pm
+ * Last Modified: Wednesday April 21st 2021 9:45am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -22,15 +22,15 @@ import Footer from "./footer/Footer";
 import { Provider } from "react-redux";
 import AdminLogin from "./admin/AdminLogin";
 import ContactForm from './contact/ContactForm';
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App(){
     return (
         <Provider store={ store }>
-            <HashRouter>
+            <BrowserRouter basename="r">
                 <Navbar />
                 <Content />
-            </HashRouter>
+            </BrowserRouter>
         </Provider>
     );
 }

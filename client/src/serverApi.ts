@@ -3,7 +3,7 @@
  * Created: Wednesday March 31st 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 3rd 2021 7:15pm
+ * Last Modified: Wednesday April 21st 2021 10:33am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -14,17 +14,17 @@ import { Blog, isBlog } from "../../common/types";
 // Fetch all blogs from the server database
 export const fetchAllBlogs = async (): Promise<Blog[]> => {
     return new Promise((resolve, reject) => {
-        fetch(new Request("blogs"))
+        fetch(new Request("/blogs"))
             .then(res  => res.json())
             .then(json => resolve(json))
             .catch(err => reject(err));
     });
-};
+};  
 
 // Increment blogs emoji counter
 export const incrementEmojiCount = async (slug: string, emoji: string) => {
     return new Promise((resolve, reject) => {
-        fetch(new Request(`blog/${slug}/${emoji}`, {
+        fetch(new Request(`/blog/${slug}/${emoji}`, {
             method: "POST"
         }))
             .then(res => res.json())
@@ -51,7 +51,7 @@ export const submitContactForm = async (form: Form) => {
 
     return new Promise<string>((resolve, reject) => {
         setTimeout(() => {
-            fetch(new Request("contact"), {
+            fetch(new Request("/contact"), {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

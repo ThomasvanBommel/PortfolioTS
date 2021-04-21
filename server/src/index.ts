@@ -3,7 +3,7 @@
  * Created Date: Sunday, February 7th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday April 19th 2021 8:34pm
+ * Last Modified: Wednesday April 21st 2021 10:37am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -66,7 +66,7 @@ app.use(express.static(path.join(__dirname, "../../../public")));
 app.use(express.static(path.join(__dirname, "../../../.well-known/acme-challenge")));
 
 // home get request
-app.get("/", (req, res) => {
+app.get(/^(\/|\/r\/.*)$/, (req, res) => {
     res.sendFile(path.join(__dirname, "../../../public/index.html"));
 });
 
@@ -122,7 +122,7 @@ app.post("/contact", (req, res) => {
         if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(req.body.email)){
 
             // log request
-            console.log(req.ip, req.body);
+            // console.log(req.ip, req.body);
 
             // send email
             mailer.sendMail({

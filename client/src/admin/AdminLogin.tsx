@@ -3,7 +3,7 @@
  * Created: Tuesday April 20th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Tuesday April 20th 2021 4:28pm
+ * Last Modified: Wednesday April 21st 2021 9:20am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -27,7 +27,11 @@ function AdminLogin(){
 
     if(loading)
         return (
-            <Spinner />
+            <div className={ style.container }>
+                <Spinner />
+                <br/>
+                <p>Awaiting server response...</p>
+            </div>
         );
 
     return (

@@ -3,7 +3,7 @@
  * Created: Thursday March 25th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 10:43pm
+ * Last Modified: Wednesday April 21st 2021 10:30am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -75,7 +75,7 @@ export async function fetchVideos(dispatch: AppDispatch, getState: () => RootSta
     console.log("Loading videos...");
     
     // const videos = await (await fetch(`https://${ config.host }:${config.port}/youtube`)).json();
-    const videos = await (await fetch(new Request(`youtube`))).json();
+    const videos = await (await fetch(new Request(`/youtube`))).json();
     dispatch({ ...setVideos(), payload: videos });
     dispatch({ ...setLoaded(), payload: true });
 }

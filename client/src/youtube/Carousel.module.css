@@ -3,7 +3,7 @@
  * Created: Tuesday March 16th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Saturday April 17th 2021 10:47pm
+ * Last Modified: Thursday April 22nd 2021 7:48pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -91,6 +91,20 @@
     position:absolute;
     top:25%;
     padding:0 0.5rem;
+}
+
+.backButton{
+    --border: 0.25rem solid var(--dark);
+    border-top: var(--border); 
+    border-bottom: var(--border); 
+    border-right: var(--border); 
+}
+
+.forwardButton{
+    --border: 0.25rem solid var(--dark);
+    border-top: var(--border); 
+    border-bottom: var(--border); 
+    border-left: var(--border); 
 }
 
 .backButton:hover, .forwardButton:hover{

@@ -34,22 +34,24 @@ All commands are run using `npm run <command>`
  - `cleanup`: clean-up generated files
  - `watch`: watch client files for changes and auto-transpile (used for client development)
 
-## Requirements
+## Project Dependencies
 You need the following in order to run this project
  - [NodeJS](https://nodejs.org/en/)
  - [NPM](https://www.npmjs.com/)
-
-## Run the project
-Prerequisite:
- - Configure the server, see [Configuration](##-configuration)
- - Install npm packages with `npm i`
-
-Run in production mode:
- 1. Run `npm start`
-
-Run in development mode:
- 1. Run `npm start` in one terminal
- 2. Run `npm run watch` in another terminal
-
-Run tests:
- 1. Run `npm test`
+   - [Typescript](https://www.npmjs.com/package/typescript)
+   - [Express](https://www.npmjs.com/package/express)
+   - [Nodemailer](https://www.npmjs.com/package/nodemailer)
+   - [React](https://www.npmjs.com/package/react)
+   - [React-dom](https://www.npmjs.com/package/react-dom)
+   - [React-helmet](https://www.npmjs.com/package/react-helmet)
+   - [React-redux](https://www.npmjs.com/package/react-redux)
+   - [Redux-thunk](https://www.npmjs.com/package/redux-thunk)
+   - [React-router-dom](https://www.npmjs.com/package/react-router-dom)
+   - [Sqlite3](https://www.npmjs.com/package/sqlite3)
+   - [Knex](https://www.npmjs.com/package/knex)
+   - [Webpack](https://www.npmjs.com/package/webpack)
+   - [Webpack-cli](https://www.npmjs.com/package/webpack-cli)
+   - [Style-loader](https://www.npmjs.com/package/style-loader)
+   - [Ts-loader](https://www.npmjs.com/package/ts-loader)
+   - [Yargs-parser](https://www.npmjs.com/package/yargs-parser)
+   - [Mocha](https://www.npmjs.com/package/mocha)

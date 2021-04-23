@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Thursday April 22nd 2021 11:12pm
+ # Last Modified: Friday April 23rd 2021 1:32pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -18,12 +18,13 @@ scripts/config.sh
 
  # Build and run mocha client tests
 test_client () {
-    echo "Skipping client tests:"
-    # webpack --config test-client/webpack.config.js
+    # echo "Skipping client tests:"
+    echo "Building client test:"
+    webpack --config client/test/webpack.config.js
     # tsc --build test-client/
 
-    # echo "Start client testing:"
-    # mocha "test-client/build/**/*.js"
+    echo "Start client testing:"
+    mocha "build/client/test/**/*.js" -r jsdom-global/register
     # node test-client/build/index.test.js
 }
 
@@ -46,4 +47,4 @@ else
     test_server
 fi
 
-scripts/cleanup.sh
+# scripts/cleanup.sh

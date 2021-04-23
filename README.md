@@ -55,3 +55,4 @@ You need the following in order to run this project
    - [Ts-loader](https://www.npmjs.com/package/ts-loader)
    - [Yargs-parser](https://www.npmjs.com/package/yargs-parser)
    - [Mocha](https://www.npmjs.com/package/mocha)
+   - [Jsdom](https://www.npmjs.com/package/jsdom)

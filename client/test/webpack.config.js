@@ -3,7 +3,7 @@
  * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday March 25th 2021 8:29pm
+ * Last Modified: Friday April 23rd 2021 1:35pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -12,16 +12,16 @@
 const join = require("path").join;
 
 module.exports = {
-    mode: "production",
+    mode: "development",
 
-    entry: { client: join(__dirname, "src/index.test") },
-    output: { path:  join(__dirname, "build"), filename: "test.js" },
+    entry: { client: join(__dirname, "index.test") },
+    output: { path:  join(__dirname, "../../build/client/test"), filename: "test.js" },
 
     resolve: { extensions: [".ts", ".tsx", ".js", ".jsx", ".css"] },
 
     module: {
         rules: [
-            { test: /\.tsx?$/, use: "ts-loader" },
+            { test: /\.tsx?$/, use: { loader: "ts-loader", options: { "projectReferences": true }} },
             { test: /\.css$/,  use: ["style-loader", "css-loader"] },
         ]
     }

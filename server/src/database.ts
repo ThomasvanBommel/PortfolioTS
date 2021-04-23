@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 23rd 2021 12:09am
+ * Last Modified: Friday April 23rd 2021 12:15am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -48,7 +48,7 @@ export default class Database{
                     table.unique(["slug"]);
                 });
 
-                console.log("Created blogs table");
+                // console.log("Created blogs table");
 
                 // Insert test blog
                 await this.db("blogs").insert({
@@ -57,12 +57,12 @@ export default class Database{
                     slug: makeSlug("Testing...")
                 });
 
-                console.log("Inserted test article");
+                // console.log("Inserted test article");
             }
 
             this.isSetup = true;
         }catch(error) {
-            console.error(error);
+            // console.error(error);
         }
     }
 

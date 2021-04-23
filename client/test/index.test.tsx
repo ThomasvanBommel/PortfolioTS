@@ -3,20 +3,22 @@
  * Created: Friday March 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Friday April 23rd 2021 2:43pm
+ * Last Modified: Friday April 23rd 2021 2:55pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
-import React from 'react';
-import assert from "assert";
+// import React from 'react';
+// import assert from "assert";
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import Footer from "../src/footer/Footer";
+// import Footer from "../src/footer/Footer";
 
 Enzyme.configure({ adapter: new Adapter() });
+
+import "./footer/Footer.test";
 
 // describe("React test...", function() {
 //     it("something", function() {

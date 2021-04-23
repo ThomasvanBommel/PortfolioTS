@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 22nd 2021 11:51pm
+ * Last Modified: Friday April 23rd 2021 12:09am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -25,8 +25,9 @@ export default class Database{
 
     isSetup = false;
 
-    constructor(){
-        this.setup();
+    constructor(setup=true){
+        if(setup)
+            this.setup();
     }
 
     // Setup database

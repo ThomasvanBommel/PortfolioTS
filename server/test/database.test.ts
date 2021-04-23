@@ -3,7 +3,7 @@
  * Created: Thursday April 22nd 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Thursday April 22nd 2021 11:50pm
+ * Last Modified: Friday April 23rd 2021 12:10am
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -19,7 +19,7 @@ describe("Database", function() {
 
     // Initialize database
     before(function(done) {
-        db = new Database();
+        db = new Database(false);
         db.setup()
             .then(res => done())
             .catch(err => done(err));

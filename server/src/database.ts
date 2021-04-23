@@ -3,7 +3,7 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday April 19th 2021 7:30pm
+ * Last Modified: Thursday April 22nd 2021 11:51pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
@@ -29,9 +29,12 @@ export default class Database{
         this.setup();
     }
 
+    // Setup database
     async setup(){
         try{
             if(! await this.db.schema.hasTable("blogs")){
+
+                // Create blog table
                 await this.db.schema.createTable("blogs", table => {
                     table.increments("id");
                     table.text("slug").notNullable();
@@ -46,6 +49,7 @@ export default class Database{
 
                 console.log("Created blogs table");
 
+                // Insert test blog
                 await this.db("blogs").insert({
                     title: "Testing...",
                     article: "Welcome to my new blog!",
@@ -70,19 +74,22 @@ export default class Database{
     }
 
     // Incrmenet blogs emoji count
-    async incrementEmojiCount(slug: string, emoji: "coffee" | "thumbsup" | "clap"){
-        // Ensure database is setup and functioning
-        if(!this.isSetup) 
-            return new Error("Database is not setup. Try again later");
+    async incrementEmojiCount(slug: string, emoji: "coffee" | "thumbsup" | "clap")
+        : Promise<Blog> {
+        return new Promise(async (resolve, reject) => {
+            // Ensure database is setup and functioning
+            if(!this.isSetup) 
+                reject(new Error("Database is not setup. Try again later"));
 
-        try{
-            // increment emoji count
-            await this.db("blogs").where({ slug: slug }).increment(emoji);
+            try{
+                // increment emoji count
+                await this.db("blogs").where({ slug: slug }).increment(emoji);
 
-            // return blog object
-            return await this.db("blogs").select("*").where({ slug: slug });
-        }catch(error){
-            return new Error(error);
-        }
+                // return blog object
+                resolve((await this.db("blogs").select("*").where({ slug: slug }))[0] as Blog);
+            }catch(error){
+                reject(new Error(error));
+            }
+        });
     }
 }

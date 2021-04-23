@@ -3,15 +3,13 @@
  * Created: Monday April 19th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Wednesday April 21st 2021 10:50am
+ * Last Modified: Thursday April 22nd 2021 8:45pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
  */
 
-import { Blog } from "../../common/types";
-
-export function sitemap(blogs: Blog[]){
+export function sitemap(blogs: { slug: string }[]){
     let host = "https://vanbommel.ca";
     return `<?xml version="1.0" encoding="UTF-8"?>
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

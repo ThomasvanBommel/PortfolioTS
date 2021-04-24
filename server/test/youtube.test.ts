@@ -1,8 +1,13 @@
 /*
- * Filename: test/server/src/youtube2.test.ts
+ * File: youtube.test.ts
  * Created Date: Saturday, March 6th 2021, 10:29:22 pm
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday April 24th 2021 5:31pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-04-24	TvB	Modified for jest
  */
 
 import YouTube, { YouTubeParameters } from "../src/youtube";
@@ -50,6 +55,7 @@ describe("youtube", function() {
             describe("http requests", function() {
                 test(`get [${count}] video snippets`, async () => {
                     expect.assertions(1);
+                    
                     await youtube.getVideoSnippets(pageLimit, "videos").then((vids: YouTubeVideo[]) => {
                         videos = vids;
                     });

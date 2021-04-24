@@ -1,8 +1,13 @@
 /*
- * Filename: test/server/src/config.test.ts
+ * File: config.test.ts
  * Created Date: Friday, March 5th 2021, 11:53:11 am
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday April 24th 2021 5:32pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-04-24	TvB	Modified for jest
  */
 
 import config from "../../common/config.json";

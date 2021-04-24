@@ -1,10 +1,14 @@
 /*
- * Filename: test/server/src/request2.test.ts
+ * File: request.test.ts
  * Created Date: Saturday, March 6th 2021, 5:54:29 pm
  * Author: Thomas vanBommel
  * 
+ * Last Modified: Saturday April 24th 2021 5:30pm
+ * Modified By: Thomas vanBommel
+ * 
+ * CHANGELOG:
+ * 2021-04-24	TvB	Modified for jest
  */
-
 import request from "../src/request"
 
 // Testing the request module

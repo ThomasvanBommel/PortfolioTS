@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Friday April 23rd 2021 7:29pm
+ # Last Modified: Saturday April 24th 2021 4:26pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -34,7 +34,7 @@ test_server () {
     
     echo "Start server testing:"
     # jest "build/server/test/**/*.js"
-    jest "build/server/test/.*"
+    jest "build/server/test/.*" --verbose
 }
 
 ## Pick what to test (default both)

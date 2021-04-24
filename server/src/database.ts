@@ -3,10 +3,11 @@
  * Created: Sunday March 28th 2021
  * Author: Thomas vanBommel
  * 
- * Last Modified: Monday April 19th 2021 7:30pm
+ * Last Modified: Saturday April 24th 2021 12:23pm
  * Modified By: Thomas vanBommel
  * 
  * CHANGELOG:
+ * 2021-04-24	TvB	Modified for testing
  */
 
 import knex from "knex";
@@ -25,13 +26,17 @@ export default class Database{
 
     isSetup = false;
 
-    constructor(){
-        this.setup();
+    constructor(setup=true){
+        if(setup)
+            this.setup();
     }
 
+    // Setup database
     async setup(){
         try{
             if(! await this.db.schema.hasTable("blogs")){
+
+                // Create blog table
                 await this.db.schema.createTable("blogs", table => {
                     table.increments("id");
                     table.text("slug").notNullable();
@@ -44,20 +49,23 @@ export default class Database{
                     table.unique(["slug"]);
                 });
 
-                console.log("Created blogs table");
+                // console.log("Created blogs table");
 
+                // Insert test blog
                 await this.db("blogs").insert({
                     title: "Testing...",
                     article: "Welcome to my new blog!",
                     slug: makeSlug("Testing...")
                 });
 
-                console.log("Inserted test article");
+                // console.log("Inserted test article");
             }
 
             this.isSetup = true;
+            return Promise.resolve();
         }catch(error) {
-            console.error(error);
+            return Promise.reject(error);
+            // console.error(error);
         }
     }
 
@@ -70,19 +78,22 @@ export default class Database{
     }
 
     // Incrmenet blogs emoji count
-    async incrementEmojiCount(slug: string, emoji: "coffee" | "thumbsup" | "clap"){
-        // Ensure database is setup and functioning
-        if(!this.isSetup) 
-            return new Error("Database is not setup. Try again later");
+    async incrementEmojiCount(slug: string, emoji: "coffee" | "thumbsup" | "clap")
+        : Promise<Blog> {
+        return new Promise(async (resolve, reject) => {
+            // Ensure database is setup and functioning
+            if(!this.isSetup) 
+                reject(new Error("Database is not setup. Try again later"));
 
-        try{
-            // increment emoji count
-            await this.db("blogs").where({ slug: slug }).increment(emoji);
+            try{
+                // increment emoji count
+                await this.db("blogs").where({ slug: slug }).increment(emoji);
 
-            // return blog object
-            return await this.db("blogs").select("*").where({ slug: slug });
-        }catch(error){
-            return new Error(error);
-        }
+                // return blog object
+                resolve((await this.db("blogs").select("*").where({ slug: slug }))[0] as Blog);
+            }catch(error){
+                reject(new Error(error));
+            }
+        });
     }
 }

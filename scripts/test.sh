@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Tuesday March 30th 2021 6:52pm
+ # Last Modified: Friday April 23rd 2021 7:29pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -33,7 +33,8 @@ test_server () {
     tsc --build server/test && echo " - Done"
     
     echo "Start server testing:"
-    mocha "build/server/test/**/*.js"
+    # jest "build/server/test/**/*.js"
+    jest "build/server/test/.*"
 }
 
 ## Pick what to test (default both)

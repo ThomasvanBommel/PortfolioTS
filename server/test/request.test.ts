@@ -6,35 +6,41 @@
  */
 
 import request from "../src/request"
-import assert from "assert";
 
 // Testing the request module
-describe("request", function() {
+describe("request", () => {
+
 
     // Verify response status code
-    it("www.google.com", function() {
-        assert.doesNotReject(async function() {
-            await request("https://www.google.com");
-        });
+    test("www.google.com", () => {
+        expect.assertions(1);
+
+        expect(async () => 
+            request("https://www.google.com")
+        ).not.toThrow();
     });
 
     // No api key test
-    it("googleapis.com", function() {
-        assert.rejects(async function() {
-            await request({
+    test("googleapis.com", async () => {
+        expect.assertions(1);
+
+        await expect(() =>
+            request({
                 hostname: "youtube.googleapis.com",
                 path: "/youtube/v3/videos",
                 parameters: {
                     reason: "testing"
                 }
-            });
-        });
+            })
+        ).rejects.toThrow();
     });
 
     // Invalid url test
-    it("123abcLMNOP.987", function() {
-        assert.rejects(async function() {
-            await request("123abcLMNOP.987");
-        });
+    test("123abcLMNOP.987", async () => {
+        expect.assertions(1);
+
+        await expect(() =>
+            request("123abcLMNOP.987")
+        ).rejects.toThrow();
     });
 });

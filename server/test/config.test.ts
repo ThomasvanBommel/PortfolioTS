@@ -5,50 +5,45 @@
  * 
  */
 
-import assert from "assert";
 import config from "../../common/config.json";
 
 describe("config", () => {
 
-    // Check config properties
-    describe(".config", () => {
+    // Check if the properties exist
+    describe("check config properties", () => {
 
-        // Check if the properties exist
-        describe("exists", () => {
-
-            // Check that channelId exists and is not empty
-            it(".channelId", () => {
-                assert.ok(!!config.channelId);
-            });
-
-            // Check that port exists and is not 0
-            it(".port", () => {
-                assert.ok(!!config.port);
-            });
-
-            // Check that host exists and is not empty
-            it(".host", () => {
-                assert.ok(!!config.host);
-            });
+        // Check that channelId exists and is not empty
+        test(".channelId", () => {
+            expect(!!config.channelId).toBeTruthy();
         });
 
-        // Check the properties type
-        describe("type-check", () => {
+        // Check that port exists and is not 0
+        test(".port", () => {
+            expect(!!config.port).toBeTruthy();
+        });
 
-            // Check that channelId is a string type
-            it(".channelId", () => {
-                assert.strictEqual(typeof config.channelId, "string");
-            });
+        // Check that host exists and is not empty
+        test(".host", () => {
+            expect(!!config.host).toBeTruthy();
+        });
+    });
 
-            // Check that port is a number type
-            it(".port", () => {
-                assert.strictEqual(typeof config.port, "number");
-            });
+    // Check the properties type
+    describe("type-check config properties", () => {
 
-            // Check that host is a string type
-            it(".host", () => {
-                assert.strictEqual(typeof config.host, "string");
-            });
+        // Check that channelId is a string type
+        test(".channelId", () => {
+            expect(typeof config.channelId).toBe("string");
+        });
+
+        // Check that port is a number type
+        it(".port", () => {
+            expect(typeof config.port).toBe("number");
+        });
+
+        // Check that host is a string type
+        it(".host", () => {
+            expect(typeof config.host).toBe("string");
         });
     });
 });

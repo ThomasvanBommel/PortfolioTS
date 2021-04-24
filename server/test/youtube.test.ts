@@ -8,12 +8,10 @@
 import YouTube, { YouTubeParameters } from "../src/youtube";
 import { YouTubeVideo } from "../../common/types";
 import config from "../../common/config.json";
-import assert from "assert";
 
 describe("youtube", function() {
     let youtube = new YouTube(config.channelId);
 
-    // unit-cost of 2*i units 
     for(let i = 1; i <= 2; i++){
         const maxResults = 5;
         const pageLimit = 1 * i;
@@ -23,63 +21,67 @@ describe("youtube", function() {
         let parameters: YouTubeParameters = {};
 
         describe(`test ${i}`, function() {
+            youtube = new YouTube(config.channelId);
 
-            before("create YouTube object", function() {
-                youtube = new YouTube(config.channelId);
-
-                youtube.setParameters({
-                    "maxResults": maxResults,
-                });
-
-                parameters = youtube.parameters_;
+            youtube.setParameters({
+                "maxResults": maxResults,
             });
 
+            parameters = youtube.parameters_;
+
             describe(".setParameters", function() {
-                it("'channelId' exists", function() {
-                    assert.ok(!!youtube.parameters_["channelId"]);
+                test("'channelId' exists", function() {
+                    expect(!!youtube.parameters_["channelId"]).toBeTruthy();
                 });
 
-                it("'key' exists", function() {
-                    assert.ok(!!youtube.parameters_["key"]);
+                test("'key' exists", function() {
+                    expect(!!youtube.parameters_["key"]).toBeTruthy();
                 });
 
-                it("'order' exists", function() {
-                    assert.ok(!!youtube.parameters_["order"]);
+                test("'order' exists", function() {
+                    expect(!!youtube.parameters_["order"]).toBeTruthy();
                 });
 
-                it(`'maxResults' is ${maxResults}`, function() {
-                    assert.strictEqual(youtube.parameters_["maxResults"], maxResults);
+                test(`'maxResults' is ${maxResults}`, function() {
+                    expect(youtube.parameters_["maxResults"]).toBe(maxResults);
                 });
             });
 
             describe("http requests", function() {
-                it(`get [${count}] video snippets`, function() {
-                    return youtube.getVideoSnippets(pageLimit, "videos").then((vids: YouTubeVideo[]) => {
+                test(`get [${count}] video snippets`, async () => {
+                    expect.assertions(1);
+                    await youtube.getVideoSnippets(pageLimit, "videos").then((vids: YouTubeVideo[]) => {
                         videos = vids;
                     });
+
+                    expect(videos).toHaveLength(count);
                 });
 
-                it("get video statistics", function() {
-                    return youtube.addVideoStatistics(videos, true);
+                test("get video statistics", async() => {
+                    expect.assertions(count);
+                    await youtube.addVideoStatistics(videos, true);
+                    
+                    for(const video of videos)
+                        expect(video).toHaveProperty("statistics");
                 });
             });
 
             describe("values", function() {
-                it("check for video statistics", function() {
+                test("check for video statistics", function() {
                     let result = true;
 
                     for(let video of videos)
                         result = result && !!video.statistics;
 
-                    assert.strictEqual(result, true);
+                    expect(result).toBeTruthy();
                 });
 
-                it(`check video count is ${count}`, function() {
-                    assert.strictEqual(videos.length, count);
+                test(`check video count is ${count}`, function() {
+                    expect(videos).toHaveLength(count);
                 });
 
-                it("ensure parameters stayed the same", function() {
-                    assert.deepStrictEqual(youtube.parameters_, parameters);
+                test("ensure parameters stayed the same", function() {
+                    expect(youtube.parameters_).toStrictEqual(parameters);
                 });
             });
         });

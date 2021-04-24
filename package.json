@@ -29,6 +29,7 @@
     "@types/sqlite3": "^3.1.7",
     "css-loader": "^5.0.2",
     "express": "^4.17.1",
+    "jest": "^26.6.3",
     "knex": "^0.95.4",
     "nodemailer": "^6.5.0",
     "react": "^17.0.1",
@@ -46,9 +47,9 @@
     "yargs-parser": "^20.2.4"
   },
   "devDependencies": {
-    "@types/mocha": "^8.2.1",
+    "@testing-library/react": "^11.2.6",
+    "@types/jest": "^26.0.22",
     "@types/react-helmet": "^6.1.1",
-    "@types/react-router-dom": "^5.1.7",
-    "mocha": "^8.3.0"
+    "@types/react-router-dom": "^5.1.7"
   }
 }

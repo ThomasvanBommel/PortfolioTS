@@ -2,7 +2,7 @@
  # Created: Thursday March 25th 2021
  # Author: Thomas vanBommel
  # 
- # Last Modified: Saturday April 24th 2021 4:26pm
+ # Last Modified: Saturday April 24th 2021 6:13pm
  # Modified By: Thomas vanBommel
  # 
  # CHANGELOG:
@@ -18,11 +18,13 @@ scripts/config.sh
 
  # Build and run mocha client tests
 test_client () {
-    echo "Skipping client tests:"
-    # webpack --config test-client/webpack.config.js
+    # echo "Skipping client tests:"
+    echo "Building client test"
+    webpack --config client/test/webpack.config.js
     # tsc --build test-client/
 
-    # echo "Start client testing:"
+    echo "Start client testing:"
+    jest "build/client/test/.*" --verbose
     # mocha "test-client/build/**/*.js"
     # node test-client/build/index.test.js
 }

@@ -10,3 +10,5 @@ sqlite.db
 
 **/.well-known/
 .cert/
+
+secrets.env

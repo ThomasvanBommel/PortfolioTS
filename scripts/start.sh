@@ -12,18 +12,18 @@
 set -e
 
 ## Check / create config file (common/config.json)
-scripts/config.sh
+# scripts/config.sh
 
 ## Build server
 buildServer () {
     echo "Building server:"
-    tsc --build server/src && echo " - Done" || echo " - Failed"
+    npx tsc --build server/src && echo " - Done" || echo " - Failed"
 }
 
 ## Build client
 buildClient () {
     echo "Webpacking client:"
-    webpack --config client/src/webpack.config.js
+    npx webpack --config client/src/webpack.config.js
 }
 
 ## If testing, clean up and return successful
@@ -42,10 +42,11 @@ elif [ "$1" = "client" ]; then
     buildClient
     exit 0
 
-## Default, build everything
-else
+## Only build
+elif [ "$1" = "only-build" ]; then
     buildServer && \
-    buildClient
+    buildClient && \
+    exit 0 || echo " - Failed to build"
 fi
 
 ## Start server

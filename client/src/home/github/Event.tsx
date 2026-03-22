@@ -67,6 +67,9 @@ function EventElement({ event }: { event: Event }){
 }
 
 function PushEventElement({ event }: { event: PushEvent }){
+    if(!event.payload.commits)
+        return <></>
+
     return (
         <div className={ style.commitContainer }>
             Commit{ event.payload.commits.length > 1 ? "s" : "" }:

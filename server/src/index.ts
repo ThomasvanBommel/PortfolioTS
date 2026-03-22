@@ -19,14 +19,14 @@ import { sitemap } from "./robots";
 import Database from "./database";
 import YouTube from "./youtube";
 import express from "express";
-import https from "https";
+import http from "http";
 import path from "path";
 import fs from "fs";
 
-const credentials = {
-    cert: fs.readFileSync(path.join(__dirname, "../../../.cert/cert.pem")),
-    key: fs.readFileSync(path.join(__dirname, "../../../.cert/privkey.pem"))
-};
+// const credentials = {
+//     cert: fs.readFileSync(path.join(__dirname, "../../../.cert/cert.pem")),
+//     key: fs.readFileSync(path.join(__dirname, "../../../.cert/privkey.pem"))
+// };
 
 let db = new Database();
 
@@ -63,7 +63,7 @@ app.use("/bundle.js", express.static(path.join(__dirname, "../../client/src/bund
 app.use(express.static(path.join(__dirname, "../../../public")));
 
 // expose .well-known/acme-challenge for certbot acme challenges
-app.use(express.static(path.join(__dirname, "../../../.well-known/acme-challenge")));
+// app.use(express.static(path.join(__dirname, "../../../.well-known/acme-challenge")));
 
 // home get request
 app.get(/^(\/|\/r\/.*)$/, (req, res) => {
@@ -171,27 +171,32 @@ app.post("/login", (req, res) => {
 });
 
 // tell server to start listening on secure port
-https.createServer(credentials, app).listen(config.port, config.host, () => {
-    console.log(`👂 Listening @ https://${ config.host }:${ config.port }`);
+// https.createServer(credentials, app).listen(config.port, config.host, () => {
+//     console.log(`👂 Listening @ https://${ config.host }:${ config.port }`);
+// });
+
+// switch to insecure :8080
+http.createServer(app).listen(8080, () => {
+    console.log(`👂 Listening @ http://${ config.host }:8080`);
 });
 
-// redirect from insecure to secure port
-const redirect = express();
+// // redirect from insecure to secure port
+// const redirect = express();
 
-// use the same headers
-redirect.use(setHeaders);
+// // use the same headers
+// redirect.use(setHeaders);
 
-// redirect traffic from all endpoints
-redirect.all("*", (req, res) => {
+// // redirect traffic from all endpoints
+// redirect.all("*", (req, res) => {
     
-    // replace the port with the secure version
-    const host = req.headers.host?.replace(/:\d+/g, `:${ config.port }`);
+//     // replace the port with the secure version
+//     const host = req.headers.host?.replace(/:\d+/g, `:${ config.port }`);
 
-    // redirect
-    res.redirect(`https://${ host }${ req.url }`);
-});
+//     // redirect
+//     res.redirect(`http://${ host }${ req.url }`);
+// });
 
-// listen for requests
-redirect.listen(config.redirect, config.host, () => 
-    console.log(`⏩ Redirect  @  http://${ config.host }:${ config.redirect }`)
-);
+// // listen for requests
+// redirect.listen(config.redirect, config.host, () => 
+//     console.log(`⏩ Redirect  @  http://${ config.host }:${ config.redirect }`)
+// );

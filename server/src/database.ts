@@ -18,7 +18,7 @@ export default class Database{
     db = knex({
         client: "sqlite3",
         connection: {
-            filename: "./sqlite.db"
+            filename: "/app/data/sqlite.db"
         },
         useNullAsDefault: true
     });

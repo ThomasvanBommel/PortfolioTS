@@ -23,9 +23,8 @@ Environment variables:
  - **GMAIL_USER**: gmail username / email for the account used to send emails (from the contact form)
  - **GMAIL_PASS**: gmail password for the account used to send emails (from the contact form)
 
-TLS Certificate:
- - Create and store a TLS certificate pair in the `.cert` directory, named `cert.pem` and `privkey.pem`
-   - Can be generated with `openssl req -x509 -newkey rsa:4096 -keyout privkey.pem -out cert.pem -days 365 -nodes -subj '/CN=localhost'`
+Volumes:
+ - Mount a volume to /app/data to store a persistant database, sqlite.db
 
 ## Available Commands
 All commands are run using `npm run <command>`

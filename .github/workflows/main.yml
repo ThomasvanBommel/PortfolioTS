@@ -1,51 +1,51 @@
-name: CI
+# name: CI
 
-on:
-  push:
-    branches:
-      - "*"
+# on:
+#   push:
+#     branches:
+#       - "*"
 
-  workflow_dispatch:
+#   workflow_dispatch:
 
-jobs:
-  testing:
-    runs-on: dash
+# jobs:
+#   testing:
+#     runs-on: dash
 
-    steps:
-        # check the actor running the workflow (not necessary?)
-      - name: OwnerCheck
-        run: |
-          if [ ${{ github.actor }} != "ThomasvanBommel" ]
-          then
-            echo "Error wrong actor: ${{ github.actor }}"
-            exit 1
-          fi
+#     steps:
+#         # check the actor running the workflow (not necessary?)
+#       - name: OwnerCheck
+#         run: |
+#           if [ ${{ github.actor }} != "ThomasvanBommel" ]
+#           then
+#             echo "Error wrong actor: ${{ github.actor }}"
+#             exit 1
+#           fi
 
-        # checkout repo using github action
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.ref }}
+#         # checkout repo using github action
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           ref: ${{ github.ref }}
 
-        # setup a node environment
-      - name: Setup
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
+#         # setup a node environment
+#       - name: Setup
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 14
 
-        # install and initialize required node modules
-      - name: Initialize
-        run: npm ci
+#         # install and initialize required node modules
+#       - name: Initialize
+#         run: npm ci
 
-        # start the application with the '-- test' argument
-      - name: Build test
-        run: npm start -- test
-        env:
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+#         # start the application with the '-- test' argument
+#       - name: Build test
+#         run: npm start -- test
+#         env:
+#           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 
-        # run 'npm test'
-      - name: CI test
-        run: npm test
-        env:
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+#         # run 'npm test'
+#       - name: CI test
+#         run: npm test
+#         env:
+#           YT_API_KEY: ${{ secrets.YT_API_KEY }}
 

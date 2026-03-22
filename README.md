@@ -1,7 +1,7 @@
 # PortfolioTS
 Typescript portfolio with a ReactJS front-end
 
-This project gets auto-deployed to [vanbommel.ca](https://vanbommel.ca)
+This project is *now deployed @ https://portfolio-ts.cekeh.com/
 
 ## Features
  - Continuous integration

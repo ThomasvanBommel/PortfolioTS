@@ -1,10 +1,11 @@
 services:
   app:
     build: .
+    init: true
     env_file:
       - secrets.env
     ports:
       - "8080:8080"
     volumes:
       - ./data:/app/data
-    command: npm start
+    # command: node build/server/src/index.js
